@@ -1,0 +1,42 @@
+﻿using DataAccess.Repository;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
+
+namespace PetWorld
+{
+    /// <summary>
+    /// Interaction logic for App.xaml
+    /// </summary>
+    public partial class App : Application
+    {
+
+        private ServiceProvider serviceProvider;
+        public App()
+        {
+            //Config for DependencyInjection (DI)
+            ServiceCollection services = new ServiceCollection();
+            ConfigureServices(services);
+            serviceProvider = services.BuildServiceProvider();
+        }
+
+        private void ConfigureServices(ServiceCollection services)
+        {
+            services.AddSingleton(typeof(IUserRepository), typeof(UserRepository));
+            services.AddSingleton(typeof(IProductRepository), typeof(ProductRepository));
+            services.AddSingleton(typeof(ICategoryRepository), typeof(CategoryRepository));
+            services.AddSingleton<WindowLogin>();
+        }
+
+        private void OnStartUp(object sender, StartupEventArgs e)
+        {
+            var windowLogin = serviceProvider.GetService<WindowLogin>();
+            windowLogin.Show();
+        }
+    }
+}

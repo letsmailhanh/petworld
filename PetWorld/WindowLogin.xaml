@@ -1,0 +1,23 @@
+﻿<Window x:Class="PetWorld.WindowLogin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PetWorld"
+        mc:Ignorable="d"
+        Title="WindowLogin" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel>
+            <Label>Username</Label>
+            <TextBox Name="tbUsername"></TextBox>
+            <Label>Password</Label>
+            <PasswordBox Name="pwbPass"></PasswordBox>
+            <Button Click="btnSigninClick">Sign in</Button>
+        </StackPanel>
+    </Grid>
+</Window>
