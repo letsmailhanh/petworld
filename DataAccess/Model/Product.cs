@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 
 #nullable disable
@@ -19,7 +20,6 @@ namespace DataAccess.Model
         public decimal Price { get; set; }
         public int UnitsInStock { get; set; }
         public string Image { get; set; }
-
         public virtual Category Category { get; set; }
         public virtual PetDetail PetDetail { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }

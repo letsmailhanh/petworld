@@ -17,5 +17,10 @@ namespace DataAccess.Model
         public bool? IsPet { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
+
+        public Category(string title)
+        {
+            Title = title;
+        }
     }
 }

@@ -10,5 +10,7 @@ namespace DataAccess.Repository
     public interface ICategoryRepository
     {
         IEnumerable<Category> GetCategories();
+        IEnumerable<Category> GetPetCategories();
+        IEnumerable<Category> GetAccessoryCategories();
     }
 }

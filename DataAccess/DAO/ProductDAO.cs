@@ -1,4 +1,5 @@
 ﻿using DataAccess.Model;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace DataAccess.DAO
 {
     class ProductDAO
     {
+        
         //---------------------------
         //Using ingleton pattern
         private static ProductDAO instance = null;

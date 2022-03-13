@@ -32,6 +32,7 @@ namespace PetWorld
             categoryRepo = categoryRepository;
             LoadProductList();
             LoadCategoryList();
+            cbCategory1.SelectedIndex = 0;
         }
 
         private void LoadProductList()
@@ -43,14 +44,56 @@ namespace PetWorld
         private void LoadCategoryList()
         {
             List<Category> categories = categoryRepo.GetCategories().ToList();
-            cbCategory.ItemsSource = categories;
+            List<Product> products = productRepo.GetProducts().ToList();
+            Category all = new Category("Tất cả");
+            categories.Add(all);
+            cbCategory2.ItemsSource = categories;
+            cbCategory2.SelectedIndex = categories.Count - 1;
         }
 
-        private void cbCategoryChange(object sender, SelectionChangedEventArgs e)
+        private void cbCategory1Change(object sender, SelectionChangedEventArgs e)
         {
-            Category selected = (Category)cbCategory.SelectedItem;
-            int catID = Convert.ToInt32(selected.CategoryId);
-            List<Product> products = productRepo.GetProductsByCatID(catID).ToList();
+            string selected = cbCategory1.SelectedValue.ToString();
+            List<Category> categories;
+            if (selected.Equals("Pet"))
+            {
+                categories = categoryRepo.GetPetCategories().ToList();
+            }else if (selected.Equals("Accessory"))
+            {
+                categories = categoryRepo.GetAccessoryCategories().ToList();
+            }
+            else
+            {
+                categories = categoryRepo.GetCategories().ToList();
+            }
+            cbCategory2.ItemsSource = categories;
+            Category all = new Category("Tất cả");
+            categories.Add(all);
+            cbCategory2.SelectedIndex = categories.Count - 1;
+        }
+
+        private void cbCategory2Change(object sender, SelectionChangedEventArgs e)
+        {
+            Category selected = (Category)cbCategory2.SelectedItem;
+            string selectedName;
+            if (selected == null)
+            {
+                selectedName = "Tất cả";
+            }
+            else
+            {
+                selectedName = selected.Title.ToString();
+            }
+            List<Product> products;
+            if (selectedName.Equals("Tất cả"))
+            {
+                products = productRepo.GetProducts().ToList();
+            }
+            else
+            {
+                int catID = Convert.ToInt32(selected.CategoryId);
+                products = productRepo.GetProductsByCatID(catID).ToList();
+            }
             lvProducts.ItemsSource = products;
         }
     }

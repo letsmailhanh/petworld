@@ -31,7 +31,7 @@ namespace DataAccess.DAO
             }
         }
 
-        //Get danh sach user
+        //Get danh sach category
         public IEnumerable<Category> GetCategoryList()
         {
             List<Category> categories;
@@ -44,7 +44,44 @@ namespace DataAccess.DAO
             {
                 throw new Exception(ex.Message);
             }
+            return categories;
+        }
 
+        //Get danh sach pet category
+        public IEnumerable<Category> GetPetCategory()
+        {
+            List<Category> categories;
+            try
+            {
+                var db = new prn221_petworldContext();
+                var query = from c in db.Categories
+                            where c.IsPet == true
+                            select c;
+                categories = query.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception (ex.Message);
+            }
+            return categories;
+        }
+
+        //Get danh sach accessory category
+        public IEnumerable<Category> GetAccessoryCategory()
+        {
+            List<Category> categories;
+            try
+            {
+                var db = new prn221_petworldContext();
+                var query = from c in db.Categories
+                            where c.IsPet == false
+                            select c;
+                categories = query.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
             return categories;
         }
     }
