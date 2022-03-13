@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PetWorld"
         mc:Ignorable="d"
-        Title="WindowProduct" Height="450" Width="800">
+        Title="WindowProduct" Height="847" Width="882">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="8*"></RowDefinition>
         </Grid.RowDefinitions>
-        
+
         <StackPanel Orientation="Horizontal">
             <!--Choose Category-->
             <Label>Category</Label>
@@ -24,6 +24,7 @@
                 <ComboBoxItem>Pet</ComboBoxItem>
                 <ComboBoxItem>Accessory</ComboBoxItem>
             </ComboBox>
+            <Label>Subcategory</Label>
             <ComboBox Name="cbCategory2"
                       DisplayMemberPath="Title"
                       SelectedValuePath="CategoryId"
@@ -32,7 +33,14 @@
                       Height="25">
             </ComboBox>
             <Label>Order by</Label>
-            <ComboBox></ComboBox>
+            <ComboBox Width="120"
+                      Height="25"
+                      Name="cbOrderBy"
+                      SelectionChanged="cbOrderByChange"
+                      SelectedValuePath="Content">
+                <ComboBoxItem>Giá tăng dần</ComboBoxItem>
+                <ComboBoxItem>Giá giảm dần</ComboBoxItem>
+            </ComboBox>
 
         </StackPanel>
 
@@ -44,27 +52,28 @@
 
             <!--List product-->
             <StackPanel>
-                <ListView Name="lvProducts" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ListView Name="lvProducts" ScrollViewer.CanContentScroll="True" 
+                          ScrollViewer.VerticalScrollBarVisibility="Auto"
+                          SelectionChanged="selectProduct">
                     <ListView.View>
                         <GridView>
-                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=ProductId}"></GridViewColumn>
-                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=ProductName}"></GridViewColumn>
-                                <GridViewColumn Header="Category" DisplayMemberBinding="{Binding Path=CategoryId}"></GridViewColumn>
-                                <GridViewColumn Header="Is pet" DisplayMemberBinding="{Binding Path=IsPet}"></GridViewColumn>
-                                <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Path=Price}"></GridViewColumn>
-                                <GridViewColumn Header="In stock" DisplayMemberBinding="{Binding Path=UnitsInStock}"></GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                            <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=ProductId}"></GridViewColumn>
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=ProductName}"></GridViewColumn>
+                            <GridViewColumn Header="Category" DisplayMemberBinding="{Binding Path=CategoryId}"></GridViewColumn>
+                            <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Path=Price}"></GridViewColumn>
+                            <GridViewColumn Header="In stock" DisplayMemberBinding="{Binding Path=UnitsInStock}"></GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </StackPanel>
-            
+
             <!--Product information-->
             <StackPanel Grid.Column="1">
                 <Image Source="{Binding Path=Image}"
                        DataContext="{Binding ElementName=lvProducts, Path=SelectedItem}"
                        Height="150"></Image>
                 <Label>Product ID</Label>
-                <TextBox Text="{Binding Path=ProductId}"
+                <TextBox Text="{Binding Path=ProductId}" IsReadOnly="True"
                          DataContext="{Binding ElementName=lvProducts, Path=SelectedItem}"></TextBox>
                 <Label>Product name</Label>
                 <TextBox Text="{Binding Path=ProductName}"
@@ -81,9 +90,29 @@
                 <Label>Unit in stock</Label>
                 <TextBox Text="{Binding Path=UnitsInStock}"
                          DataContext="{Binding ElementName=lvProducts, Path=SelectedItem}"></TextBox>
+
+                <StackPanel Name="spnPetInformation">
+                    <Label>Weight</Label>
+                    <TextBox></TextBox>
+                    <Label>Age</Label>
+                    <TextBox></TextBox>
+                    <Label>Vaccinated</Label>
+                    <RadioButton></RadioButton>
+                    <Label>Gender</Label>
+                    <RadioButton></RadioButton>
+                    <RadioButton></RadioButton>
+                    <Label>Sterilized</Label>
+                    <RadioButton></RadioButton>
+                    <Label>IsRescued</Label>
+                    <RadioButton></RadioButton>
+                </StackPanel>
+
+                <Button Click="btnAddClick">Add</Button>
+                <Button Click="btnUpdateClick">Update</Button>
+                <Button Click="btnDeleteClick">Delete</Button>
             </StackPanel>
-            
+
         </Grid>
-        
+
     </Grid>
 </Window>
