@@ -19,8 +19,9 @@ namespace DataAccess.Model
 
         public virtual Product Product { get; set; }
 
-        public PetDetail(int productId, string petName, double weight, bool vaccinated, bool gender, double age, bool sterilized, bool isRescued)
+        public PetDetail(int petId, int productId, string petName, double weight, bool vaccinated, bool gender, double age, bool sterilized, bool isRescued)
         {
+            PetId = petId;
             ProductId = productId;
             PetName = petName;
             Weight = weight;

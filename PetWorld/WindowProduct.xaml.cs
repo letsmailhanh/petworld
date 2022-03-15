@@ -169,6 +169,7 @@ namespace PetWorld
 
                     int pID = Convert.ToInt32(product.ProductId);
                     PetDetail detail = petRepo.GetPetDetailByProductID(pID);
+                    tbPetID.Text = detail.PetId.ToString();
                     tbWeight.Text = detail.Weight.ToString();
                     tbAge.Text = detail.Age.ToString();
                     tbName.Text = detail.PetName.ToString();
@@ -217,14 +218,6 @@ namespace PetWorld
             Product p = null;
             try
             {
-                //int id = Convert.ToInt32(tbProductID.Text);
-                //string name = tbName.Text;
-                //int catID = Convert.ToInt32(tbCategory.Text);
-                //bool isPet = Convert.ToBoolean(tbIsPet.Text);
-                //decimal price = Convert.ToDecimal(tbPrice.Text);
-                //int inStock = Convert.ToInt32(tbUnitInStock.Text);
-                //string image = tbImageLink.Text;
-
                 int id = int.Parse(tbProductID.Text);
                 string name = Convert.ToString(tbName.Text);
                 int catID = int.Parse(tbCategory.Text);
@@ -233,7 +226,6 @@ namespace PetWorld
                 int inStock = int.Parse(tbUnitInStock.Text);
                 string image = Convert.ToString(tbImageLink.Text);
                 p = new Product(id, name, catID, isPet, price, inStock, image);
-                MessageBox.Show($"Product: {p.ProductId} - {p.ProductName} - {p.CategoryId} - {p.IsPet} - {p.Price} - {p.UnitsInStock} - {p.Image}");
             }
             catch (Exception ex)
             {
@@ -248,6 +240,7 @@ namespace PetWorld
             try
             {
                 int pid = Convert.ToInt32(tbProductID.Text);
+                int id = Convert.ToInt32(tbPetID.Text);
                 string name = tbName.Text;
                 double age = Convert.ToDouble(tbAge.Text);
                 double weight = Convert.ToDouble(tbWeight.Text);
@@ -263,7 +256,8 @@ namespace PetWorld
                 {
                     gender = false;
                 }
-                pd = new PetDetail(pid, name, weight, vaccinated, gender, age, sterilized, rescued);
+                pd = new PetDetail(id, pid, name, weight, vaccinated, gender, age, sterilized, rescued);
+                MessageBox.Show($"Pet detail: product id {pid} - pet id {id} - {name} - {weight} \n - {age} - vaccine {vaccinated} - {sterilized} - {rescued} - {gender}");
             }
             catch (Exception ex)
             {
@@ -294,17 +288,17 @@ namespace PetWorld
                 {
                     Product p = GetProductObject();
                     productRepo.UpdateProduct(p);
-                    LoadProductList();
-
+                    
                     //Neu la pet thi update them pet detail
                     bool ispet = Convert.ToBoolean(tbIsPet.Text);
-                    if(ispet == true)
+                    if (ispet == true)
                     {
                         PetDetail pd = GetPetDetailObject();
                         petRepo.UpdatePetDetail(pd);
                     }
 
                     MessageBox.Show($"Update product {p.ProductName} successfully");
+                    LoadProductList();
                 }
                 else
                 {
@@ -337,6 +331,8 @@ namespace PetWorld
         private void selectProduct(object sender, SelectionChangedEventArgs e)
         {
             LoadPetInformation();
+            //Product p = (Product)lvProducts.SelectedItem;
+            //MessageBox.Show($"{p.IsPet}");
         }
     }
 }

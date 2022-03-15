@@ -86,19 +86,23 @@
                         <TextBox Text="{Binding Path=Image}"
                          Name="tbImageLink"
                          DataContext="{Binding ElementName=lvProducts, Path=SelectedItem}"></TextBox>
+                        
                         <Label>Product ID</Label>
                         <TextBox Text="{Binding Path=ProductId}" 
                          IsReadOnly="True"
                          Name="tbProductID"
                          DataContext="{Binding ElementName=lvProducts, Path=SelectedItem}"></TextBox>
+                        
                         <Label>Product name</Label>
                         <TextBox Text="{Binding Path=ProductName}"
                          Name="tbName"
                          DataContext="{Binding ElementName=lvProducts, Path=SelectedItem}"></TextBox>
+                        
                         <Label>Category ID</Label>
                         <TextBox Text="{Binding Path=CategoryId}"
                          Name="tbCategory"
                          DataContext="{Binding ElementName=lvProducts, Path=SelectedItem}"></TextBox>
+                        
                         <Label>Is pet</Label>
                         <TextBox Text="{Binding Path=IsPet}"
                          Name="tbIsPet"
@@ -115,6 +119,8 @@
 
                     <!--Pet information-->
                     <StackPanel Name="spnPetInformation" Grid.Column="1" Margin="10">
+                        <Label>Pet ID</Label>
+                        <TextBox Name="tbPetID" IsReadOnly="True"></TextBox>
                         
                         <Label>Weight</Label>
                         <TextBox Name="tbWeight"></TextBox>
