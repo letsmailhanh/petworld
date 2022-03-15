@@ -25,13 +25,15 @@ namespace PetWorld
         IUserRepository userRepo;
         IProductRepository productRepo;
         ICategoryRepository categoryRepo;
+        IPetDetailRepository petRepo;
 
-        public WindowLogin(IUserRepository userRepository, IProductRepository productRepository, ICategoryRepository categoryRepository)
+        public WindowLogin(IUserRepository userRepository, IProductRepository productRepository, ICategoryRepository categoryRepository, IPetDetailRepository petRepository)
         {
             InitializeComponent();
             userRepo = userRepository;
             productRepo = productRepository;
             categoryRepo = categoryRepository;
+            petRepo = petRepository;
         }
 
         private void btnSigninClick(object sender, RoutedEventArgs e)
@@ -46,7 +48,7 @@ namespace PetWorld
                 {
                     if (u.Password.Equals(pass) && (u.Role.Equals("admin") || u.Role.Equals("staff")))
                     {
-                        var dashboard = new WindowDashboard(u, userRepo, productRepo, categoryRepo);
+                        var dashboard = new WindowDashboard(u, userRepo, productRepo, categoryRepo, petRepo);
                         dashboard.Show();
                         this.Close();
                     }

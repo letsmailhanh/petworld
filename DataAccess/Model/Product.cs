@@ -23,5 +23,16 @@ namespace DataAccess.Model
         public virtual Category Category { get; set; }
         public virtual PetDetail PetDetail { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+
+        public Product(int productId, string productName, int categoryId, bool isPet, decimal price, int unitsInStock, string image)
+        {
+            ProductId = productId;
+            ProductName = productName;
+            CategoryId = categoryId;
+            IsPet = isPet;
+            Price = price;
+            UnitsInStock = unitsInStock;
+            Image = image;
+        }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using DataAccess.Model;
+using DataAccess.Repository;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -100,6 +102,95 @@ namespace DataAccess.DAO
                 throw new Exception(ex.Message);
             }
             return products;
+        }
+        //Get product by id
+        public Product GetProductByID(int id)
+        {
+            Product p = null;
+            try
+            {
+                var db = new prn221_petworldContext();
+                p = db.Products.SingleOrDefault(p => p.ProductId == id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return p;
+        }
+        //add new product
+        public void AddProduct(Product p)
+        {
+            try
+            {
+                Product _p = GetProductByID(p.ProductId);
+                if(_p == null)
+                {
+                    var db = new prn221_petworldContext();
+                    db.Products.Add(p);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("San pham da ton tai");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        //update product
+        public void UpdateProduct(Product p)
+        {
+            try
+            {
+                Product _p = GetProductByID(p.ProductId);
+                if(_p != null)
+                {
+                    var db = new prn221_petworldContext();
+                    db.Entry<Product>(p).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("San pham khong ton tai");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        //delete product
+        public void DeleteProduct(Product p)
+        {
+            try
+            {
+                Product _p = GetProductByID(p.ProductId);
+                if (_p != null)
+                {
+                    var db = new prn221_petworldContext();
+                    db.Products.Remove(p);
+
+                    //delete pet detail
+                    if(p.IsPet == true)
+                    {
+                        PetDetailRepository petRepo = new PetDetailRepository();
+                        PetDetail pd = petRepo.GetPetDetailByProductID(p.ProductId);
+                        db.PetDetails.Remove(pd);
+                    }
+                    db.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("San pham khong ton tai");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

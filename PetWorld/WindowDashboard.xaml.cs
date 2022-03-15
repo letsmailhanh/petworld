@@ -25,14 +25,15 @@ namespace PetWorld
         IUserRepository userRepo;
         IProductRepository productRepo;
         ICategoryRepository categoryRepo;
-        
-        public WindowDashboard(User u, IUserRepository userRepository, IProductRepository productRepository, ICategoryRepository categoryRepository)
+        IPetDetailRepository petRepo;
+        public WindowDashboard(User u, IUserRepository userRepository, IProductRepository productRepository, ICategoryRepository categoryRepository, IPetDetailRepository petRepository)
         {
             InitializeComponent();
             user = u;
             userRepo = userRepository;
             productRepo = productRepository;
             categoryRepo = categoryRepository;
+            petRepo = petRepository;
         }
 
         private void btnUserClick(object sender, RoutedEventArgs e)
@@ -49,7 +50,7 @@ namespace PetWorld
 
         private void btnProductClick(object sender, RoutedEventArgs e)
         {
-            var productWindow = new WindowProduct(user, productRepo, categoryRepo);
+            var productWindow = new WindowProduct(user, productRepo, categoryRepo, petRepo);
             productWindow.Show();
             this.Close();
         }

@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PetWorld"
         mc:Ignorable="d"
-        Title="WindowProduct" Height="847" Width="882">
+        Title="WindowProduct" Height="672" Width="882">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal">
@@ -69,44 +69,93 @@
 
             <!--Product information-->
             <StackPanel Grid.Column="1">
+                <!--Image-->
                 <Image Source="{Binding Path=Image}"
                        DataContext="{Binding ElementName=lvProducts, Path=SelectedItem}"
                        Height="150"></Image>
-                <Label>Product ID</Label>
-                <TextBox Text="{Binding Path=ProductId}" IsReadOnly="True"
-                         DataContext="{Binding ElementName=lvProducts, Path=SelectedItem}"></TextBox>
-                <Label>Product name</Label>
-                <TextBox Text="{Binding Path=ProductName}"
-                         DataContext="{Binding ElementName=lvProducts, Path=SelectedItem}"></TextBox>
-                <Label>Category ID</Label>
-                <TextBox Text="{Binding Path=CategoryId}"
-                         DataContext="{Binding ElementName=lvProducts, Path=SelectedItem}"></TextBox>
-                <Label>Is pet</Label>
-                <TextBox Text="{Binding Path=IsPet}"
-                         DataContext="{Binding ElementName=lvProducts, Path=SelectedItem}"></TextBox>
-                <Label>Price</Label>
-                <TextBox Text="{Binding Path=Price}"
-                         DataContext="{Binding ElementName=lvProducts, Path=SelectedItem}"></TextBox>
-                <Label>Unit in stock</Label>
-                <TextBox Text="{Binding Path=UnitsInStock}"
-                         DataContext="{Binding ElementName=lvProducts, Path=SelectedItem}"></TextBox>
 
-                <StackPanel Name="spnPetInformation">
-                    <Label>Weight</Label>
-                    <TextBox></TextBox>
-                    <Label>Age</Label>
-                    <TextBox></TextBox>
-                    <Label>Vaccinated</Label>
-                    <RadioButton></RadioButton>
-                    <Label>Gender</Label>
-                    <RadioButton></RadioButton>
-                    <RadioButton></RadioButton>
-                    <Label>Sterilized</Label>
-                    <RadioButton></RadioButton>
-                    <Label>IsRescued</Label>
-                    <RadioButton></RadioButton>
-                </StackPanel>
+                <!--Product information-->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
 
+                    <StackPanel Margin="10">
+                        <Label>Image link</Label>
+                        <TextBox Text="{Binding Path=Image}"
+                         Name="tbImageLink"
+                         DataContext="{Binding ElementName=lvProducts, Path=SelectedItem}"></TextBox>
+                        <Label>Product ID</Label>
+                        <TextBox Text="{Binding Path=ProductId}" 
+                         IsReadOnly="True"
+                         Name="tbProductID"
+                         DataContext="{Binding ElementName=lvProducts, Path=SelectedItem}"></TextBox>
+                        <Label>Product name</Label>
+                        <TextBox Text="{Binding Path=ProductName}"
+                         Name="tbName"
+                         DataContext="{Binding ElementName=lvProducts, Path=SelectedItem}"></TextBox>
+                        <Label>Category ID</Label>
+                        <TextBox Text="{Binding Path=CategoryId}"
+                         Name="tbCategory"
+                         DataContext="{Binding ElementName=lvProducts, Path=SelectedItem}"></TextBox>
+                        <Label>Is pet</Label>
+                        <TextBox Text="{Binding Path=IsPet}"
+                         Name="tbIsPet"
+                         DataContext="{Binding ElementName=lvProducts, Path=SelectedItem}"></TextBox>
+                        <Label>Price</Label>
+                        <TextBox Text="{Binding Path=Price}"
+                         Name="tbPrice"
+                         DataContext="{Binding ElementName=lvProducts, Path=SelectedItem}"></TextBox>
+                        <Label>Unit in stock</Label>
+                        <TextBox Text="{Binding Path=UnitsInStock}"
+                         Name="tbUnitInStock"
+                         DataContext="{Binding ElementName=lvProducts, Path=SelectedItem}"></TextBox>
+                    </StackPanel>
+
+                    <!--Pet information-->
+                    <StackPanel Name="spnPetInformation" Grid.Column="1" Margin="10">
+                        
+                        <Label>Weight</Label>
+                        <TextBox Name="tbWeight"></TextBox>
+                        
+                        <Label>Age</Label>
+                        <TextBox Name="tbAge"></TextBox>
+
+                        <WrapPanel>
+                            <Label Width="70">Vaccinated</Label>
+                            <RadioButton Name="rbVaccinated"
+                                         VerticalAlignment="Center"></RadioButton>
+                        </WrapPanel>
+                        
+                        <Label>Gender</Label>
+                        <WrapPanel>
+                            <Label Width="70">Male</Label>
+                            <RadioButton GroupName="Gender" 
+                                         Name="rbMale"
+                                         VerticalAlignment="Center"></RadioButton>
+                            <Label Width="70">Female</Label>
+                            <RadioButton GroupName="Gender" 
+                                         Name="rbFemale"
+                                         VerticalAlignment="Center"></RadioButton>
+                        </WrapPanel>
+                        
+                        <WrapPanel>
+                            <Label Width="70">Sterilized</Label>
+                            <RadioButton x:Name="rbSterilized"
+                                         VerticalAlignment="Center"></RadioButton>
+                        </WrapPanel>
+                        
+                        <WrapPanel>
+                            <Label Width="70">IsRescued</Label>
+                            <RadioButton x:Name="rbIsRescued"
+                                         VerticalAlignment="Center"></RadioButton>
+                        </WrapPanel>
+                        
+                    </StackPanel>
+                </Grid>
+
+                <!--Action-->
                 <Button Click="btnAddClick">Add</Button>
                 <Button Click="btnUpdateClick">Update</Button>
                 <Button Click="btnDeleteClick">Delete</Button>

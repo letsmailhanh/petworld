@@ -25,13 +25,15 @@ namespace PetWorld
         User user;
         IProductRepository productRepo;
         ICategoryRepository categoryRepo;
-        List<Product> selectedProducts;
-        public WindowProduct(User u, IProductRepository productRepository, ICategoryRepository categoryRepository)
+        IPetDetailRepository petRepo;
+        //List<Product> selectedProducts;
+        public WindowProduct(User u, IProductRepository productRepository, ICategoryRepository categoryRepository, IPetDetailRepository petRepository)
         {
             InitializeComponent();
             user = u;
             productRepo = productRepository;
             categoryRepo = categoryRepository;
+            petRepo = petRepository;
             LoadProductList();
             LoadCategoryList();
             LoadPetInformation();
@@ -41,7 +43,7 @@ namespace PetWorld
         private void LoadProductList()
         {
             List<Product> products = productRepo.GetProducts().ToList();
-            selectedProducts = products;
+            //selectedProducts = products;
             lvProducts.ItemsSource = products;
         }
 
@@ -49,7 +51,7 @@ namespace PetWorld
         {
             List<Category> categories = categoryRepo.GetCategories().ToList();
             List<Product> products = productRepo.GetProducts().ToList();
-            selectedProducts = products;
+            //selectedProducts = products;
             Category all = new Category("Tất cả");
             categories.Add(all);
             cbCategory2.ItemsSource = categories;
@@ -58,9 +60,12 @@ namespace PetWorld
 
         private void cbCategory1Change(object sender, SelectionChangedEventArgs e)
         {
+            //Get selected category
             string selected = cbCategory1.SelectedValue.ToString();
             List<Category> categories;
             List<Product> products;
+
+            //Get list sub categories
             if (selected.Equals("Pet"))
             {
                 categories = categoryRepo.GetPetCategories().ToList();
@@ -73,12 +78,21 @@ namespace PetWorld
             {
                 categories = categoryRepo.GetCategories().ToList();
             }
+
+            //Set sub categories
             cbCategory2.ItemsSource = categories;
+
+            //Set product list
             products = productRepo.GetProducts().ToList();
-            selectedProducts = products;
+
+            //selectedProducts = products;
             lvProducts.ItemsSource = products;
+
+            //Add selection "All"
             Category all = new Category("Tất cả");
             categories.Add(all);
+
+            //Set default selected index of sub category
             cbCategory2.SelectedIndex = categories.Count - 1;
         }
 
@@ -120,7 +134,7 @@ namespace PetWorld
                 int catID = Convert.ToInt32(selected.CategoryId);
                 products = productRepo.GetProductsByCatID(catID).ToList();
             }
-            selectedProducts = products;
+            //selectedProducts = products;
             lvProducts.ItemsSource = products;
         }
 
@@ -152,6 +166,44 @@ namespace PetWorld
                 if (product.IsPet == true)
                 {
                     spnPetInformation.Visibility = Visibility.Visible;
+
+                    int pID = Convert.ToInt32(product.ProductId);
+                    PetDetail detail = petRepo.GetPetDetailByProductID(pID);
+                    tbWeight.Text = detail.Weight.ToString();
+                    tbAge.Text = detail.Age.ToString();
+                    tbName.Text = detail.PetName.ToString();
+                    if(detail.Vaccinated == true)
+                    {
+                        rbVaccinated.IsChecked = true;
+                    }
+                    else
+                    {
+                        rbVaccinated.IsChecked = false;
+                    }
+                    if(detail.Gender == true)
+                    {
+                        rbMale.IsChecked = true;
+                    }
+                    else
+                    {
+                        rbFemale.IsChecked = true;
+                    }
+                    if (detail.IsRescued == true)
+                    {
+                        rbIsRescued.IsChecked = true;
+                    }
+                    else
+                    {
+                        rbIsRescued.IsChecked = false;
+                    }
+                    if (detail.Sterilized == true)
+                    {
+                        rbSterilized.IsChecked = true;
+                    }
+                    else
+                    {
+                        rbSterilized.IsChecked = false;
+                    }
                 }
                 else
                 {
@@ -160,19 +212,126 @@ namespace PetWorld
             }
         }
 
+        private Product GetProductObject()
+        {
+            Product p = null;
+            try
+            {
+                //int id = Convert.ToInt32(tbProductID.Text);
+                //string name = tbName.Text;
+                //int catID = Convert.ToInt32(tbCategory.Text);
+                //bool isPet = Convert.ToBoolean(tbIsPet.Text);
+                //decimal price = Convert.ToDecimal(tbPrice.Text);
+                //int inStock = Convert.ToInt32(tbUnitInStock.Text);
+                //string image = tbImageLink.Text;
+
+                int id = int.Parse(tbProductID.Text);
+                string name = Convert.ToString(tbName.Text);
+                int catID = int.Parse(tbCategory.Text);
+                bool isPet = bool.Parse(tbIsPet.Text);
+                decimal price = decimal.Parse(tbPrice.Text);
+                int inStock = int.Parse(tbUnitInStock.Text);
+                string image = Convert.ToString(tbImageLink.Text);
+                p = new Product(id, name, catID, isPet, price, inStock, image);
+                MessageBox.Show($"Product: {p.ProductId} - {p.ProductName} - {p.CategoryId} - {p.IsPet} - {p.Price} - {p.UnitsInStock} - {p.Image}");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return p;
+        }
+
+        private PetDetail GetPetDetailObject()
+        {
+            PetDetail pd = null;
+            try
+            {
+                int pid = Convert.ToInt32(tbProductID.Text);
+                string name = tbName.Text;
+                double age = Convert.ToDouble(tbAge.Text);
+                double weight = Convert.ToDouble(tbWeight.Text);
+                bool vaccinated = Convert.ToBoolean(rbVaccinated.IsChecked);
+                bool sterilized = Convert.ToBoolean(rbSterilized.IsChecked);
+                bool rescued = Convert.ToBoolean(rbIsRescued.IsChecked);
+                bool gender;
+                if (Convert.ToBoolean(rbMale.IsChecked))
+                {
+                    gender = true;
+                }
+                else
+                {
+                    gender = false;
+                }
+                pd = new PetDetail(pid, name, weight, vaccinated, gender, age, sterilized, rescued);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            return pd;
+        }
+
         private void btnAddClick(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         private void btnUpdateClick(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                int pid = Convert.ToInt32(tbProductID.Text);
+                string name = tbName.Text;
+                if(name.Trim() != null)
+                {
+                    Product p = GetProductObject();
+                    productRepo.UpdateProduct(p);
+                    LoadProductList();
 
+                    //Neu la pet thi update them pet detail
+                    bool ispet = Convert.ToBoolean(tbIsPet.Text);
+                    if(ispet == true)
+                    {
+                        PetDetail pd = GetPetDetailObject();
+                        petRepo.UpdatePetDetail(pd);
+                    }
+
+                    MessageBox.Show($"Update product {p.ProductName} successfully");
+                }
+                else
+                {
+                    MessageBox.Show("All information is required!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Update product");
+            }
         }
 
         private void btnDeleteClick(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                int id = Convert.ToInt32(tbProductID.Text);
+                string name = tbName.Text;
+                Product p = productRepo.GetProductByID(id);
+                productRepo.DeleteProduct(p);
+                MessageBox.Show($"Delete {name} successfully!");
+                LoadProductList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Delete product");
+            }
         }
 
         private void selectProduct(object sender, SelectionChangedEventArgs e)

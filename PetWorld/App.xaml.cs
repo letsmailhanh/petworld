@@ -30,6 +30,7 @@ namespace PetWorld
             services.AddSingleton(typeof(IUserRepository), typeof(UserRepository));
             services.AddSingleton(typeof(IProductRepository), typeof(ProductRepository));
             services.AddSingleton(typeof(ICategoryRepository), typeof(CategoryRepository));
+            services.AddSingleton(typeof(IPetDetailRepository), typeof(PetDetailRepository));
             services.AddSingleton<WindowLogin>();
         }
 
