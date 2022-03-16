@@ -97,11 +97,15 @@
                         <TextBox Text="{Binding Path=ProductName}"
                          Name="tbName"
                          DataContext="{Binding ElementName=lvProducts, Path=SelectedItem}"></TextBox>
-                        
-                        <Label>Category ID</Label>
-                        <TextBox Text="{Binding Path=CategoryId}"
-                         Name="tbCategory"
-                         DataContext="{Binding ElementName=lvProducts, Path=SelectedItem}"></TextBox>
+
+                        <WrapPanel>
+                            <Label>Category</Label>
+                            <ComboBox Name="cbCategoryInfo"
+                            DisplayMemberPath="Title"
+                            SelectedValuePath="CategoryId"
+                            Width="140"
+                            Height="20"></ComboBox>
+                        </WrapPanel>
                         
                         <Label>Is pet</Label>
                         <TextBox Text="{Binding Path=IsPet}"

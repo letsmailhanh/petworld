@@ -5,19 +5,98 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PetWorld"
         mc:Ignorable="d"
-        Title="WindowLogin" Height="450" Width="800">
+        Title="WindowLogin" Height="450" Width="800" Background="#f3e3e3">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <StackPanel>
-            <Label>Username</Label>
-            <TextBox Name="tbUsername"></TextBox>
-            <Label>Password</Label>
-            <PasswordBox Name="pwbPass"></PasswordBox>
-            <Button Click="btnSigninClick">Sign in</Button>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock
+                HorizontalAlignment="Center"
+                Margin="0 30"
+                Foreground="#2f3543"
+                FontSize="30"
+                FontWeight="Bold"
+                FontFamily="Arial Rounded MT Bold">pet world</TextBlock>
+            <WrapPanel Margin="10">
+                <Label Width="70">Username</Label>
+                <TextBox Name="tbUsername"
+                     Background="#f4f4f4"
+                     Width="200"
+                     Height="30"
+                     VerticalAlignment="Center"
+                     Padding="5" 
+                     Foreground="#FFA2A2A2">
+                    <!--<TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </TextBox.Resources>-->
+                </TextBox>
+            </WrapPanel>
+
+            <WrapPanel Margin="10">
+                <Label Width="70">Password</Label>
+                <PasswordBox Name="pwbPass"
+                     Background="#f4f4f4"
+                     Width="200"
+                     Height="30"
+                     Padding="5"
+                     VerticalAlignment="Center"
+                     Foreground="#FFA2A2A2">
+                </PasswordBox>
+            </WrapPanel>
+
+            <Border BorderBrush="#ff6b81" CornerRadius="20" Height="40" Background="#ff6b81" Margin="0 10" Width="270">
+                <Button
+                    Click="btnSigninClick"
+                    FontSize="20"
+                    Height="40"
+                    Width="220"
+                    Foreground="White">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <!--Mouseover-->
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="#ff6b81">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="Sign in"></ContentPresenter>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Background" Value="Transparent"></Setter>
+                                    <Setter Property="BorderBrush" Value="Transparent"></Setter>
+                                    <Setter Property="BorderThickness" Value="0"></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <!--Shadow effect-->
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="5" Color="black" Opacity="0.5" BlurRadius="15"/>
+                </Border.Effect>
+            </Border>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Background="#f5ccd0">
+            <Image Source="/Image/cat1.png" Height="300"></Image>
+                <TextBlock Foreground="#2f3543"
+                FontSize="30"
+                FontWeight="Bold"
+                FontFamily="Arial Rounded MT Bold"
+                HorizontalAlignment="Center">meow.</TextBlock>
+            <TextBlock Foreground="#2f3543"
+                FontSize="15"
+                FontFamily="Arial Unicode MS"
+                TextAlignment="Center"
+                TextWrapping="WrapWithOverflow" >welcome back, human</TextBlock>
         </StackPanel>
     </Grid>
 </Window>

@@ -34,5 +34,15 @@ namespace DataAccess.Model
             UnitsInStock = unitsInStock;
             Image = image;
         }
+
+        public Product(string productName, int categoryId, bool isPet, decimal price, int unitsInStock, string image)
+        {
+            ProductName = productName;
+            CategoryId = categoryId;
+            IsPet = isPet;
+            Price = price;
+            UnitsInStock = unitsInStock;
+            Image = image;
+        }
     }
 }

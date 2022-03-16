@@ -24,5 +24,15 @@ namespace PetWorld
         {
             InitializeComponent();
         }
+
+        private void btnSignupClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnSigninClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

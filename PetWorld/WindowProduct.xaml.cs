@@ -26,7 +26,6 @@ namespace PetWorld
         IProductRepository productRepo;
         ICategoryRepository categoryRepo;
         IPetDetailRepository petRepo;
-        //List<Product> selectedProducts;
         public WindowProduct(User u, IProductRepository productRepository, ICategoryRepository categoryRepository, IPetDetailRepository petRepository)
         {
             InitializeComponent();
@@ -51,7 +50,6 @@ namespace PetWorld
         {
             List<Category> categories = categoryRepo.GetCategories().ToList();
             List<Product> products = productRepo.GetProducts().ToList();
-            //selectedProducts = products;
             Category all = new Category("Tất cả");
             categories.Add(all);
             cbCategory2.ItemsSource = categories;
@@ -85,7 +83,6 @@ namespace PetWorld
             //Set product list
             products = productRepo.GetProducts().ToList();
 
-            //selectedProducts = products;
             lvProducts.ItemsSource = products;
 
             //Add selection "All"
@@ -134,22 +131,23 @@ namespace PetWorld
                 int catID = Convert.ToInt32(selected.CategoryId);
                 products = productRepo.GetProductsByCatID(catID).ToList();
             }
-            //selectedProducts = products;
             lvProducts.ItemsSource = products;
         }
 
         private void cbOrderByChange(object sender, SelectionChangedEventArgs e)
         {
             string orderBy = cbOrderBy.SelectedValue.ToString();
-            
+            MessageBox.Show($"{orderBy}");
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvProducts.ItemsSource);
+
             if (orderBy.Equals("Giá tăng dần"))
             {
-                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvProducts.ItemsSource);
+                view.SortDescriptions.Clear();
                 view.SortDescriptions.Add(new SortDescription("Price", ListSortDirection.Ascending));
             }
             else if (orderBy.Equals("Giá giảm dần"))
             {
-                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvProducts.ItemsSource);
+                view.SortDescriptions.Clear();
                 view.SortDescriptions.Add(new SortDescription("Price", ListSortDirection.Descending));
             }
         }
@@ -213,14 +211,15 @@ namespace PetWorld
             }
         }
 
-        private Product GetProductObject()
+        private Product GetProductObjectWithID()
         {
             Product p = null;
             try
             {
                 int id = int.Parse(tbProductID.Text);
                 string name = Convert.ToString(tbName.Text);
-                int catID = int.Parse(tbCategory.Text);
+                Category selectedCat = (Category)cbCategoryInfo.SelectedItem;
+                int catID = selectedCat.CategoryId;
                 bool isPet = bool.Parse(tbIsPet.Text);
                 decimal price = decimal.Parse(tbPrice.Text);
                 int inStock = int.Parse(tbUnitInStock.Text);
@@ -234,7 +233,28 @@ namespace PetWorld
             return p;
         }
 
-        private PetDetail GetPetDetailObject()
+        private Product GetProductObject()
+        {
+            Product p = null;
+            try
+            {
+                string name = Convert.ToString(tbName.Text);
+                Category selectedCat = (Category) cbCategoryInfo.SelectedItem;
+                int catID = selectedCat.CategoryId;
+                bool isPet = bool.Parse(tbIsPet.Text);
+                decimal price = decimal.Parse(tbPrice.Text);
+                int inStock = int.Parse(tbUnitInStock.Text);
+                string image = Convert.ToString(tbImageLink.Text);
+                p = new Product(name, catID, isPet, price, inStock, image);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return p;
+        }
+
+        private PetDetail GetPetDetailObjectWithID()
         {
             PetDetail pd = null;
             try
@@ -267,14 +287,76 @@ namespace PetWorld
             return pd;
         }
 
+        private PetDetail GetPetDetailObject()
+        {
+            PetDetail pd = null;
+            try
+            {
+                int pid = Convert.ToInt32(tbProductID.Text);
+                string name = tbName.Text;
+                double age = Convert.ToDouble(tbAge.Text);
+                double weight = Convert.ToDouble(tbWeight.Text);
+                bool vaccinated = Convert.ToBoolean(rbVaccinated.IsChecked);
+                bool sterilized = Convert.ToBoolean(rbSterilized.IsChecked);
+                bool rescued = Convert.ToBoolean(rbIsRescued.IsChecked);
+                bool gender;
+                if (Convert.ToBoolean(rbMale.IsChecked))
+                {
+                    gender = true;
+                }
+                else
+                {
+                    gender = false;
+                }
+                pd = new PetDetail(pid, name, weight, vaccinated, gender, age, sterilized, rescued);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            return pd;
+        }
+
         private void btnAddClick(object sender, RoutedEventArgs e)
         {
             try
             {
+                int pid = Convert.ToInt32(tbProductID.Text);
+                string name = tbName.Text;
+                if (name.Trim() != null)
+                {
+                    //Lấy thông tin sản phẩm và add vào db
+                    Product p = GetProductObject();
+                    productRepo.AddProduct(p);
+
+                    //Neu la pet thi update them pet detail
+                    //bool ispet = Convert.ToBoolean(tbIsPet.Text);
+                    //if (ispet == true)
+                    //{
+                    //    PetDetail pd = GetPetDetailObject();
+                    //    petRepo.AddPetDetail(pd);
+                    //}
+
+                    //Thông báo thêm sản phẩm thành công
+                    MessageBox.Show($"Insert product {p.ProductName} successfully");
+
+                    //Load lại danh sách sản phẩm
+                    LoadProductList();
+
+                    //Load lại selected index của 2 combobox category
+                    cbCategory1.SelectedIndex = 0;
+                    List<Category> categories = categoryRepo.GetCategories().ToList();
+                    cbCategory2.SelectedIndex = categories.Count;
+                }
+                else
+                {
+                    MessageBox.Show("All information is required!");
+                }
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                MessageBox.Show(ex.Message, "Insert product");
             }
         }
 
@@ -286,14 +368,14 @@ namespace PetWorld
                 string name = tbName.Text;
                 if(name.Trim() != null)
                 {
-                    Product p = GetProductObject();
+                    Product p = GetProductObjectWithID();
                     productRepo.UpdateProduct(p);
                     
                     //Neu la pet thi update them pet detail
                     bool ispet = Convert.ToBoolean(tbIsPet.Text);
                     if (ispet == true)
                     {
-                        PetDetail pd = GetPetDetailObject();
+                        PetDetail pd = GetPetDetailObjectWithID();
                         petRepo.UpdatePetDetail(pd);
                     }
 
@@ -331,8 +413,23 @@ namespace PetWorld
         private void selectProduct(object sender, SelectionChangedEventArgs e)
         {
             LoadPetInformation();
-            //Product p = (Product)lvProducts.SelectedItem;
-            //MessageBox.Show($"{p.IsPet}");
+
+            //Load danh sách categories lên combo box
+            List<Category> categories = categoryRepo.GetCategories().ToList();
+            cbCategoryInfo.ItemsSource = categories;
+
+            //Load category của sản phẩm
+            Product p = (Product)lvProducts.SelectedItem;
+            int catID;
+            if (p == null)
+            {
+                catID = 1;
+            }
+            else
+            {
+                catID = p.CategoryId;
+            }
+            cbCategoryInfo.SelectedValue = catID;
         }
     }
 }

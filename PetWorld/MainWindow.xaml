@@ -5,8 +5,110 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PetWorld"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Background="#f3e3e3">
     <Grid>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Image Source="/Image/whiteCat.png"
+                   Height="200"></Image>
+            <TextBlock Foreground="#2f3543"
+                FontSize="30"
+                FontWeight="Bold"
+                FontFamily="Arial Rounded MT Bold"
+                HorizontalAlignment="Center">hi human.</TextBlock>
+            <TextBlock Foreground="#2f3543"
+                FontSize="15"
+                FontFamily="Arial Unicode MS"
+                TextAlignment="Center"
+                TextWrapping="WrapWithOverflow" Width="263"
+                Text="do you want to sign in or sign up to have me or whatever?"></TextBlock>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+            <TextBlock
+                HorizontalAlignment="Center"
+                Margin="0 30"
+                Foreground="#2f3543"
+                FontSize="30"
+                FontWeight="Bold"
+                FontFamily="Arial Rounded MT Bold">pet world</TextBlock>
+            <!--Sign in button-->
+            <Border BorderBrush="#2f3543" CornerRadius="20" Height="40" Background="#2f3543" Margin="0 10" Width="370">
+                <Button
+                    Click="btnSigninClick"
+                    FontSize="20"
+                    Height="40"
+                    Width="320"
+                    Foreground="White">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <!--Mouseover-->
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="#2f3543">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="Sign in"></ContentPresenter>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Background" Value="Transparent"></Setter>
+                                    <Setter Property="BorderBrush" Value="Transparent"></Setter>
+                                    <Setter Property="BorderThickness" Value="0"></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <!--Shadow effect-->
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="5" Color="black" Opacity="0.5" BlurRadius="15"/>
+                </Border.Effect>
+            </Border>
+
+            <!--Signup button-->
+            <Border BorderBrush="#ff6b81" CornerRadius="20" Height="40" Background="#ff6b81" Margin="0 10" Width="370">
+                <Button
+                    Click="btnSignupClick"
+                    FontSize="20"
+                    Height="40"
+                    Width="320"
+                    Foreground="White">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <!--Mouseover-->
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="#ff6b81">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="Sign up"></ContentPresenter>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Background" Value="Transparent"></Setter>
+                                    <Setter Property="BorderBrush" Value="Transparent"></Setter>
+                                    <Setter Property="BorderThickness" Value="0"></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <!--Shadow effect-->
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="5" Color="black" Opacity="0.5" BlurRadius="15"/>
+                </Border.Effect>
+            </Border>
+
+        </StackPanel>
     </Grid>
 </Window>
