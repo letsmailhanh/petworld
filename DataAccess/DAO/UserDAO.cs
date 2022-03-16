@@ -84,6 +84,86 @@ namespace DataAccess.DAO
             }
             return user;
         }
-
+        //Get user by ID
+        public User GetUserByID(int id)
+        {
+            User user = null;
+            try
+            {
+                var db = new prn221_petworldContext();
+                user = db.Users.SingleOrDefault(user => user.UserId == id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return user;
+        }
+        //Add user
+        public void AddUser(User u)
+        {
+            try
+            {
+                User _u = GetUserByUsername(u.UserName);
+                if(_u == null)
+                {
+                    var db = new prn221_petworldContext();
+                    db.Users.Add(u);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("User da ton tai");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        //Update user
+        public void UpdateUser(User u)
+        {
+            try
+            {
+                User _u = GetUserByID(u.UserId);
+                if (_u != null)
+                {
+                    var db = new prn221_petworldContext();
+                    db.Entry<User>(u).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("User khong ton tai");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        //Delete user
+        public void DeleteUser(User u)
+        {
+            try
+            {
+                User _u = GetUserByID(u.UserId);
+                if (_u != null)
+                {
+                    var db = new prn221_petworldContext();
+                    db.Users.Remove(u);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("User khong ton tai");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

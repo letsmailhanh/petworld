@@ -14,6 +14,8 @@
     <None Remove="Image\bosat1.jpg" />
     <None Remove="Image\bosat2.jpg" />
     <None Remove="Image\bosat3.jpg" />
+    <None Remove="Image\cat1.png" />
+    <None Remove="Image\cat2.png" />
     <None Remove="Image\hamster1.jpg" />
     <None Remove="Image\hamster2.jpg" />
     <None Remove="Image\husky1.jpg" />
@@ -26,6 +28,7 @@
     <None Remove="Image\poodle1.jpg" />
     <None Remove="Image\poodle2.jpg" />
     <None Remove="Image\poodle4.jpg" />
+    <None Remove="Image\search.png" />
     <None Remove="Image\thucan1.jpg" />
     <None Remove="Image\thucan2.jpg" />
     <None Remove="Image\thucan3.jpg" />
@@ -33,6 +36,7 @@
     <None Remove="Image\toy2.jpg" />
     <None Remove="Image\toy3.jpg" />
     <None Remove="Image\toy4.jpg" />
+    <None Remove="Image\whiteCat.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -67,6 +71,8 @@
     <Resource Include="Image\bosat3.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Image\cat1.png" />
+    <Resource Include="Image\cat2.png" />
     <Resource Include="Image\hamster1.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -103,6 +109,7 @@
     <Resource Include="Image\poodle4.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Image\search.png" />
     <Resource Include="Image\thucan1.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -124,6 +131,7 @@
     <Resource Include="Image\toy4.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Image\whiteCat.png" />
   </ItemGroup>
 
 </Project>

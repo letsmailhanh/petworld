@@ -29,11 +29,6 @@
                      VerticalAlignment="Center"
                      Padding="5" 
                      Foreground="#FFA2A2A2">
-                    <!--<TextBox.Resources>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="CornerRadius" Value="5"/>
-                        </Style>
-                    </TextBox.Resources>-->
                 </TextBox>
             </WrapPanel>
 
@@ -86,7 +81,7 @@
         </StackPanel>
 
         <StackPanel Grid.Column="1" Background="#f5ccd0">
-            <Image Source="/Image/cat1.png" Height="300"></Image>
+            <Image Source="/Image/cat2.png" Height="300"></Image>
                 <TextBlock Foreground="#2f3543"
                 FontSize="30"
                 FontWeight="Bold"
