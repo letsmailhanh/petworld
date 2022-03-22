@@ -23,6 +23,8 @@ namespace DataAccess.Repository
 
         public IEnumerable<Product> GetProductsByCatID(int catID) => ProductDAO.Instance.GetProductListByCatID(catID);
 
+        public IEnumerable<Product> GetProductsByName(string name) => ProductDAO.Instance.GetProductListByName(name);
+
         public void UpdateProduct(Product p) => ProductDAO.Instance.UpdateProduct(p);
     }
 }

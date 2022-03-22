@@ -151,7 +151,6 @@ namespace PetWorld
                 role = selected.Role;
                 cbRole.SelectedValue = role;
             }
-            
         }
     }
 }

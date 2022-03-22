@@ -1,4 +1,4 @@
-﻿using DataAccess.Model;
+﻿ using DataAccess.Model;
 using DataAccess.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -94,6 +94,25 @@ namespace DataAccess.DAO
                 var db = new prn221_petworldContext();
                 var query = from p in db.Products
                             where p.CategoryId == catID
+                            select p;
+                products = query.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return products;
+        }
+
+        //Get product list by name
+        public List<Product> GetProductListByName(string key)
+        {
+            List<Product> products;
+            try
+            {
+                var db = new prn221_petworldContext();
+                var query = from p in db.Products
+                            where p.ProductName.Contains(key)
                             select p;
                 products = query.ToList();
             }
