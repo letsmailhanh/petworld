@@ -70,7 +70,6 @@
                            HorizontalAlignment="Center"
                            FontStyle="Italic"></TextBlock>
                 <ScrollViewer>
-
                     <ListView Name="lvProducts" ScrollViewer.CanContentScroll="True" 
                           ScrollViewer.VerticalScrollBarVisibility="Auto"
                           SelectionChanged="selectProduct">

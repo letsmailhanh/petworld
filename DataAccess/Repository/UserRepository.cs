@@ -16,6 +16,8 @@ namespace DataAccess.Repository
 
         public IEnumerable<User> GetCustomers() => UserDAO.Instance.GetCustomerList();
 
+        public IEnumerable<User> GetCustomersByKey(string key) => UserDAO.Instance.GetListUserByKey(key);
+
         public User GetUserByUsername(string username) => UserDAO.Instance.GetUserByUsername(username);
 
         public IEnumerable<User> GetUsers() => UserDAO.Instance.GetUserList();

@@ -11,6 +11,7 @@ namespace DataAccess.Repository
     {
         IEnumerable<User> GetUsers();
         IEnumerable<User> GetCustomers();
+        IEnumerable<User> GetCustomersByKey(string key);
         User GetUserByUsername(string username);
         void AddUser(User u);
         void UpdateUser(User u);
