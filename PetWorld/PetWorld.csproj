@@ -13,6 +13,8 @@
     <None Remove="Image\ao1.jpg" />
     <None Remove="Image\ao2.jpg" />
     <None Remove="Image\ao3.jpg" />
+    <None Remove="Image\back.png" />
+    <None Remove="Image\backIcon.png" />
     <None Remove="Image\balo1.jpg" />
     <None Remove="Image\batu1.jpg" />
     <None Remove="Image\bosat1.jpg" />
@@ -67,6 +69,8 @@
     <Resource Include="Image\ao1.jpg" />
     <Resource Include="Image\ao2.jpg" />
     <Resource Include="Image\ao3.jpg" />
+    <Resource Include="Image\back.png" />
+    <Resource Include="Image\backIcon.png" />
     <Resource Include="Image\balo1.jpg" />
     <Resource Include="Image\batu1.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

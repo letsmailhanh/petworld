@@ -36,7 +36,9 @@ namespace PetWorld
 
         private void btnSignupClick(object sender, RoutedEventArgs e)
         {
-            
+            var signup = new WindowSignup(userRepo, productRepo, categoryRepo, petRepo);
+            signup.Show();
+            this.Close();
         }
 
         private void btnSigninClick(object sender, RoutedEventArgs e)

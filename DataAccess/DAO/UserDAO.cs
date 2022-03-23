@@ -69,7 +69,7 @@ namespace DataAccess.DAO
             return result;
         }
         //Get user by key
-        public List<User> GetListUserByKey(string key)
+        public IEnumerable<User> GetListUserByKey(string key)
         {
             List<User> users;
             try

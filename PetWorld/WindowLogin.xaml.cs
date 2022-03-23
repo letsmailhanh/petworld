@@ -70,5 +70,12 @@ namespace PetWorld
                 throw new Exception(ex.Message);
             }
         }
+
+        private void btnBackClick(object sender, RoutedEventArgs e)
+        {
+            var previous = new MainWindow(userRepo, productRepo, categoryRepo, petRepo);
+            previous.Show();
+            this.Close();
+        }
     }
 }
