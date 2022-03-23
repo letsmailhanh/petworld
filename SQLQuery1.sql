@@ -24,7 +24,7 @@ INSERT INTO [Category] VALUES (N'Thuốc', 0)
 INSERT INTO [Category] VALUES (N'Khác', 0)
 
 --Insert product
---select * from [Product]
+--select * from [Product] where [IsPet] = 1
 --Insert pet
 INSERT INTO [Product] VALUES (N'Husky', 1, 1, '12000000', 1, N'/Image/husky1.jpg')
 INSERT INTO [Product] VALUES (N'Husky', 1, 1, '9999000', 1,  N'/Image/husky2.jpg')
@@ -94,6 +94,15 @@ INSERT INTO [PetDetail] VALUES(12, N'Chả', 3.7, 0, 1, 1, 1, 1)
 INSERT INTO [PetDetail] VALUES(13, N'Lucas', 5.1, 1, 1, 3, 1, 0 )
 INSERT INTO [PetDetail] VALUES(14, N'Rosa', 4.8, 1, 0, 2, 0, 1)
 INSERT INTO [PetDetail] VALUES(15, N'Đậu phụ', 3.8, 0, 1, 2, 1, 1)
+
+INSERT INTO [PetDetail] VALUES(16, N'Hung', 4.2, 0, 1, 1, 0, 0)
+INSERT INTO [PetDetail] VALUES(17, N'Lếu', 3.3, 0, 1, 1, 0, 0)
+INSERT INTO [PetDetail] VALUES(18, N'Bi', 1.2, 0, 1, 1, 0, 0)
+INSERT INTO [PetDetail] VALUES(19, N'Cá chép Nhật', 8, 0, 1, 1, 0, 0)
+INSERT INTO [PetDetail] VALUES(20, N'Lau kiếng', 1.2, 0, 1, 1, 0, 0)
+INSERT INTO [PetDetail] VALUES(21, N'Tai tượng', 23, 0, 1, 1, 0, 0)
+INSERT INTO [PetDetail] VALUES(22, N'Tún', 0.12, 0, 1, 1, 0, 0)
+INSERT INTO [PetDetail] VALUES(23, N'Tếu', 0.14, 0, 1, 1, 0, 0)
 
 --Insert order
 --select * from [Order]

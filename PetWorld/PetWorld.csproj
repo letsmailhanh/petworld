@@ -10,6 +10,10 @@
     <None Remove="Image\anhdai1.jpg" />
     <None Remove="Image\anhngan1.jpg" />
     <None Remove="Image\anhngan2.jpg" />
+    <None Remove="Image\ao1.jpg" />
+    <None Remove="Image\ao2.jpg" />
+    <None Remove="Image\ao3.jpg" />
+    <None Remove="Image\balo1.jpg" />
     <None Remove="Image\batu1.jpg" />
     <None Remove="Image\bosat1.jpg" />
     <None Remove="Image\bosat2.jpg" />
@@ -23,6 +27,7 @@
     <None Remove="Image\husky3.jpg" />
     <None Remove="Image\mainecoon1.jpg" />
     <None Remove="Image\mainecoon2.jpg" />
+    <None Remove="Image\nha1.jpg" />
     <None Remove="Image\pitbull1.jpg" />
     <None Remove="Image\pitbull2.jpg" />
     <None Remove="Image\poodle1.jpg" />
@@ -59,6 +64,10 @@
     <Resource Include="Image\anhngan2.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Image\ao1.jpg" />
+    <Resource Include="Image\ao2.jpg" />
+    <Resource Include="Image\ao3.jpg" />
+    <Resource Include="Image\balo1.jpg" />
     <Resource Include="Image\batu1.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -94,6 +103,7 @@
     <Resource Include="Image\mainecoon2.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Image\nha1.jpg" />
     <Resource Include="Image\pitbull1.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
