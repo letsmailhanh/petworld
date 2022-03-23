@@ -69,6 +69,13 @@ INSERT INTO [Product] VALUES (N'Ống cào móng', 8, 0, '60000', 3, N'/Image/to
 INSERT INTO [Product] VALUES (N'Xương cao su', 8, 0, '25000', 12, N'/Image/toy3.jpg')
 INSERT INTO [Product] VALUES (N'Đĩa bay vải', 8, 0, '45000', 7, N'/Image/toy4.jpg')
 
+INSERT INTO [Product] VALUES(N'Balo trong suốt cho chó mèo', 6, 0, '290000', 10, N'/Image/balo1.jpg')
+INSERT INTO [Product] VALUES(N'nNhà cây cho mèo', 6, 0, '1650000', 5, N'/Image/nha1.jpg')
+
+INSERT INTO [Product] VALUES(N'Áo tai thỏ', 5, 0, '172000', 3, N'/Image/ao1.jpg')
+INSERT INTO [Product] VALUES(N'Áo ba lỗ', 5, 0, '120000', 15, N'/Image/ao2.jpg')
+INSERT INTO [Product] VALUES(N'Áo cosplay cảnh sát', 5, 0, '260000', 5, N'/Image/ao3.jpg')
+
 --Insert pet detail
 --select * from [Product] inner join [PetDetail] on [Product].ProductId = [PetDetail].ProductId
 --select * from [PetDetail]
@@ -87,3 +94,33 @@ INSERT INTO [PetDetail] VALUES(12, N'Chả', 3.7, 0, 1, 1, 1, 1)
 INSERT INTO [PetDetail] VALUES(13, N'Lucas', 5.1, 1, 1, 3, 1, 0 )
 INSERT INTO [PetDetail] VALUES(14, N'Rosa', 4.8, 1, 0, 2, 0, 1)
 INSERT INTO [PetDetail] VALUES(15, N'Đậu phụ', 3.8, 0, 1, 2, 1, 1)
+
+--Insert order
+--select * from [Order]
+INSERT INTO [Order] (UserId, OrderDate, ShippedDate) VALUES (4, '2022/02/21', '2022/03/01')
+INSERT INTO [Order] (UserId, OrderDate, ShippedDate) VALUES (5, '2022/02/25', '2022/03/05')
+INSERT INTO [Order] (UserId, OrderDate, ShippedDate) VALUES (6, '2022/01/31', '2022/02/10')
+INSERT INTO [Order] (UserId, OrderDate, ShippedDate) VALUES (4, '2022/03/06', '2022/03/11')
+INSERT INTO [Order] (UserId, OrderDate, ShippedDate) VALUES (4, '2022/03/07', '2022/03/09')
+INSERT INTO [Order] (UserId, OrderDate, ShippedDate) VALUES (5, '2022/03/03', '2022/03/10')
+
+--Insert order detail
+--select * from [OrderDetail]
+INSERT INTO [OrderDetail] VALUES(1, 12, '16000000', 1)
+INSERT INTO [OrderDetail] VALUES(1, 28, '60000', 2)
+INSERT INTO [OrderDetail] VALUES(1, 26, '45000', 3)
+INSERT INTO [OrderDetail] VALUES(1, 11, '15500000', 1)
+
+INSERT INTO [OrderDetail] VALUES(2, 35, '25000', 2)
+INSERT INTO [OrderDetail] VALUES(2, 34, '20000', 1)
+
+INSERT INTO [OrderDetail] VALUES(3, 10, '120500000', 1)
+
+INSERT INTO [OrderDetail] VALUES(4, 3, '68500000', 1)
+INSERT INTO [OrderDetail] VALUES(4, 24, '20000', 5)
+
+INSERT INTO [OrderDetail] VALUES(5, 36, '25000', 8)
+
+INSERT INTO [OrderDetail] VALUES(6, 5, '53000000', 1)
+INSERT INTO [OrderDetail] VALUES(6, 4, '68500000', 1)
+INSERT INTO [OrderDetail] VALUES(6, 32, '25000', 7)

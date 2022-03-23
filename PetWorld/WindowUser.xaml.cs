@@ -170,7 +170,6 @@ namespace PetWorld
                 tbMessage.Visibility = Visibility.Hidden;
                 lvUser.Visibility = Visibility.Visible;
             }
-            
         }
     }
 }
