@@ -1,16 +1,16 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PRN221_GroupProject_PetWorldWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataAccess.Repository;
+using DataAccess.Model;
 
-namespace PRN221_GroupProject_PetWorldWeb
+namespace PetWorldWeb
 {
     public class Startup
     {
@@ -26,6 +26,10 @@ namespace PRN221_GroupProject_PetWorldWeb
         {
             services.AddRazorPages();
             services.AddDbContext<prn221_petworldContext>();
+            services.AddSingleton(typeof(ICategoryRepository), typeof(CategoryRepository));
+            services.AddSingleton(typeof(IPetDetailRepository), typeof(PetDetailRepository));
+            services.AddSingleton(typeof(IProductRepository), typeof(ProductRepository));
+            services.AddSingleton(typeof(IUserRepository), typeof(UserRepository));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,9 +42,12 @@ namespace PRN221_GroupProject_PetWorldWeb
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
             }
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseStaticFiles();
 
             app.UseRouting();
 
