@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31410.357
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetWorld", "PetWorld\PetWorld.csproj", "{872BDE36-C862-4CFB-8177-D428F3B6D201}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetWorld", "PetWorld\PetWorld.csproj", "{872BDE36-C862-4CFB-8177-D428F3B6D201}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Presentation", "1. Presentation", "{92B96FA7-552B-4309-8AD8-E2A6AB102D6E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Data Layer", "2. Data Layer", "{586573DE-40B3-4ABC-8B51-D8BBA64EE055}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{25BD1550-BA8A-4810-BBBF-3DFCA1B73298}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{25BD1550-BA8A-4810-BBBF-3DFCA1B73298}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetWorldWeb", "PetWorldWeb\PetWorldWeb.csproj", "{2EAE0225-0B0B-4CAA-9690-A3227781D075}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{25BD1550-BA8A-4810-BBBF-3DFCA1B73298}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25BD1550-BA8A-4810-BBBF-3DFCA1B73298}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25BD1550-BA8A-4810-BBBF-3DFCA1B73298}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EAE0225-0B0B-4CAA-9690-A3227781D075}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EAE0225-0B0B-4CAA-9690-A3227781D075}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EAE0225-0B0B-4CAA-9690-A3227781D075}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EAE0225-0B0B-4CAA-9690-A3227781D075}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{872BDE36-C862-4CFB-8177-D428F3B6D201} = {92B96FA7-552B-4309-8AD8-E2A6AB102D6E}
 		{25BD1550-BA8A-4810-BBBF-3DFCA1B73298} = {586573DE-40B3-4ABC-8B51-D8BBA64EE055}
+		{2EAE0225-0B0B-4CAA-9690-A3227781D075} = {92B96FA7-552B-4309-8AD8-E2A6AB102D6E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {12B36D62-06F9-4222-A2CF-AD6CF09B362C}
