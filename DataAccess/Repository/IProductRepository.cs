@@ -13,6 +13,7 @@ namespace DataAccess.Repository
         IEnumerable<Product> GetPets();
         IEnumerable<Product> GetAccessories();
         IEnumerable<Product> GetProductsByCatID(int catID);
+        IEnumerable<Product> GetProductsByName(string name);
         Product GetProductByID(int id);
         void AddProduct(Product p);
         void UpdateProduct(Product p);

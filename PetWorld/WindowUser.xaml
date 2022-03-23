@@ -20,11 +20,16 @@
                     <ComboBoxItem>Staff</ComboBoxItem>
                     <ComboBoxItem>Customer</ComboBoxItem>
                 </ComboBox>
-                <TextBox Margin="0 10" Width="150" Height="30"></TextBox>
+                <!--Search-->
+                <TextBox Name="tbSearch" Margin="0 10" Width="150" Height="30" TextChanged="searchTextChanged"></TextBox>
                 <Button Width="25" Height="30" Background="Transparent">
                     <Image Source="/Image/search.png" Width="20"></Image>
                 </Button>
             </WrapPanel>
+
+            <TextBlock Name="tbMessage"
+                           HorizontalAlignment="Center"
+                           FontStyle="Italic"></TextBlock>
             
             <ListView Name="lvUser" Background="#f3e3e3" SelectionChanged="selectUser">
                 <ListView.View>
@@ -50,6 +55,7 @@
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="5"/>
+                        <Setter Property="Height" Value="25"/>
                     </Style>
                 </TextBox.Resources>
             </TextBox>
@@ -59,6 +65,7 @@
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="5"/>
+                        <Setter Property="Height" Value="25"/>
                     </Style>
                 </TextBox.Resources>
             </TextBox>
@@ -68,6 +75,7 @@
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="5"/>
+                        <Setter Property="Height" Value="25"/>
                     </Style>
                 </TextBox.Resources>
             </TextBox>
@@ -77,6 +85,7 @@
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="5"/>
+                        <Setter Property="Height" Value="25"/>
                     </Style>
                 </TextBox.Resources>
             </TextBox>
@@ -86,6 +95,7 @@
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="5"/>
+                        <Setter Property="Height" Value="25"/>
                     </Style>
                 </TextBox.Resources>
             </TextBox>
@@ -95,6 +105,7 @@
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="5"/>
+                        <Setter Property="Height" Value="25"/>
                     </Style>
                 </TextBox.Resources>
             </TextBox>

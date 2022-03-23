@@ -1,11 +1,11 @@
-﻿<Window x:Class="PetWorld.WindowLogin"
+﻿<Window x:Class="PetWorld.WindowSignup"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PetWorld"
         mc:Ignorable="d"
-        Title="WindowLogin" Height="450" Width="800" Background="#f3e3e3">
+        Title="WindowSignup" Height="450" Width="800" Background="#f3e3e3">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -18,9 +18,9 @@
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top"
                 Click="btnBackClick">
+            <!--Mouse Over-->
             <Button.Style>
                 <Style TargetType="Button">
-                    <!--Mouseover-->
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="Button">
@@ -41,7 +41,7 @@
             </Button.Style>
             <Image Source="/Image/back.png" Height="50"></Image>
         </Button>
-        
+
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBlock
                 HorizontalAlignment="Center"
@@ -51,7 +51,7 @@
                 FontWeight="Bold"
                 FontFamily="Arial Rounded MT Bold">pet world</TextBlock>
             <WrapPanel Margin="10">
-                <Label Width="70">Username</Label>
+                <Label Width="110">Username</Label>
                 <TextBox Name="tbUsername"
                      Background="#f4f4f4"
                      Width="200"
@@ -63,7 +63,7 @@
             </WrapPanel>
 
             <WrapPanel Margin="10">
-                <Label Width="70">Password</Label>
+                <Label Width="110">Password</Label>
                 <PasswordBox Name="pwbPass"
                      Background="#f4f4f4"
                      Width="200"
@@ -74,9 +74,21 @@
                 </PasswordBox>
             </WrapPanel>
 
-            <Border BorderBrush="#ff6b81" CornerRadius="20" Height="40" Background="#ff6b81" Margin="0 10" Width="270">
+            <WrapPanel Margin="10">
+                <Label Width="110">Confirm password</Label>
+                <PasswordBox Name="pwbConfirmPass"
+                     Background="#f4f4f4"
+                     Width="200"
+                     Height="30"
+                     Padding="5"
+                     VerticalAlignment="Center"
+                     Foreground="#FFA2A2A2">
+                </PasswordBox>
+            </WrapPanel>
+
+            <Border BorderBrush="#2f3543" CornerRadius="20" Height="40" Background="#2f3543" Margin="0 10" Width="270">
                 <Button
-                    Click="btnSigninClick"
+                    Click="btnSignupClick"
                     FontSize="20"
                     Height="40"
                     Width="220"
@@ -87,8 +99,8 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="Button">
-                                        <Border Background="#ff6b81">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="Sign in"></ContentPresenter>
+                                        <Border Background="#2f3543">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="Sign up"></ContentPresenter>
                                         </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
@@ -111,17 +123,17 @@
         </StackPanel>
 
         <StackPanel Grid.Column="1" Background="#f5ccd0">
-            <Image Source="/Image/cat2.png" Height="300"></Image>
-                <TextBlock Foreground="#2f3543"
+            <Image Source="/Image/cat1.png" Height="300"></Image>
+            <TextBlock Foreground="#2f3543"
                 FontSize="30"
                 FontWeight="Bold"
                 FontFamily="Arial Rounded MT Bold"
-                HorizontalAlignment="Center">meow.</TextBlock>
+                HorizontalAlignment="Center">hi pal.</TextBlock>
             <TextBlock Foreground="#2f3543"
                 FontSize="15"
                 FontFamily="Arial Unicode MS"
                 TextAlignment="Center"
-                TextWrapping="WrapWithOverflow" >welcome back, human</TextBlock>
+                TextWrapping="WrapWithOverflow">are you ready to be my new family?</TextBlock>
         </StackPanel>
     </Grid>
 </Window>

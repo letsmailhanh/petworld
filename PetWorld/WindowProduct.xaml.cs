@@ -37,6 +37,7 @@ namespace PetWorld
             LoadCategoryList();
             LoadPetInformation();
             cbCategory1.SelectedIndex = 0;
+            tbMessage.Visibility = Visibility.Collapsed;
         }
 
         private void LoadProductList()
@@ -430,6 +431,44 @@ namespace PetWorld
                 catID = p.CategoryId;
             }
             cbCategoryInfo.SelectedValue = catID;
+        }
+
+        private void searchTextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                string text = tbSearch.Text;
+                List<Product> products = productRepo.GetProductsByName(text).ToList();
+                if (products.Count == 0)
+                {
+                    tbMessage.Visibility = Visibility.Visible;
+                    tbMessage.Text = "Không tìm thấy sản phẩm nào";
+                    lvProducts.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    tbMessage.Visibility = Visibility.Collapsed;
+                    lvProducts.Visibility = Visibility.Visible;
+                    lvProducts.ItemsSource = products;
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Search product");
+            }
+        }
+
+        private void btnSearchClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string text = tbSearch.Text;
+                List<Product> products = productRepo.GetProductsByName(text).ToList();
+                lvProducts.ItemsSource = products;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Search product");
+            }
         }
     }
 }

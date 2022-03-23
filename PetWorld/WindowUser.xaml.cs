@@ -30,6 +30,7 @@ namespace PetWorld
             userRepo = repository;
             user = u;
             LoadUserList();
+            tbMessage.Visibility = Visibility.Collapsed;
         }
 
         private void LoadUserList()
@@ -151,7 +152,24 @@ namespace PetWorld
                 role = selected.Role;
                 cbRole.SelectedValue = role;
             }
-            
+        }
+
+        private void searchTextChanged(object sender, TextChangedEventArgs e)
+        {
+            string key = tbSearch.Text;
+            List<User> users = userRepo.GetCustomersByKey(key).ToList();
+            if(users.Count == 0)
+            {
+                tbMessage.Visibility = Visibility.Visible;
+                tbMessage.Text = "No matching item";
+                lvUser.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                lvUser.ItemsSource = users;
+                tbMessage.Visibility = Visibility.Hidden;
+                lvUser.Visibility = Visibility.Visible;
+            }
         }
     }
 }

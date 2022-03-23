@@ -68,6 +68,24 @@ namespace DataAccess.DAO
 
             return result;
         }
+        //Get user by key
+        public IEnumerable<User> GetListUserByKey(string key)
+        {
+            List<User> users;
+            try
+            {
+                var db = new prn221_petworldContext();
+                var query = from u in db.Users
+                            where u.UserName.Contains(key)
+                            select u;
+                users = query.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return users;
+        }
 
         //Get user by usernam
         public User GetUserByUsername(string username)

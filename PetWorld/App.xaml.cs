@@ -31,13 +31,13 @@ namespace PetWorld
             services.AddSingleton(typeof(IProductRepository), typeof(ProductRepository));
             services.AddSingleton(typeof(ICategoryRepository), typeof(CategoryRepository));
             services.AddSingleton(typeof(IPetDetailRepository), typeof(PetDetailRepository));
-            services.AddSingleton<WindowLogin>();
+            services.AddSingleton<MainWindow>();
         }
 
         private void OnStartUp(object sender, StartupEventArgs e)
         {
-            var windowLogin = serviceProvider.GetService<WindowLogin>();
-            windowLogin.Show();
+            var main = serviceProvider.GetService<MainWindow>();
+            main.Show();
         }
     }
 }

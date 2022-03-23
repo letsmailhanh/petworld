@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PetWorld"
         mc:Ignorable="d"
-        Title="WindowProduct" Height="672" Width="882">
+        Title="WindowProduct" Height="672" Width="882" Background="#f3e3e3">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -14,7 +14,7 @@
 
         <StackPanel Orientation="Horizontal">
             <!--Choose Category-->
-            <Label>Category</Label>
+            <Label Height="25">Category</Label>
             <ComboBox Width="120"
                       Height="25"
                       Name="cbCategory1"
@@ -24,7 +24,7 @@
                 <ComboBoxItem>Pet</ComboBoxItem>
                 <ComboBoxItem>Accessory</ComboBoxItem>
             </ComboBox>
-            <Label>Subcategory</Label>
+            <Label Height="25">Subcategory</Label>
             <ComboBox Name="cbCategory2"
                       DisplayMemberPath="Title"
                       SelectedValuePath="CategoryId"
@@ -32,7 +32,7 @@
                       Width="120"
                       Height="25">
             </ComboBox>
-            <Label>Order by</Label>
+            <Label Height="25">Order by</Label>
             <ComboBox Width="120"
                       Height="25"
                       Name="cbOrderBy"
@@ -41,7 +41,16 @@
                 <ComboBoxItem>Giá tăng dần</ComboBoxItem>
                 <ComboBoxItem>Giá giảm dần</ComboBoxItem>
             </ComboBox>
-
+            <!--Search-->
+            <WrapPanel Height="25" HorizontalAlignment="Right">
+                <TextBox Height="25"
+                     Width="250"
+                     Margin="25 0 0 0"
+                     TextChanged="searchTextChanged"
+                     Name="tbSearch"></TextBox>
+                <Button Height="25"
+                        Click="btnSearchClick">Search</Button>
+            </WrapPanel>
         </StackPanel>
 
         <Grid Grid.Row="1">
@@ -51,21 +60,31 @@
             </Grid.ColumnDefinitions>
 
             <!--List product-->
-            <StackPanel>
-                <ListView Name="lvProducts" ScrollViewer.CanContentScroll="True" 
+            <Grid Margin="25">
+                <TextBlock FontSize="25"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Center"
+                           FontFamily="Arial Rounded MT Bold"
+                           Foreground="#2f3543">Product list</TextBlock>
+                <TextBlock Name="tbMessage"
+                           HorizontalAlignment="Center"
+                           FontStyle="Italic"></TextBlock>
+                <ScrollViewer>
+                    <ListView Name="lvProducts" ScrollViewer.CanContentScroll="True" 
                           ScrollViewer.VerticalScrollBarVisibility="Auto"
                           SelectionChanged="selectProduct">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=ProductId}"></GridViewColumn>
-                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=ProductName}"></GridViewColumn>
-                            <GridViewColumn Header="Category" DisplayMemberBinding="{Binding Path=CategoryId}"></GridViewColumn>
-                            <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Path=Price}"></GridViewColumn>
-                            <GridViewColumn Header="In stock" DisplayMemberBinding="{Binding Path=UnitsInStock}"></GridViewColumn>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </StackPanel>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=ProductId}"></GridViewColumn>
+                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=ProductName}"></GridViewColumn>
+                                <GridViewColumn Header="Category" DisplayMemberBinding="{Binding Path=CategoryId}"></GridViewColumn>
+                                <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Path=Price}"></GridViewColumn>
+                                <GridViewColumn Header="In stock" DisplayMemberBinding="{Binding Path=UnitsInStock}"></GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+            </Grid>
 
             <!--Product information-->
             <StackPanel Grid.Column="1">
@@ -132,12 +151,6 @@
                         <Label>Age</Label>
                         <TextBox Name="tbAge"></TextBox>
 
-                        <WrapPanel>
-                            <Label Width="70">Vaccinated</Label>
-                            <RadioButton Name="rbVaccinated"
-                                         VerticalAlignment="Center"></RadioButton>
-                        </WrapPanel>
-                        
                         <Label>Gender</Label>
                         <WrapPanel>
                             <Label Width="70">Male</Label>
@@ -149,17 +162,23 @@
                                          Name="rbFemale"
                                          VerticalAlignment="Center"></RadioButton>
                         </WrapPanel>
+
+                        <WrapPanel>
+                            <Label Width="70">Vaccinated</Label>
+                            <CheckBox Name="rbVaccinated"
+                                         VerticalAlignment="Center"></CheckBox>
+                        </WrapPanel>
                         
                         <WrapPanel>
                             <Label Width="70">Sterilized</Label>
-                            <RadioButton x:Name="rbSterilized"
-                                         VerticalAlignment="Center"></RadioButton>
+                            <CheckBox x:Name="rbSterilized"
+                                         VerticalAlignment="Center"></CheckBox>
                         </WrapPanel>
                         
                         <WrapPanel>
                             <Label Width="70">IsRescued</Label>
-                            <RadioButton x:Name="rbIsRescued"
-                                         VerticalAlignment="Center"></RadioButton>
+                            <CheckBox x:Name="rbIsRescued"
+                                         VerticalAlignment="Center"></CheckBox>
                         </WrapPanel>
                         
                     </StackPanel>
