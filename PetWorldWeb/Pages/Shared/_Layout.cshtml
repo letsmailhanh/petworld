@@ -5,23 +5,141 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - PetWorldWeb</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/1358b71548.js" crossorigin="anonymous"></script>
+    <style>
+
+        .navbar .nav-item .dropdown-menu {
+            display: none;
+        }
+
+        .navbar .nav-item:hover .nav-link {
+        }
+
+        .navbar .nav-item:hover .dropdown-menu {
+            display: block;
+        }
+
+        .navbar .nav-item .dropdown-menu {
+            margin-top: 0;
+        }
+    </style>
 </head>
 <body>
-    <header>
+    <header class="fixed-top" style="background-color: wheat">
+        <div class="container">
+            <div class="row align-items-center justify-content-center" style="height: 70px;">
+                <div class="col-1">
+                    <a asp-page="/Index" asp-area="">
+                        <img src="https://cellphones.com.vn/sforum/wp-content/uploads/2022/01/yae-1.jpg" class="rounded img-fluid" />
+                    </a>
+                </div>
+                <div class="col-9 d-flex justify-content-center">
+                    <div class="row border border-4 w-75 rounded-pill" style="background-color: white">
+                        <input class="col-11 form-control shadow-none w-75 rounded-pill border-0" type="text" placeholder="Find Pets ..." style="background-color: rgba(0,0,0,0);" />
+                        <a asp-page="/Index" asp-area="" class="col-1 align-self-center btn w-25 rounded-pill">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-1 d-flex justify-content-start">
+                    <a asp-page="/Index" asp-area="" class="btn h-100">
+                        <i class="fa-solid fa-cart-shopping fa-2x"></i>
+                    </a>
+                    <div class="align-items-center rounded-circle d-flex justify-content-center" style="height: 20px; background-color:deepskyblue; margin-left: -25px; font-size: 12px; padding: 5px;">100</div>
+                </div>
+                <div class="col-1 d-flex justify-content-start">
+                    <a asp-page="/Index" asp-area="" class="btn btn-info h-100">
+                        LOGIN
+                    </a>
+                </div>
+            </div>
+        </div>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">PetWorldWeb</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index"  style="width: 140px;">Pet World</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                        <li class="nav-item border-left border-1 d-flex justify-content-center dropdown" style="width: 120px;">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index"  data-bs-toggle="dropdown" aria-expanded="false" id="dog-dropdown">Dog</a>
+                            <ul class="dropdown-menu" aria-labelledby="dog-dropdown">
+                                <li>
+                                    <a class="dropdown-item" href="#">Action</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item border-left border-1 d-flex justify-content-center dropdown" style="width: 120px;">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index" data-bs-toggle="dropdown" aria-expanded="false" id="dog-dropdown">Cat</a>
+                            <ul class="dropdown-menu" aria-labelledby="dog-dropdown">
+                                <li>
+                                    <a class="dropdown-item" href="#">Action</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item border-left border-1 d-flex justify-content-center dropdown" style="width: 120px;">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index" data-bs-toggle="dropdown" aria-expanded="false" id="dog-dropdown">Other</a>
+                            <ul class="dropdown-menu" aria-labelledby="dog-dropdown">
+                                <li>
+                                    <a class="dropdown-item" href="#">Action</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item border-left border-1 d-flex justify-content-center dropdown" style="width: 120px;">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index" data-bs-toggle="dropdown" aria-expanded="false" id="dog-dropdown">Accessory</a>
+                            <ul class="dropdown-menu" aria-labelledby="dog-dropdown">
+                                <li>
+                                    <a class="dropdown-item" href="#">Action</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item border-left border-1 d-flex justify-content-center dropdown" style="width: 120px;">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index" data-bs-toggle="dropdown" aria-expanded="false" id="dog-dropdown">News</a>
+                            <ul class="dropdown-menu" aria-labelledby="dog-dropdown">
+                                <li>
+                                    <a class="dropdown-item" href="#">Action</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item border-left border-1 d-flex justify-content-center" style="width: 120px;">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">About Us</a>
+                        </li>
+                        <li class="nav-item border-left border-1 d-flex justify-content-center" style="width: 120px;">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
                     </ul>
@@ -29,7 +147,7 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container" style="margin-top: 150px">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -37,7 +155,8 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - PetWorldWeb - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2022 - PetWorldWeb -
+            <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
 
