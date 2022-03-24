@@ -1,86 +1,170 @@
-﻿@page
+﻿@page "{currentpage:int?}"
 @model PetWorldWeb.Pages.Products.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+	ViewData["Title"] = "Index";
 }
 
 <h2>Products</h2>
+<style>
+	.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+		float: left;
+	}
 
-<div>
-    @foreach (var product in Model.Product)
-    {
-        <div class="col-xs-12 col-sm-6 col-md-4">
-            <a asp-page="./Details" asp-route-id="@product.ProductId">
-                <div class="product-grids product-item">
-                    <div class="product-img">
-                        <img class="image-product" src="https://placekitten.com/200/400" alt="Image"/>
-                    </div>
-                    <h4>@product.ProductName</h4>
-                    <h5>@product.Price.</h5>
-                </div>
-            </a>
-        </div>
-    }
+	.col-md-4 {
+		width: 33.33333333%;
+	}
+
+	.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+		position: relative;
+		min-height: 1px;
+		padding-right: 15px;
+		padding-left: 15px;
+		padding-bottom: 15px
+	}
+
+	.product-img {
+		position: relative;
+		box-shadow: 0 0 1px #bbb;
+		padding: 10px;
+	}
+
+	.image-product {
+		float: left;
+		width: 100px;
+		height: 250px;
+		object-fit: cover;
+	}
+
+	.recommendation .product-item .product-img {
+		height: 284px;
+	}
+
+	.product-img .p-mask, .row .product .vm-product-media-container .p-mask {
+		opacity: 0;
+		visibility: hidden;
+		background: rgba(0, 229, 139, 0.52);
+		bottom: 0%;
+		left: 0;
+		position: absolute;
+		width: 100%;
+		-webkit-transform: translate3d( 0px, 100%, 0px );
+		-moz-transform: translate3d( 0px, 100%, 0px );
+		-ms-transform: translate3d( 0px, 100%, 0px );
+		-o-transform: translate3d( 0px, 100%, 0px );
+		transform: translate3d( 0px, 100%, 0px );
+		-webkit-transition: all .5s ease 0s;
+		-moz-transition: all .5s ease 0s;
+		transition: all .5s ease 0s;
+		text-align: left;
+	}
+
+		.product-img .p-mask .p-desc {
+			color: #a3a3a3;
+			position: relative;
+			display: block;
+			margin-bottom: 10px;
+			padding-bottom: 10px;
+			font-size: 1em;
+		}
+
+	.product-img:hover .p-mask, .row .product:hover .p-mask {
+		opacity: 1;
+		visibility: visible;
+		-webkit-transform: translate3d( 0px, 0px, 0px );
+		-moz-transform: translate3d( 0px, 0px, 0px );
+		-ms-transform: translate3d( 0px, 0px, 0px );
+		-o-transform: translate3d( 0px, 0px, 0px );
+		transform: translate3d( 0px, 0px, 0px );
+		left: 0;
+	}
+
+	.product-item .product-img {
+		height: 312px;
+		overflow: hidden;
+	}
+
+		.product-item .product-img > img {
+			width: 100%;
+		}
+
+	.product-img .p-mask, .row .product .vm-product-media-container .p-mask {
+		padding: 0;
+	}
+
+	.product-item .product-img {
+		height: 293px;
+	}
+
+	.product-item h4 {
+		font-size: 12px;
+	}
+
+	.product-item h5 {
+		font-size: 10px;
+	}
+
+	.top-product-grids h4, .product-grids h4 {
+		font-size: 18px;
+		color: #484848;
+		margin: 10px 0;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		margin: 0;
+		padding: 0;
+		text-align: center;
+		font-family: 'Source Sans Pro', sans-serif;
+		letter-spacing: 1px;
+	}
+
+	.product-grids h4 {
+		font-size: 18px;
+		color: #484848;
+		margin: 10px 0;
+	}
+
+	.product-grids h4 {
+		height: auto;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		line-height: 24px;
+	}
+
+	.product-grids h5 {
+		font-size: 18px;
+		font-weight: 700;
+	}
+</style>
+<div class="row">
+	@if (Model.Product.Any())
+	{
+		@foreach (var product in Model.Product)
+		{
+			<div class="col-xs-12 col-sm-6 col-md-4">
+				<a asp-page="./Details" asp-route-id="@product.ProductId">
+					<div class="product-grids product-item">
+						<div class="product-img">
+							<img class="image-product" src="@product.Image" alt="Image" />
+						</div>
+						<h4>@product.ProductName</h4>
+						<h5>@((int)product.Price) ₫</h5>
+					</div>
+				</a>
+				<a asp-page="/Cart" asp-page-handler="AddToCart" asp-route-id="@product.ProductId">Buy Now</a>
+			</div>
+		}
+	}
 </div>
 
-
-@*
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Product[0].ProductName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product[0].IsPet)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product[0].Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product[0].UnitsInStock)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product[0].Image)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product[0].Category)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Product) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsPet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitsInStock)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Title)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ProductId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ProductId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ProductId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-*@
+<div>
+	<ul class="pagination">
+		@for (var i = 1; i <= Model.TotalPages; i++)
+		{
+			<li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+				<a asp-page="./Index" asp-route-currentpage="@i" class="page-link">@i</a>
+			</li>
+		}
+	</ul>
+</div>

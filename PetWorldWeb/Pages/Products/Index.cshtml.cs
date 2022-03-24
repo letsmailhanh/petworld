@@ -19,12 +19,31 @@ namespace PetWorldWeb.Pages.Products
             _context = context;
         }
 
-        public IList<Product> Product { get;set; }
+
+        [BindProperty(SupportsGet = true)]
+        public int CurrentPage { get; set; } = 1;
+        public int Count { get; set; }
+        public int PageSize { get; set; } = 6;
+
+        public int TotalPages => (int)Math.Ceiling(decimal.Divide(Count, PageSize));
+
+
+        public IList<Product> AllProducts { get;set; }
+        public List<Product> Product { get; set; }
 
         public async Task OnGetAsync([FromServices] IProductRepository productRepo)
         {
-            Product = await _context.Products
+            AllProducts = await _context.Products
                 .Include(p => p.Category).ToListAsync();
+            Count = AllProducts.Count;
+            Product = await GetPaginatedResult(CurrentPage, PageSize);
+
+        }
+        public async Task<List<Product>> GetPaginatedResult(int currentPage, int pageSize = 10)
+        {
+            var data = await _context.Products
+                .Include(p => p.Category).ToListAsync();
+            return data.OrderBy(d => d.ProductId).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
         }
     }
 }

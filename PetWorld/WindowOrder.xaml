@@ -12,22 +12,71 @@
             <RowDefinition Height="5*"></RowDefinition>
         </Grid.RowDefinitions>
 
+        <StackPanel Orientation="Horizontal">
+            <!--Order by-->
+            <Label Height="25">Order by</Label>
+            <ComboBox Width="120"
+                      Height="25"
+                      Name="cbOrderBy"
+                      SelectionChanged="cbOrderByChange"
+                      SelectedValuePath="Content">
+                <ComboBoxItem>Ngày order tăng dần</ComboBoxItem>
+                <ComboBoxItem>Ngày order giảm dần</ComboBoxItem>
+            </ComboBox>
+            <!--Filter-->
+            <Label Height="25">Status</Label>
+            <ComboBox Width="120"
+                      Height="25"
+                      Name="cbStatus"
+                      SelectionChanged="cbStatusChange"
+                      SelectedValuePath="Content">
+                <ComboBoxItem>Uncomfirmed</ComboBoxItem>
+                <ComboBoxItem>Confirmed</ComboBoxItem>
+                <ComboBoxItem>Shipping</ComboBoxItem>
+                <ComboBoxItem>Shipped</ComboBoxItem>
+            </ComboBox>
+            <!--Pick Date-->
+            <Label Height="25">From</Label>
+            <DatePicker Name="dpkFrom"
+                        Height="25"
+                        SelectedDateChanged="dpkFromChange">
+
+            </DatePicker>
+            <Label Height="25">To</Label>
+            <DatePicker Name="dpkTo"
+                        Height="25"
+                        SelectedDateChanged="dpkToChange">
+
+            </DatePicker>
+        </StackPanel>
+
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <ListView Name="lvOrder">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=OrderId}"></GridViewColumn>
-                        <GridViewColumn Header="User" DisplayMemberBinding="{Binding Path=UserId}"></GridViewColumn>
-                        <GridViewColumn Header="Order date" DisplayMemberBinding="{Binding Path=OrderDate}"></GridViewColumn>
-                        <GridViewColumn Header="Shipped date" DisplayMemberBinding="{Binding Path=ShippedDate}"></GridViewColumn>
-                        <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Path=Freight}"></GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+
+            <Grid>
+                <!--Message-->
+                <TextBlock Name="tbMessage"
+                           HorizontalAlignment="Center"
+                           FontStyle="Italic"></TextBlock>
+                <!--Order list-->
+                <ScrollViewer>
+                    <ListView Name="lvOrder">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=OrderId}"></GridViewColumn>
+                                <GridViewColumn Header="User" DisplayMemberBinding="{Binding Path=UserId}"></GridViewColumn>
+                                <GridViewColumn Header="Order date" DisplayMemberBinding="{Binding Path=OrderDate}"></GridViewColumn>
+                                <GridViewColumn Header="Shipped date" DisplayMemberBinding="{Binding Path=ShippedDate}"></GridViewColumn>
+                                <GridViewColumn Header="Freight" DisplayMemberBinding="{Binding Path=Freight}"></GridViewColumn>
+                                <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Path=Status}"></GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+            </Grid>
         </Grid>
     </Grid>
 </Window>
