@@ -25,25 +25,27 @@ namespace PetWorld
         IProductRepository productRepo;
         ICategoryRepository categoryRepo;
         IPetDetailRepository petRepo;
-        public MainWindow(IUserRepository userRepository, IProductRepository productRepository, ICategoryRepository categoryRepository, IPetDetailRepository petRepository)
+        IOrderRepository orderRepo;
+        public MainWindow(IUserRepository userRepository, IProductRepository productRepository, ICategoryRepository categoryRepository, IPetDetailRepository petRepository, IOrderRepository orderRepository)
         {
             InitializeComponent();
             userRepo = userRepository;
             productRepo = productRepository;
             categoryRepo = categoryRepository;
             petRepo = petRepository;
+            orderRepo = orderRepository;
         }
 
         private void btnSignupClick(object sender, RoutedEventArgs e)
         {
-            var signup = new WindowSignup(userRepo, productRepo, categoryRepo, petRepo);
+            var signup = new WindowSignup(userRepo, productRepo, categoryRepo, petRepo, orderRepo);
             signup.Show();
             this.Close();
         }
 
         private void btnSigninClick(object sender, RoutedEventArgs e)
         {
-            var signin = new WindowLogin(userRepo, productRepo, categoryRepo, petRepo);
+            var signin = new WindowLogin(userRepo, productRepo, categoryRepo, petRepo, orderRepo);
             signin.Show();
             this.Close();
         }

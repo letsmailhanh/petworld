@@ -60,6 +60,8 @@ namespace DataAccess.Model
 
                 entity.Property(e => e.ShippedDate).HasColumnType("datetime");
 
+                entity.Property(e => e.Status).HasColumnType("int");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.UserId)

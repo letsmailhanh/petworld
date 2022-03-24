@@ -1,4 +1,5 @@
-﻿using DataAccess.Repository;
+﻿using DataAccess.DAO;
+using DataAccess.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,7 @@ namespace PetWorld
             services.AddSingleton(typeof(IProductRepository), typeof(ProductRepository));
             services.AddSingleton(typeof(ICategoryRepository), typeof(CategoryRepository));
             services.AddSingleton(typeof(IPetDetailRepository), typeof(PetDetailRepository));
+            services.AddSingleton(typeof(IOrderRepository), typeof(OrderRepository));
             services.AddSingleton<MainWindow>();
         }
 
