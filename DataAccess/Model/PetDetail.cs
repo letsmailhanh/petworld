@@ -18,7 +18,6 @@ namespace DataAccess.Model
         public bool IsRescued { get; set; }
 
         public virtual Product Product { get; set; }
-
         public PetDetail(int petId, int productId, string petName, double weight, bool vaccinated, bool gender, double age, bool sterilized, bool isRescued)
         {
             PetId = petId;

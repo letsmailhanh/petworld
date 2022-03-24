@@ -26,14 +26,16 @@ namespace PetWorld
         IProductRepository productRepo;
         ICategoryRepository categoryRepo;
         IPetDetailRepository petRepo;
+        IOrderRepository orderRepo;
 
-        public WindowLogin(IUserRepository userRepository, IProductRepository productRepository, ICategoryRepository categoryRepository, IPetDetailRepository petRepository)
+        public WindowLogin(IUserRepository userRepository, IProductRepository productRepository, ICategoryRepository categoryRepository, IPetDetailRepository petRepository, IOrderRepository orderRepository)
         {
             InitializeComponent();
             userRepo = userRepository;
             productRepo = productRepository;
             categoryRepo = categoryRepository;
             petRepo = petRepository;
+            orderRepo = orderRepository;
         }
 
         private void btnSigninClick(object sender, RoutedEventArgs e)
@@ -48,7 +50,7 @@ namespace PetWorld
                 {
                     if (u.Password.Equals(pass) && (u.Role.Equals("admin") || u.Role.Equals("staff")))
                     {
-                        var dashboard = new WindowDashboard(u, userRepo, productRepo, categoryRepo, petRepo);
+                        var dashboard = new WindowDashboard(u, userRepo, productRepo, categoryRepo, petRepo, orderRepo);
                         dashboard.Show();
                         this.Close();
                     }
@@ -73,7 +75,7 @@ namespace PetWorld
 
         private void btnBackClick(object sender, RoutedEventArgs e)
         {
-            var previous = new MainWindow(userRepo, productRepo, categoryRepo, petRepo);
+            var previous = new MainWindow(userRepo, productRepo, categoryRepo, petRepo, orderRepo);
             previous.Show();
             this.Close();
         }
