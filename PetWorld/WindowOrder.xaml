@@ -5,14 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PetWorld"
         mc:Ignorable="d"
-        Title="WindowOrder" Height="450" Width="800">
+        Title="WindowOrder" Height="450" Width="800" Background="#f3e3e3">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="5*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal">
+        <!--Back button-->
+        <Button Height="50" 
+                Background="Transparent"
+                BorderBrush="Transparent"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top"
+                Click="btnBackClick">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <!--Mouseover-->
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="Transparent">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" Value="Transparent"></Setter>
+                            <Setter Property="BorderBrush" Value="Transparent"></Setter>
+                            <Setter Property="BorderThickness" Value="0"></Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Image Source="/Image/back.png" Height="50"></Image>
+        </Button>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
             <!--Order by-->
             <Label Height="25">Order by</Label>
             <ComboBox Width="120"
@@ -50,7 +82,7 @@
             </DatePicker>
         </StackPanel>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>

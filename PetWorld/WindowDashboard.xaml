@@ -11,6 +11,47 @@
             <ColumnDefinition Width="3*"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        
+        <!--Report-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Border CornerRadius="25" Background="#f5ccd0" Margin="10" Padding="15">
+                    <StackPanel Orientation="Horizontal">
+                        <Calendar></Calendar>
+                        <StackPanel>
+                            <Label>New Customer</Label>
+                            <TextBlock></TextBlock>
+                            <Label>Total Order</Label>
+                            <TextBlock></TextBlock>
+                            <Label>Revenue</Label>
+                            <TextBlock></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <StackPanel Grid.Column="1">
+                    <Border CornerRadius="10" Background="#dcd5ee" Margin="10" Height="50"></Border>
+                    <Border CornerRadius="10" Background="#f4e9dd" Margin="10" Height="50"></Border>
+                    <Border CornerRadius="10" Background="#e8ecf2" Margin="10" Height="50"></Border>
+                </StackPanel>
+            </Grid>
+
+            <Border CornerRadius="25" Background="#f5ccd0" Margin="10" Grid.Row="1">
+                
+            </Border>
+        </Grid>
+        
+        
         <!---Other options-->
         <Border Grid.Column="1" CornerRadius="30 0 0 30" Background="#f5ccd0">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="center">
