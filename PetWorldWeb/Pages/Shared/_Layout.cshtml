@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - PetWorldWeb</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/1358b71548.js" crossorigin="anonymous"></script>
@@ -23,20 +22,20 @@
         }
 
         .navbar .nav-item .dropdown-menu {
-            margin-top: 0;
+            margin-top: 10px    ;
         }
     </style>
 </head>
 <body>
-    <header class="fixed-top" style="background-color: wheat">
-        <div class="container">
-            <div class="row align-items-center justify-content-center" style="height: 70px;">
-                <div class="col-1">
+    <header class="fixed-top" style="background-color: wheat; height: 100px;">
+        <div class="container h-50">
+            <div class="row align-items-center justify-content-center h-100">
+                <div class="col-2 h-100">
                     <a asp-page="/Index" asp-area="">
-                        <img src="https://cellphones.com.vn/sforum/wp-content/uploads/2022/01/yae-1.jpg" class="rounded img-fluid" />
+                        <img src="/Image/Logo.png" class="h-100"/>
                     </a>
                 </div>
-                <div class="col-9 d-flex justify-content-center">
+                <div class="col-8 d-flex justify-content-center">
                     <div class="row border border-4 w-75 rounded-pill" style="background-color: white">
                         <input class="col-11 form-control shadow-none w-75 rounded-pill border-0" type="text" placeholder="Find Pets ..." style="background-color: rgba(0,0,0,0);" />
                         <a asp-page="/Index" asp-area="" class="col-1 align-self-center btn w-25 rounded-pill">
@@ -57,7 +56,7 @@
                 </div>
             </div>
         </div>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 align-content-end">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index"  style="width: 140px;">Pet World</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -147,7 +146,7 @@
             </div>
         </nav>
     </header>
-    <div class="container" style="margin-top: 150px">
+    <div class="container" style="margin-top: 100px">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -155,8 +154,23 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - PetWorldWeb -
-            <a asp-area="" asp-page="/Privacy">Privacy</a>
+            <div class="row justify-content-around">
+                <div class="col-6">
+                    &copy; 2022 - PetWorld -
+                    <a asp-area="" asp-page="/Privacy">Privacy</a>
+                </div>
+                <div class="col-3">
+                    <span>
+                        <i class="fa-solid fa-phone fa-1x">&nbsp;&nbsp;01-234-5678</i>
+                    </span>
+                </div>
+                <div class="col-3">
+                    <span>
+                        <i class="fa-solid fa-inbox"></i>
+                        &nbsp;&nbsp;petworld@petworld.com
+                    </span>
+                </div>
+            </div>
         </div>
     </footer>
 
