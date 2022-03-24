@@ -1,4 +1,7 @@
-﻿INSERT INTO [User] VALUES (N'admin', N'0123456789', N'admin@gmai.com', N'Ha Noi', N'admin', N'admin')
+﻿USE [prn221_petworld]
+GO
+
+INSERT INTO [User] VALUES (N'admin', N'0123456789', N'admin@gmai.com', N'Ha Noi', N'admin', N'admin')
 
 INSERT INTO [User] VALUES (N'hanh', N'0123456789', N'hanh@gmai.com', N'Ha Noi', N'hanh', N'staff')
 INSERT INTO [User] VALUES (N'thuan', N'0123456789', N'thuan@gmai.com', N'Ha Noi', N'thuan', N'staff')
