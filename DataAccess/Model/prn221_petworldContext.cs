@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 #nullable disable
 
@@ -28,15 +29,14 @@ namespace DataAccess.Model
         {
             if (!optionsBuilder.IsConfigured)
             {
+                var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("server=localhost; database=prn221_petworld; uid=sa; password=sa");
+                optionsBuilder.UseSqlServer(config.GetConnectionString("Database"));
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
-
             modelBuilder.Entity<Category>(entity =>
             {
                 entity.ToTable("Category");
@@ -70,7 +70,7 @@ namespace DataAccess.Model
             modelBuilder.Entity<OrderDetail>(entity =>
             {
                 entity.HasKey(e => new { e.OrderId, e.ProductId })
-                    .HasName("PK__OrderDet__08D097A32FF7F683");
+                    .HasName("PK__OrderDet__08D097A3ECCB0034");
 
                 entity.ToTable("OrderDetail");
 
@@ -92,11 +92,11 @@ namespace DataAccess.Model
             modelBuilder.Entity<PetDetail>(entity =>
             {
                 entity.HasKey(e => e.PetId)
-                    .HasName("PK__PetDetai__48E53862458848F8");
+                    .HasName("PK__PetDetai__48E538622317A00D");
 
                 entity.ToTable("PetDetail");
 
-                entity.HasIndex(e => e.ProductId, "UQ__PetDetai__B40CC6CC1B764D65")
+                entity.HasIndex(e => e.ProductId, "UQ__PetDetai__B40CC6CC7B1B982C")
                     .IsUnique();
 
                 entity.Property(e => e.PetName).HasMaxLength(100);

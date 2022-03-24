@@ -17,7 +17,9 @@ namespace DataAccess.Model
         public DateTime OrderDate { get; set; }
         public DateTime? ShippedDate { get; set; }
         public decimal Freight { get; set; }
+        public int Status { get; set; }
 
+        public int Status { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
