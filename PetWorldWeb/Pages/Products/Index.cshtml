@@ -5,8 +5,27 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h2>Products</h2>
 
+<div>
+    @foreach (var product in Model.Product)
+    {
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <a asp-page="./Details" asp-route-id="@product.ProductId">
+                <div class="product-grids product-item">
+                    <div class="product-img">
+                        <img class="image-product" src="https://placekitten.com/200/400" alt="Image"/>
+                    </div>
+                    <h4>@product.ProductName</h4>
+                    <h5>@product.Price</h5>
+                </div>
+            </a>
+        </div>
+    }
+</div>
+
+
+@*
 <p>
     <a asp-page="Create">Create New</a>
 </p>
@@ -64,3 +83,4 @@
 }
     </tbody>
 </table>
+*@
