@@ -35,8 +35,6 @@ namespace DataAccess.Model
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
-
             modelBuilder.Entity<Category>(entity =>
             {
                 entity.ToTable("Category");
@@ -60,8 +58,6 @@ namespace DataAccess.Model
 
                 entity.Property(e => e.ShippedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.Status).HasColumnType("int");
-
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.UserId)
@@ -72,7 +68,7 @@ namespace DataAccess.Model
             modelBuilder.Entity<OrderDetail>(entity =>
             {
                 entity.HasKey(e => new { e.OrderId, e.ProductId })
-                    .HasName("PK__OrderDet__08D097A32FF7F683");
+                    .HasName("PK__OrderDet__08D097A3ECCB0034");
 
                 entity.ToTable("OrderDetail");
 
@@ -94,11 +90,11 @@ namespace DataAccess.Model
             modelBuilder.Entity<PetDetail>(entity =>
             {
                 entity.HasKey(e => e.PetId)
-                    .HasName("PK__PetDetai__48E53862458848F8");
+                    .HasName("PK__PetDetai__48E538622317A00D");
 
                 entity.ToTable("PetDetail");
 
-                entity.HasIndex(e => e.ProductId, "UQ__PetDetai__B40CC6CC1B764D65")
+                entity.HasIndex(e => e.ProductId, "UQ__PetDetai__B40CC6CC7B1B982C")
                     .IsUnique();
 
                 entity.Property(e => e.PetName).HasMaxLength(100);
