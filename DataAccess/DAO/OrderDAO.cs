@@ -47,5 +47,47 @@ namespace DataAccess.DAO
 
             return orders;
         }
+        //Get danh sach Order theo status
+        public IEnumerable<Order> GetOrderListByStatus(string statusName)
+        {
+            List<Order> orders;
+            try
+            {
+                int status;
+                switch (statusName)
+                {
+                    case "Unconfirmed": status = 0; break;
+                    case "Confirmed": status = 1; break;
+                    case "Shipping": status = 2; break;
+                    case "Shipped": status = 3; break;
+                    default: status = -1; break;
+                }
+                var db = new prn221_petworldContext();
+                //var query = from o in db.Orders
+                //            where o.Status == status
+                //            select o;
+                orders = db.Orders.Where(o => o.Status == status).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return orders;
+        }
+        //Get order list 
+        public IEnumerable<Order> GetOrderListInPeriod(DateTime fromDate, DateTime toDate)
+        {
+            List<Order> orders = null;
+            try
+            {
+                var db = new prn221_petworldContext();
+                orders = db.Orders.Where(o => o.OrderDate <= toDate && o.OrderDate >= fromDate).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return orders;
+        }
     }
 }

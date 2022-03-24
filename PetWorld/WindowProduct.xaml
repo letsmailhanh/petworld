@@ -9,10 +9,42 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="9*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal">
+        <!--Back button-->
+        <Button Height="50" 
+                Background="Transparent"
+                BorderBrush="Transparent"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top"
+                Click="btnBackClick">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <!--Mouseover-->
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="Transparent">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" Value="Transparent"></Setter>
+                            <Setter Property="BorderBrush" Value="Transparent"></Setter>
+                            <Setter Property="BorderThickness" Value="0"></Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Image Source="/Image/back.png" Height="50"></Image>
+        </Button>
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
             <!--Choose Category-->
             <Label Height="25">Category</Label>
             <ComboBox Width="120"
@@ -32,6 +64,7 @@
                       Width="120"
                       Height="25">
             </ComboBox>
+            <!--Order by-->
             <Label Height="25">Order by</Label>
             <ComboBox Width="120"
                       Height="25"
@@ -53,7 +86,7 @@
             </WrapPanel>
         </StackPanel>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>

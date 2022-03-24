@@ -11,5 +11,9 @@ namespace DataAccess.DAO
     public class OrderRepository : IOrderRepository
     {
         public IEnumerable<Order> GetOrderList() => OrderDAO.Instance.GetOrderList();
+
+        public IEnumerable<Order> GetOrderListByStatus(string statusName) => OrderDAO.Instance.GetOrderListByStatus(statusName);
+
+        public IEnumerable<Order> GetOrderListInPeriod(DateTime from, DateTime to) => OrderDAO.Instance.GetOrderListInPeriod(from, to);
     }
 }

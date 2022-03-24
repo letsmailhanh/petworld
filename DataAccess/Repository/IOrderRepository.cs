@@ -11,5 +11,7 @@ namespace DataAccess.Repository
     public interface IOrderRepository
     {
         IEnumerable<Order> GetOrderList();
+        IEnumerable<Order> GetOrderListByStatus(string statusName);
+        IEnumerable<Order> GetOrderListInPeriod(DateTime from, DateTime to);
     }
 }

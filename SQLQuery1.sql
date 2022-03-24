@@ -106,17 +106,18 @@ INSERT INTO [PetDetail] VALUES(23, N'Tếu', 0.14, 0, 1, 1, 0, 0)
 
 --Insert order
 --select * from [Order]
-
+ 
 --Status: 0: unconfirmed, 1: confirm, 2: shipping, 3: shipped
-INSERT INTO [Order] (UserId, OrderDate, ShippedDate, Status) VALUES (4, '2022/02/21', '2022/03/01', 3)
-INSERT INTO [Order] (UserId, OrderDate, ShippedDate, Status) VALUES (5, '2022/02/25', '2022/03/05', 3)
-INSERT INTO [Order] (UserId, OrderDate, ShippedDate, Status) VALUES (6, '2022/01/31', '2022/02/10', 3)
-INSERT INTO [Order] (UserId, OrderDate, ShippedDate, Status) VALUES (4, '2022/03/06', '2022/03/11', 3)
-INSERT INTO [Order] (UserId, OrderDate, ShippedDate, Status) VALUES (4, '2022/03/07', '2022/03/09', 3)
-INSERT INTO [Order] (UserId, OrderDate, ShippedDate, Status) VALUES (5, '2022/03/03', '2022/03/10', 3)
+INSERT INTO [Order] VALUES (4, '2022/02/21', '2022/03/01', '30000', 3)
+INSERT INTO [Order] VALUES (5, '2022/02/25', '2022/03/05', '25000',3)
+INSERT INTO [Order] VALUES (6, '2022/01/31', '2022/02/10', '0', 3)
+INSERT INTO [Order] VALUES (4, '2022/03/06', '2022/03/11', '25000', 3)
+INSERT INTO [Order] VALUES (4, '2022/03/07', '2022/03/09', '320000', 3)
+INSERT INTO [Order] VALUES (5, '2022/03/03', '2022/03/10', '15000', 3)
 
 --Insert order detail
 --select * from [OrderDetail]
+--drop table [OrderDetail]
 INSERT INTO [OrderDetail] VALUES(1, 12, '16000000', 1)
 INSERT INTO [OrderDetail] VALUES(1, 28, '60000', 2)
 INSERT INTO [OrderDetail] VALUES(1, 26, '45000', 3)

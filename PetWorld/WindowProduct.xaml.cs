@@ -470,5 +470,10 @@ namespace PetWorld
                 MessageBox.Show(ex.Message, "Search product");
             }
         }
+
+        private void btnBackClick(object sender, RoutedEventArgs e)
+        {
+            //var dashboard = new WindowDashboard()
+        }
     }
 }
