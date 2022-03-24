@@ -24,6 +24,7 @@ namespace PetWorldWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSession();
             services.AddRazorPages();
             services.AddDbContext<prn221_petworldContext>();
             services.AddSingleton(typeof(ICategoryRepository), typeof(CategoryRepository));
@@ -47,7 +48,7 @@ namespace PetWorldWeb
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseStaticFiles();
+            app.UseSession();
 
             app.UseRouting();
 
