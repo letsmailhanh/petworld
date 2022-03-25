@@ -10,14 +10,14 @@ namespace PetWorldWeb.Pages
 {
     public class CartModel : BaseViewModel
     {
-        IProductRepository productRepo;
+        private IProductRepository _productRepo;
         private readonly DataAccess.Model.prn221_petworldContext _context;
 
         public List<CartItem> Cart { get; set; }
         public CartModel(DataAccess.Model.prn221_petworldContext context, IProductRepository productRepository)
         {
             _context = context;
-            productRepo = productRepository;
+            _productRepo = productRepository;
         }
 
 
@@ -41,7 +41,7 @@ namespace PetWorldWeb.Pages
             //if (id <= 0) return NotFound();
             var product = new Product();
             Cart = SessionHelper.GetObjectFromJson<List<CartItem>>(HttpContext.Session, "cart");
-            CartItem item = new(productRepo.GetProductByID(id), 1);
+            CartItem item = new(_productRepo.GetProductByID(id), 1);
             if (item == null)
             {
                 return NotFound("Item does not exist.");
