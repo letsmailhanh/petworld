@@ -9,7 +9,7 @@ using DataAccess.Model;
 
 namespace PetWorldWeb.Pages.Orders
 {
-    public class DetailsModel : PageModel
+    public class DetailsModel : BaseViewModel
     {
         private readonly DataAccess.Model.prn221_petworldContext _context;
 
