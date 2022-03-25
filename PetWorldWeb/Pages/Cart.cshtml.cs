@@ -25,26 +25,13 @@ namespace PetWorldWeb.Pages
         {
             string cartCookies = Request.Cookies["Cart"] != null ? Request.Cookies["Cart"].Replace(" ", "") : "";
             Cart = cartCookies.Split(";").ToList();
-            if (Cart[0] != "")
-            {
-                foreach (string item in Cart)
-                {
-                    int prodId = int.Parse(item.Split("=")[0]);
-                    int quantity = int.Parse(item.Split("=")[1]);
-                    CartItems.Add(
-                        new CartItem
-                        {
-                            Product = _context.Products.Where(p => p.ProductId == prodId).FirstOrDefault(),
-                            Quantity = quantity
-                        }
-                    );
-                }
-            }
+            UpdateCart();
             base.OnPageHandlerSelected(context);
         }
 
         public override void OnPageHandlerExecuted(PageHandlerExecutedContext context)
         {
+            UpdateCart();
             Response.Cookies.Delete("Cart");
             Response.Cookies.Append("Cart", string.Join(";", Cart));
             Response.Cookies.Delete("CartItemCount");
@@ -82,35 +69,7 @@ namespace PetWorldWeb.Pages
                 Cart.Add(id.ToString() + "=1");
             }
 
-            return RedirectToPage("Cart");
-            //if (id <= 0) return NotFound();
-            //Cart = SessionHelper.GetObjectFromJson<List<CartItem>>(HttpContext.Session, "cart");
-            //CartItem item = new(productRepo.GetProductByID(id), 1);
-            //if (item == null)
-            //{
-            //    return NotFound("Item does not exist.");
-            //}
-            //if (Cart == null)
-            //{
-            //    Cart = new List<CartItem>
-            //    {
-            //        item
-            //    };
-            //    SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", Cart);
-            //}
-            //else
-            //{
-            //    int index = ExistsInCart(Cart, id);
-            //    if (index == -1)
-            //    {
-            //        Cart.Add(item);
-            //    }
-            //    else
-            //    {
-            //        Cart[index].Quantity++;
-            //    }
-            //    SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", Cart);
-            //}
+            return Redirect(Request.Headers["Referer"].ToString());
         }
         private int ExistsInCart(List<string> cart, int id)
         {
@@ -123,34 +82,26 @@ namespace PetWorldWeb.Pages
         private void UpdateCart()
         {
             CartItems.Clear();
-            if (Cart[0] != "")
+            foreach (string item in Cart)
             {
-                foreach (string item in Cart)
-                {
-                    int prodId = int.Parse(item.Split("=")[0]);
-                    int quantity = int.Parse(item.Split("=")[1]);
-                    CartItems.Add(
-                        new CartItem
-                        {
-                            Product = _context.Products.Where(p => p.ProductId == prodId).FirstOrDefault(),
-                            Quantity = quantity
-                        }
-                    );
-                }
+                if (item == "") continue;
+                int prodId = int.Parse(item.Split("=")[0]);
+                int quantity = int.Parse(item.Split("=")[1]);
+                CartItems.Add(
+                    new CartItem
+                    {
+                        Product = _context.Products.Where(p => p.ProductId == prodId).FirstOrDefault(),
+                        Quantity = quantity
+                    }
+                );
             }
         }
         public IActionResult OnGetDelete(int id)
         {
             RemoveFromCart(id);
-
-            //Cart = SessionHelper.GetObjectFromJson<List<CartItem>>(HttpContext.Session, "cart");
-            //int index = ExistsInCart(Cart, id);
-            //Cart.RemoveAt(index);
-            //SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", Cart);
-
             return RedirectToPage("Cart");
         }
-        public IActionResult OnGetUpdate(int id, int quantity, [FromServices] IProductRepository productRepo)
+        public IActionResult OnPostUpdate(int id, int quantity, [FromServices] IProductRepository productRepo)
         {
             Product product = productRepo.GetProductByID(id);
             if (product == null)
@@ -170,12 +121,6 @@ namespace PetWorldWeb.Pages
                     Cart[cartPos] = id.ToString() + "=" + quantity.ToString();
                 }
             }
-            //Cart = SessionHelper.GetObjectFromJson<List<CartItem>>(HttpContext.Session, "cart");
-            //for (var i = 0; i < Cart.Count; i++)
-            //{
-            //    Cart[i].Quantity = quantities[i];
-            //}
-            //SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", Cart);
             return RedirectToPage("Cart");
         }
     }
