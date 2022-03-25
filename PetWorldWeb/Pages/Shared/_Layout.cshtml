@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model BaseViewModel
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -47,7 +48,7 @@
                     <a asp-page="/Index" asp-area="" class="btn h-100">
                         <i class="fa-solid fa-cart-shopping fa-2x"></i>
                     </a>
-                    <div class="align-items-center rounded-circle d-flex justify-content-center" style="height: 20px; background-color:deepskyblue; margin-left: -25px; font-size: 12px; padding: 5px;">@ViewData["CartItemCount"]</div>
+                    <div id="cartItemCount" class="align-items-center rounded-circle d-flex justify-content-center" style="height: 20px; background-color:deepskyblue; margin-left: -25px; font-size: 12px; padding: 5px;">@Model.CartItemCount</div>
                 </div>
                 <div class="col-1 d-flex justify-content-start">
                     <a asp-page="/Index" asp-area="" class="btn btn-info h-100">
