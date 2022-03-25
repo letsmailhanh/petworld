@@ -48,7 +48,7 @@ namespace PetWorldWeb.Pages.Products
                 ViewData["CategoryName"] = category.Title;
                 AllProducts = await _context.Products.Where(p => p.CategoryId == CategoryId).ToListAsync();
                 Count = AllProducts.Count;
-                Product = await GetPaginatedResult(CurrentPage, PageSize);
+                Product = await GetPaginatedResult(CurrentPage, PageSize, CategoryId);
             }
         }
         public async Task<List<Product>> GetPaginatedResult(int currentPage, int pageSize = 10, int category = 0)
