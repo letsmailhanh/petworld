@@ -14,5 +14,6 @@ namespace DataAccess.Repository
         IEnumerable<Order> GetOrderListByStatus(string statusName);
         IEnumerable<Order> GetOrderListInPeriod(DateTime from, DateTime to);
         int[] GetCurrentWeekNumberOrder();
+        decimal[] GetCurrentWeekRevenue();
     }
 }

@@ -61,6 +61,7 @@ namespace PetWorld
         {
             DataContext = this;
             int[] orderNum = orderRepo.GetCurrentWeekNumberOrder();
+            decimal[] revenue = orderRepo.GetCurrentWeekRevenue();
             SeriesCollection = new SeriesCollection()
             {
                 new ColumnSeries
@@ -68,12 +69,11 @@ namespace PetWorld
                     Title="Order",
                     Values = new ChartValues<int>(orderNum),
                     ScalesYAt = 0
-                    //Values = new ChartValues<double>{10, 30, 39, 28, 50, 17, 25}
                 },
                 new LineSeries
                 {
                     Title = "Revenue",
-                    Values = new ChartValues<int> { 400, 660, 540, 290, 470, 260, 830 },
+                    Values = new ChartValues<decimal> (revenue),
                     ScalesYAt = 1
                 }
             };

@@ -12,6 +12,8 @@ namespace DataAccess.DAO
     {
         public int[] GetCurrentWeekNumberOrder() => OrderDAO.Instance.GetCurrentWeekNumberOrder();
 
+        public decimal[] GetCurrentWeekRevenue() => OrderDAO.Instance.GetCurrentWeekRevenue();
+
         public IEnumerable<Order> GetOrderList() => OrderDAO.Instance.GetOrderList();
 
         public IEnumerable<Order> GetOrderListByStatus(string statusName) => OrderDAO.Instance.GetOrderListByStatus(statusName);
