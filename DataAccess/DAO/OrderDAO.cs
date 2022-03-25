@@ -89,5 +89,46 @@ namespace DataAccess.DAO
             }
             return orders;
         }
+
+        public int GetTotalOrderADay(DateTime date)
+        {
+            int total = 0;
+            var db = new prn221_petworldContext();
+            var query = from o in db.Orders
+                        where o.OrderDate == date
+                        select o;
+            total = query.ToList().Count;
+            return total;
+        }
+
+        public int[] GetCurrentWeekNumberOrder()
+        {
+            int[] result = new int[7];
+            int num; 
+
+            DateTime dt = DateTime.Today;
+
+            if (dt.DayOfWeek == DayOfWeek.Monday) num = 0;
+            else if (dt.DayOfWeek == DayOfWeek.Tuesday) num = 1;
+            else if (dt.DayOfWeek == DayOfWeek.Wednesday) num = 2;
+            else if (dt.DayOfWeek == DayOfWeek.Thursday) num = 3;
+            else if (dt.DayOfWeek == DayOfWeek.Friday) num = 4;
+            else if (dt.DayOfWeek == DayOfWeek.Saturday) num = 5;
+            else if (dt.DayOfWeek == DayOfWeek.Sunday) num = 6;
+            else num = -1;
+
+            for (int i = 0; i <= num; i++)
+            {
+                result[i] = GetTotalOrderADay(dt.AddDays(-(num-i)));
+            }
+
+            for (int i = num + 1; i < 7; i++)
+            {
+                result[i] = 0;
+            }
+
+            return result;
+        }
     }
 }
+

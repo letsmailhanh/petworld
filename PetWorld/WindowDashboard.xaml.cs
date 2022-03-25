@@ -1,8 +1,12 @@
 ﻿using DataAccess.Model;
 using DataAccess.Repository;
+using LiveCharts;
+using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,7 +23,7 @@ namespace PetWorld
     /// <summary>
     /// Interaction logic for WindowDashboard.xaml
     /// </summary>
-    public partial class WindowDashboard : Window
+    public partial class WindowDashboard : Window, INotifyPropertyChanged
     {
         User user;
         IUserRepository userRepo;
@@ -27,6 +31,19 @@ namespace PetWorld
         ICategoryRepository categoryRepo;
         IPetDetailRepository petRepo;
         IOrderRepository orderRepo;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public SeriesCollection SeriesCollection { get; set; }
+        public AxesCollection AxisYCollection { get; set; }
+
+        public string[] Labels { get; set; }
+        public Func<int, string> Formatter { get; set; }
+
         public WindowDashboard(User u, IUserRepository userRepository, IProductRepository productRepository, ICategoryRepository categoryRepository, IPetDetailRepository petRepository, IOrderRepository orderRepository)
         {
             InitializeComponent();
@@ -36,8 +53,41 @@ namespace PetWorld
             categoryRepo = categoryRepository;
             petRepo = petRepository;
             orderRepo = orderRepository;
-        }
 
+            LoadChart();
+
+        }
+        private void LoadChart()
+        {
+            DataContext = this;
+            int[] orderNum = orderRepo.GetCurrentWeekNumberOrder();
+            SeriesCollection = new SeriesCollection()
+            {
+                new ColumnSeries
+                {
+                    Title="Order",
+                    Values = new ChartValues<int>(orderNum),
+                    ScalesYAt = 0
+                    //Values = new ChartValues<double>{10, 30, 39, 28, 50, 17, 25}
+                },
+                new LineSeries
+                {
+                    Title = "Revenue",
+                    Values = new ChartValues<int> { 400, 660, 540, 290, 470, 260, 830 },
+                    ScalesYAt = 1
+                }
+            };
+
+            AxisYCollection = new AxesCollection
+            {                
+                //new Axis{Title="Revenue", /*Foreground = Brushes.Red,*/ MinValue = 0, Position = AxisPosition.RightTop},
+                new Axis{Title = "Order", MinValue = 0, Position = AxisPosition.LeftBottom},
+                new Axis{Title="Revenue", MinValue = 0, Position = AxisPosition.RightTop},
+            };
+
+            Labels = new[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+            //Formatter = value => value.ToString("N");
+        }
         private void btnUserClick(object sender, RoutedEventArgs e)
         {
             var userWindow = new WindowUser(userRepo, user);

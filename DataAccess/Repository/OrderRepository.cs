@@ -10,6 +10,8 @@ namespace DataAccess.DAO
 {
     public class OrderRepository : IOrderRepository
     {
+        public int[] GetCurrentWeekNumberOrder() => OrderDAO.Instance.GetCurrentWeekNumberOrder();
+
         public IEnumerable<Order> GetOrderList() => OrderDAO.Instance.GetOrderList();
 
         public IEnumerable<Order> GetOrderListByStatus(string statusName) => OrderDAO.Instance.GetOrderListByStatus(statusName);
