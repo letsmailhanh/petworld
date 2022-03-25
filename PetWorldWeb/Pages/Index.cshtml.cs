@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PetWorldWeb.Pages
 {
-    public class IndexModel : PageModel
+    public class IndexModel : BaseViewModel
     {
         private readonly ILogger<IndexModel> _logger;
 
@@ -19,7 +19,7 @@ namespace PetWorldWeb.Pages
 
         public void OnGet()
         {
-
+            Response.Cookies.Append("CartItemCount", "2");
         }
     }
 }

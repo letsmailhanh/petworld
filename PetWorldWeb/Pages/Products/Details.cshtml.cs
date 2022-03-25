@@ -9,7 +9,7 @@ using DataAccess.Model;
 
 namespace PetWorldWeb.Pages.Products
 {
-    public class DetailsModel : PageModel
+    public class DetailsModel : BaseViewModel
     {
         private readonly prn221_petworldContext _context;
 
@@ -22,6 +22,7 @@ namespace PetWorldWeb.Pages.Products
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            ViewData["CartItemCount"] = Request.Cookies["CartItemCount"];
             if (id == null)
             {
                 return NotFound();

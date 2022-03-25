@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace PetWorldWeb.Pages
 {
-    public class CartModel : PageModel
+    public class CartModel : BaseViewModel
     {
         IProductRepository productRepo;
         private readonly DataAccess.Model.prn221_petworldContext _context;
