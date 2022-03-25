@@ -29,14 +29,14 @@
 
                 <Border CornerRadius="25" Background="#f5ccd0" Margin="10" Padding="15">
                     <StackPanel Orientation="Horizontal">
-                        <Calendar></Calendar>
+                        <Calendar x:Name="cldSelectDate" SelectedDatesChanged="cldSelectDateChange"></Calendar>
                         <StackPanel>
-                            <Label>New Customer</Label>
-                            <TextBlock></TextBlock>
+                            <!--<Label>New Customer</Label>
+                            <TextBlock Name="tbNewCustomer"></TextBlock>-->
                             <Label>Total Order</Label>
-                            <TextBlock></TextBlock>
+                            <TextBlock Name="tbTotalOrder"></TextBlock>
                             <Label>Revenue</Label>
-                            <TextBlock></TextBlock>
+                            <TextBlock Name="tbRevenue"></TextBlock>
                         </StackPanel>
                     </StackPanel>
                 </Border>

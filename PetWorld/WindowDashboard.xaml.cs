@@ -55,6 +55,7 @@ namespace PetWorld
             orderRepo = orderRepository;
 
             LoadChart();
+            LoadSelectedDateReport(DateTime.Today);
 
         }
         private void LoadChart()
@@ -107,6 +108,20 @@ namespace PetWorld
             var orderWindow = new WindowOrder(orderRepo);
             orderWindow.Show();
             this.Close();
+        }
+
+        private void cldSelectDateChange(object sender, SelectionChangedEventArgs e)
+        {
+            DateTime selectedDate = (DateTime) cldSelectDate.SelectedDate;
+            LoadSelectedDateReport(selectedDate);
+        }
+
+        private void LoadSelectedDateReport(DateTime selectedDate)
+        {
+            int totalOrder = orderRepo.GetTotalOrder(selectedDate);
+            tbTotalOrder.Text = totalOrder.ToString();
+            decimal revenue = orderRepo.GetTotalRevenue(selectedDate);
+            tbRevenue.Text = revenue.ToString("#.##");
         }
     }
 }

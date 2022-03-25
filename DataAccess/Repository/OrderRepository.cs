@@ -19,5 +19,9 @@ namespace DataAccess.DAO
         public IEnumerable<Order> GetOrderListByStatus(string statusName) => OrderDAO.Instance.GetOrderListByStatus(statusName);
 
         public IEnumerable<Order> GetOrderListInPeriod(DateTime from, DateTime to) => OrderDAO.Instance.GetOrderListInPeriod(from, to);
+
+        public int GetTotalOrder(DateTime date) => OrderDAO.Instance.GetTotalOrderADate(date);
+
+        public decimal GetTotalRevenue(DateTime date) => OrderDAO.Instance.GetTotalRevenueOrderADate(date);
     }
 }
