@@ -87,7 +87,7 @@ namespace DataAccess.DAO
             return users;
         }
 
-        //Get user by usernam
+        //Get user by username
         public User GetUserByUsername(string username)
         {
             User user = null;
@@ -99,6 +99,20 @@ namespace DataAccess.DAO
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
+            }
+            return user;
+        }
+        //Get user by username and password
+        public User GetUserByUsernameAndPassword(string username, string password)
+        {
+            User user = null;
+            try
+            {
+                var db = new prn221_petworldContext();
+                user = db.Users.SingleOrDefault(user => user.UserName.Equals(username) &&
+                                                user.Password.Equals(password));
+            }catch(Exception ex) { 
+                throw new Exception(ex.Message); 
             }
             return user;
         }

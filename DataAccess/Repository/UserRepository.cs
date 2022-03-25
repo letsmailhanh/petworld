@@ -20,8 +20,10 @@ namespace DataAccess.Repository
 
         public User GetUserByUsername(string username) => UserDAO.Instance.GetUserByUsername(username);
 
+
         public IEnumerable<User> GetUsers() => UserDAO.Instance.GetUserList();
 
         public void UpdateUser(User u) => UserDAO.Instance.UpdateUser(u);
+        public User GetUserByUsernameAndPassword(string username, string password) => UserDAO.Instance.GetUserByUsernameAndPassword(username, password);
     }
 }

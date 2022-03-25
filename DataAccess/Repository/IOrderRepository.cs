@@ -13,6 +13,8 @@ namespace DataAccess.Repository
         IEnumerable<Order> GetOrderList();
         IEnumerable<Order> GetOrderListByStatus(string statusName);
         IEnumerable<Order> GetOrderListInPeriod(DateTime from, DateTime to);
+        int GetTotalOrder(DateTime date);
+        decimal GetTotalRevenue(DateTime date);
         int[] GetCurrentWeekNumberOrder();
         decimal[] GetCurrentWeekRevenue();
     }
