@@ -11,10 +11,11 @@ namespace PetWorldWeb
     public class BaseViewModel: PageModel
     {
         public string CartItemCount { get; set; } = "5";
-        public override void OnPageHandlerExecuting(PageHandlerExecutingContext context)
+
+        public override void OnPageHandlerSelected(PageHandlerSelectedContext context)
         {
             CartItemCount = Request.Cookies["CartItemCount"] != null ? Request.Cookies["CartItemCount"] : "0";
-            base.OnPageHandlerExecuting(context);
+            base.OnPageHandlerSelected(context);
         }
     }
 }
