@@ -23,7 +23,7 @@
 		}
 
 		.navbar .nav-item .dropdown-menu {
-			margin-top: 10px;
+			margin-top: 0px;
 		}
 	</style>
 </head>
@@ -76,8 +76,22 @@
 				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
 					<ul class="navbar-nav flex-grow-1">
 						<li class="nav-item border-left border-1 d-flex justify-content-center dropdown" style="width: 120px;">
-							<a class="nav-link text-dark" asp-area="" asp-page="/Index" data-bs-toggle="dropdown" aria-expanded="false" id="dog-dropdown">Dog</a>
+							<a class="nav-link text-dark" asp-area="" asp-page="/Products/Index" asp-route-type="pet" asp-route-categoryid="1" data-bs-toggle="dropdown" aria-expanded="false" id="dog-dropdown">Dog</a>
 							<ul class="dropdown-menu" aria-labelledby="dog-dropdown">
+								<li>
+									<a class="dropdown-item">Action</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="#">Another action</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="#">Something else here</a>
+								</li>
+							</ul>
+						</li>
+						<li class="nav-item border-left border-1 d-flex justify-content-center dropdown" style="width: 120px;">
+							<a class="nav-link text-dark" asp-area="" asp-page="/Products/Index" asp-route-type="pet" asp-route-categoryid="2" data-bs-toggle="dropdown" aria-expanded="false" id="cat-dropdown">Cat</a>
+							<ul class="dropdown-menu" aria-labelledby="cat-dropdown">
 								<li>
 									<a class="dropdown-item" href="#">Action</a>
 								</li>
@@ -90,8 +104,8 @@
 							</ul>
 						</li>
 						<li class="nav-item border-left border-1 d-flex justify-content-center dropdown" style="width: 120px;">
-							<a class="nav-link text-dark" asp-area="" asp-page="/Index" data-bs-toggle="dropdown" aria-expanded="false" id="dog-dropdown">Cat</a>
-							<ul class="dropdown-menu" aria-labelledby="dog-dropdown">
+							<a class="nav-link text-dark" asp-area="" asp-page="/Products/Index" asp-route-type="pet" asp-route-categoryid="3" data-bs-toggle="dropdown" aria-expanded="false" id="oth-dropdown">Other</a>
+							<ul class="dropdown-menu" aria-labelledby="oth-dropdown">
 								<li>
 									<a class="dropdown-item" href="#">Action</a>
 								</li>
@@ -104,8 +118,8 @@
 							</ul>
 						</li>
 						<li class="nav-item border-left border-1 d-flex justify-content-center dropdown" style="width: 120px;">
-							<a class="nav-link text-dark" asp-area="" asp-page="/Index" data-bs-toggle="dropdown" aria-expanded="false" id="dog-dropdown">Other</a>
-							<ul class="dropdown-menu" aria-labelledby="dog-dropdown">
+							<a class="nav-link text-dark" asp-area="" asp-page="/Products/Index" asp-route-type="acc" asp-route-categoryid="0" data-bs-toggle="dropdown" aria-expanded="false" id="acc-dropdown">Accessory</a>
+							<ul class="dropdown-menu" aria-labelledby="acc-dropdown">
 								<li>
 									<a class="dropdown-item" href="#">Action</a>
 								</li>
@@ -118,22 +132,8 @@
 							</ul>
 						</li>
 						<li class="nav-item border-left border-1 d-flex justify-content-center dropdown" style="width: 120px;">
-							<a class="nav-link text-dark" asp-area="" asp-page="/Index" data-bs-toggle="dropdown" aria-expanded="false" id="dog-dropdown">Accessory</a>
-							<ul class="dropdown-menu" aria-labelledby="dog-dropdown">
-								<li>
-									<a class="dropdown-item" href="#">Action</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="#">Another action</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="#">Something else here</a>
-								</li>
-							</ul>
-						</li>
-						<li class="nav-item border-left border-1 d-flex justify-content-center dropdown" style="width: 120px;">
-							<a class="nav-link text-dark" asp-area="" asp-page="/Index" data-bs-toggle="dropdown" aria-expanded="false" id="dog-dropdown">News</a>
-							<ul class="dropdown-menu" aria-labelledby="dog-dropdown">
+							<a class="nav-link text-dark" asp-area="" asp-page="/Index" data-bs-toggle="dropdown" aria-expanded="false" id="news-dropdown">News</a>
+							<ul class="dropdown-menu" aria-labelledby="news-dropdown">
 								<li>
 									<a class="dropdown-item" href="#">Action</a>
 								</li>

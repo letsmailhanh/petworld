@@ -1,10 +1,12 @@
 using DataAccess.Model;
 using DataAccess.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PetWorldWeb.Helpers;
 using PetWorldWeb.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -31,11 +33,13 @@ namespace PetWorldWeb.Pages
 
         public override void OnPageHandlerExecuted(PageHandlerExecutedContext context)
         {
-            UpdateCart();
+            UpdateCart(); 
+            CookieOptions cookieOptions = new CookieOptions();
+            cookieOptions.Expires = new DateTimeOffset(DateTime.Now.AddDays(7));
             Response.Cookies.Delete("Cart");
-            Response.Cookies.Append("Cart", string.Join(";", Cart));
+            Response.Cookies.Append("Cart", string.Join(";", Cart), cookieOptions);
             Response.Cookies.Delete("CartItemCount");
-            Response.Cookies.Append("CartItemCount", CartItems.Sum(i => i.Quantity).ToString());
+            Response.Cookies.Append("CartItemCount", CartItems.Sum(i => i.Quantity).ToString(), cookieOptions);
             base.OnPageHandlerExecuted(context);
         }
 
