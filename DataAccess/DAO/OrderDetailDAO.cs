@@ -89,5 +89,12 @@ namespace DataAccess.DAO
             }
             return result;
         }
+
+        public void AddOrderDetail(OrderDetail orderDetail)
+        {
+            var db = new prn221_petworldContext();
+            db.OrderDetails.Add(orderDetail);
+            db.SaveChanges();
+        }
     }
 }

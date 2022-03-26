@@ -184,6 +184,14 @@ namespace DataAccess.DAO
             }
             return result;
         }
+
+        public Order AddOrder(Order order)
+        {
+            var db = new prn221_petworldContext();
+            db.Orders.Add(order);
+            db.SaveChanges();
+            return order;
+        }
     }
 }
 

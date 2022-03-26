@@ -136,8 +136,8 @@ else
                 <h5 class="font-weight-bold">@((int)Model.Total) ₫</h5>
               </li>
             </ul>
-              <a asp-page="/Products/Index" asp-route-type="pet" asp-route-categoryid="1" class="btn btn-success rounded-pill py-2"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Continue Shopping</a>
-            <a href="#" class="btn btn-dark pull-right rounded-pill py-2">Buy Now<span class="glyphicon glyphicon-chevron-right"></span></a>
+              <a href="javascript:;" onclick = "history.back()" class="btn btn-success rounded-pill py-2"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Continue Shopping</a>
+            <a asp-page="/Orders/Create" class="btn btn-dark pull-right rounded-pill py-2">Buy Now<span class="glyphicon glyphicon-chevron-right"></span></a>
           </div>
           <!-- End -->
         </div>

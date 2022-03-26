@@ -19,6 +19,7 @@ namespace PetWorldWeb.Pages.Orders
 
         public List<string> Cart { get; set; } = new List<string>();
         public List<CartItem> CartItems { get; set; } = new List<CartItem>();
+        public double Total { get; set; }
         public CartModel(DataAccess.Model.prn221_petworldContext context)
         {
             _context = context;
@@ -26,8 +27,9 @@ namespace PetWorldWeb.Pages.Orders
 
         public override void OnPageHandlerSelected(PageHandlerSelectedContext context)
         {
-            string cartCookies = Request.Cookies["Cart"] != null ? Request.Cookies["Cart"].Replace(" ", "") : "";
+            string cartCookies = Request.Cookies["Cart"] != null ? Request.Cookies["Cart"].Replace(" ", null) : "";
             Cart = cartCookies.Split(";").ToList();
+            Cart.Remove("");
             UpdateCart();
             base.OnPageHandlerSelected(context);
         }
@@ -43,8 +45,6 @@ namespace PetWorldWeb.Pages.Orders
             Response.Cookies.Append("CartItemCount", CartItems.Sum(i => i.Quantity).ToString(), cookieOptions);
             base.OnPageHandlerExecuted(context);
         }
-
-        public double Total { get; set; }
 
         public void OnGet()
         {

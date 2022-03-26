@@ -9,35 +9,104 @@
 
 <h4>Order</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post" class="row">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<p>@ViewData["message"]</p>
+<form method="post" class="row">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="col-3">
+        <div class="row">
             <div class="form-group">
-                <label asp-for="Order.UserId" class="control-label"></label>
-                <select asp-for="Order.UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
+                <label asp-for="_User.Address" class="control-label"></label>
+                @if (Model._User.Address != "" && Model._User.Address != null)
+                {
+                    <input asp-for="_User.Address" value="@Model._User.Address" class="form-control" required disabled/>
+                }
+                else
+                {
+                    <input asp-for="_User.Address" value="@Model._User.Address" class="form-control" required />
+                }
             </div>
+        </div>
+        <div class="row">
             <div class="form-group">
-                <label asp-for="Order.ShippedDate" class="control-label"></label>
-                <input asp-for="Order.ShippedDate" class="form-control" />
-                <span asp-validation-for="Order.ShippedDate" class="text-danger"></span>
+                <label asp-for="_User.Email" class="control-label"></label>
+                @if (Model._User.Address != "" && Model._User.Address != null)
+                {
+                    <input asp-for="_User.Email" value="@Model._User.Email" class="form-control" required disabled />
+                }
+                else
+                {
+                    <input asp-for="_User.Email" value="@Model._User.Email" class="form-control" required />
+                }
             </div>
+        </div>
+        <div class="row">
             <div class="form-group">
-                <label asp-for="Order.Freight" class="control-label"></label>
-                <input asp-for="Order.Freight" class="form-control" />
-                <span asp-validation-for="Order.Freight" class="text-danger"></span>
+                <label asp-for="_User.Phone" class="control-label"></label>
+                @if (Model._User.Address != "" && Model._User.Address != null)
+                {
+                    <input asp-for="_User.Phone" value="@Model._User.Phone" class="form-control" required disabled />
+                }
+                else
+                {
+                    <input asp-for="_User.Phone" value="@Model._User.Phone" class="form-control" required />
+                }
             </div>
-            <div class="form-group">
-                <label asp-for="Order.Status" class="control-label"></label>
-                <input asp-for="Order.Status" class="form-control" />
-                <span asp-validation-for="Order.Status" class="text-danger"></span>
-            </div>
+        </div>
+        <div class="row">
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
-        </form>
+        </div>
     </div>
-</div>
+    <div class="col-9">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="border-0 bg-light">
+                            <div class="p-2 px-3 text-uppercase">Product</div>
+                        </th>
+                        <th scope="col" class="border-0 bg-light">
+                            <div class="py-2 text-uppercase">Price</div>
+                        </th>
+                        <th scope="col" class="border-0 bg-light">
+                            <div class="py-2 text-uppercase">Quantity</div>
+                        </th>
+                        <th scope="col" class="border-0 bg-light">
+                            <div class="py-2 text-uppercase">Sub Total</div>
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model.CartItems)
+                    {
+
+                        <tr>
+                            <th scope="row">
+                                <div class="p-2">
+                                    <img src="@item.Product.Image" alt="" width="80" class="img-fluid rounded shadow-sm">
+
+                                    <div class="ml-3 d-inline-block align-middle">
+                                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block">@item.Product.ProductName</a></h5><span class="text-muted font-weight-normal font-italic">Category: @item.Product.Category.Title</span>
+                                    </div>
+                                </div>
+                            <td class="align-middle"><strong>@((int)item.Product.Price)</strong></td>
+                            <td class="align-middle"><strong>@item.Quantity</strong></td>
+                            <td class="align-middle"><strong>@((int)(item.Product.Price * item.Quantity)) ₫</strong></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <ul class="list-unstyled mb-4">
+                <li class="d-flex justify-content-between py-3 border-bottom">
+                    <strong class="text-muted">Total</strong>
+                    <h5 class="font-weight-bold">@((int)Model.Total) ₫</h5>
+                </li>
+            </ul>
+        </div>
+    </div>
+</form>
 
 <div>
     <a asp-page="Index">Back to List</a>

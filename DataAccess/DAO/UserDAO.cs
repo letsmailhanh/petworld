@@ -94,7 +94,7 @@ namespace DataAccess.DAO
             try
             {
                 var db = new prn221_petworldContext();
-                user = db.Users.SingleOrDefault(user => user.UserName.Equals(username));
+                user = db.Users.SingleOrDefault(user => user.UserName==(username));
             }
             catch (Exception ex)
             {

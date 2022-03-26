@@ -10,6 +10,8 @@ namespace DataAccess.Repository
 {
     public class OrderDetailRepository : IOrderDetailRepository
     {
+        public void AddOrderDetail(OrderDetail orderDetail) => OrderDetailDAO.Instance.AddOrderDetail(orderDetail);
+
         public IEnumerable<OrderDetail> GetOrderDetailList() => OrderDetailDAO.Instance.GetOrderDetailList();
 
         public IEnumerable<OrderDetail> GetOrderDetailListByOrder(Order o) => OrderDetailDAO.Instance.GetOrderDetailByOrder(o);

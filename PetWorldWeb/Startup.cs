@@ -31,6 +31,8 @@ namespace PetWorldWeb
             services.AddSingleton(typeof(IPetDetailRepository), typeof(PetDetailRepository));
             services.AddSingleton(typeof(IProductRepository), typeof(ProductRepository));
             services.AddSingleton(typeof(IUserRepository), typeof(UserRepository));
+            services.AddSingleton(typeof(IOrderRepository), typeof(OrderRepository));
+            services.AddSingleton(typeof(IOrderDetailRepository), typeof(OrderDetailRepository));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -11,7 +11,7 @@ namespace PetWorldWeb
 {
     public class BaseViewModel : PageModel
     {
-        public string CartItemCount { get; set; } = "5";
+        public string CartItemCount { get; set; } = "0";
         public string CurUser { get; set; }
         public override void OnPageHandlerSelected(PageHandlerSelectedContext context)
         {
@@ -24,7 +24,6 @@ namespace PetWorldWeb
             if (CurUser == null || CurUser == "") return false;
             return true;
         }
-        
     }
 }
 

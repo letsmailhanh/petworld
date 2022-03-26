@@ -1,4 +1,5 @@
-﻿using DataAccess.Model;
+﻿using DataAccess.DAO;
+using DataAccess.Model;
 using DataAccess.Repository;
 using System;
 using System.Collections.Generic;
@@ -6,10 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.DAO
+namespace DataAccess.Repository
 {
     public class OrderRepository : IOrderRepository
     {
+        public Order AddOrder(Order order) => OrderDAO.Instance.AddOrder(order);
+
         public decimal CalculateOrderRevenue(Order o) => OrderDAO.Instance.CalculateOrderRevenue(o);
 
         public int[] GetCurrentWeekNumberOrder() => OrderDAO.Instance.GetCurrentWeekNumberOrder();

@@ -18,5 +18,6 @@ namespace DataAccess.Repository
         decimal CalculateOrderRevenue(Order o);
         int[] GetCurrentWeekNumberOrder();
         decimal[] GetCurrentWeekRevenue();
+        Order AddOrder(Order order);
     }
 }
