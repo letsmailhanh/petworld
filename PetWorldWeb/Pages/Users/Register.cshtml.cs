@@ -21,6 +21,8 @@ namespace PetWorldWeb.Pages.Users
         [BindProperty]
         public User Customer { get; set; }
         public string Msg { get; set; }
+        [BindProperty]
+        public string ConfirmPassword { get; set; }
         public void OnGet()
         {
         }
@@ -34,7 +36,11 @@ namespace PetWorldWeb.Pages.Users
                 Msg = "Username has existed. Please choose another one.";
                 return Page();
             }
-
+            if (ConfirmPassword != Customer.Password)
+            {
+                Msg = "Passwords are not matched. Please re-enter.";
+                return Page();
+            }
             _context.Users.Add(Customer);
             _context.SaveChanges();
             Response.Cookies.Append("Username", Customer.UserName);
