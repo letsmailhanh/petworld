@@ -15,6 +15,7 @@ namespace DataAccess.Repository
         IEnumerable<Order> GetOrderListInPeriod(DateTime from, DateTime to);
         int GetTotalOrder(DateTime date);
         decimal GetTotalRevenue(DateTime date);
+        decimal CalculateOrderRevenue(Order o);
         int[] GetCurrentWeekNumberOrder();
         decimal[] GetCurrentWeekRevenue();
     }

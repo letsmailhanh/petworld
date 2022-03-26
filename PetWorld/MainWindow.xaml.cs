@@ -26,7 +26,8 @@ namespace PetWorld
         ICategoryRepository categoryRepo;
         IPetDetailRepository petRepo;
         IOrderRepository orderRepo;
-        public MainWindow(IUserRepository userRepository, IProductRepository productRepository, ICategoryRepository categoryRepository, IPetDetailRepository petRepository, IOrderRepository orderRepository)
+        IOrderDetailRepository ordDetailRepo;
+        public MainWindow(IUserRepository userRepository, IProductRepository productRepository, ICategoryRepository categoryRepository, IPetDetailRepository petRepository, IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository)
         {
             InitializeComponent();
             userRepo = userRepository;
@@ -34,18 +35,19 @@ namespace PetWorld
             categoryRepo = categoryRepository;
             petRepo = petRepository;
             orderRepo = orderRepository;
+            ordDetailRepo = orderDetailRepository;
         }
 
         private void btnSignupClick(object sender, RoutedEventArgs e)
         {
-            var signup = new WindowSignup(userRepo, productRepo, categoryRepo, petRepo, orderRepo);
+            var signup = new WindowSignup(userRepo, productRepo, categoryRepo, petRepo, orderRepo, ordDetailRepo);
             signup.Show();
             this.Close();
         }
 
         private void btnSigninClick(object sender, RoutedEventArgs e)
         {
-            var signin = new WindowLogin(userRepo, productRepo, categoryRepo, petRepo, orderRepo);
+            var signin = new WindowLogin(userRepo, productRepo, categoryRepo, petRepo, orderRepo, ordDetailRepo);
             signin.Show();
             this.Close();
         }

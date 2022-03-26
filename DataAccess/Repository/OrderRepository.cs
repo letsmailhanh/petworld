@@ -10,6 +10,8 @@ namespace DataAccess.DAO
 {
     public class OrderRepository : IOrderRepository
     {
+        public decimal CalculateOrderRevenue(Order o) => OrderDAO.Instance.CalculateOrderRevenue(o);
+
         public int[] GetCurrentWeekNumberOrder() => OrderDAO.Instance.GetCurrentWeekNumberOrder();
 
         public decimal[] GetCurrentWeekRevenue() => OrderDAO.Instance.GetCurrentWeekRevenue();

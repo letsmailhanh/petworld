@@ -22,16 +22,14 @@ namespace PetWorld
     public partial class WindowOrder : Window
     {
         IOrderRepository orderRepo;
-        public WindowOrder(IOrderRepository orderRepository)
+        IOrderDetailRepository ordDetailRepo;
+        public WindowOrder(IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository)
         {
             InitializeComponent();
             orderRepo = orderRepository;
+            ordDetailRepo = orderDetailRepository;
 
             LoadOrderList();
-
-            //Set default date for datepicker
-            dpkFrom.SelectedDate = DateTime.Today;
-            dpkTo.SelectedDate = DateTime.Today;
 
             tbMessage.Visibility = Visibility.Collapsed;
         }
@@ -137,6 +135,51 @@ namespace PetWorld
         private void btnBackClick(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void lvOrderSelectionChange(object sender, SelectionChangedEventArgs e)
+        {
+            //Load list product in order
+            Order selected = (Order)lvOrder.SelectedItem;
+            List<OrderDetail> list = ordDetailRepo.GetOrderDetailListByOrder(selected).ToList();
+            lvOrderDetail.ItemsSource = list;
+
+            //Load order status
+            int status = selected.Status;
+            switch (status)
+            {
+                case 0: 
+                    tbStatus.Text = "Uncomfirmed"; 
+                    tbStatus.Background = new SolidColorBrush(Colors.Red); 
+                    break;
+                case 1:
+                    tbStatus.Text = "Confirmed";
+                    tbStatus.Background = new SolidColorBrush(Colors.Orange);
+                    break;
+                case 2: 
+                    tbStatus.Text = "Shipping"; 
+                    tbStatus.Background = new SolidColorBrush(Colors.Yellow); 
+                    break;
+                case 3: 
+                    tbStatus.Text = "Shipped"; 
+                    tbStatus.Background = new SolidColorBrush(Colors.Green);
+                    
+                    break;
+            }
+
+            //Load order date
+
+            //Load shipping fee
+            tbFreight.Text = selected.Freight.ToString("#.##");
+
+            //Load total
+            tbTotal.Text = orderRepo.CalculateOrderRevenue(selected).ToString("#.##");
+
+        }
+
+        private void btnConfirmClick(object sender, RoutedEventArgs e)
+        {
+            //Change order status
         }
     }
 }

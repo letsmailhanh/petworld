@@ -26,7 +26,8 @@ namespace PetWorld
         ICategoryRepository categoryRepo;
         IPetDetailRepository petRepo;
         IOrderRepository orderRepo;
-        public WindowSignup(IUserRepository userRepository, IProductRepository productRepository, ICategoryRepository categoryRepository, IPetDetailRepository petRepository, IOrderRepository orderRepository)
+        IOrderDetailRepository ordDetailRepo;
+        public WindowSignup(IUserRepository userRepository, IProductRepository productRepository, ICategoryRepository categoryRepository, IPetDetailRepository petRepository, IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository)
         {
             InitializeComponent();
             userRepo = userRepository;
@@ -34,6 +35,7 @@ namespace PetWorld
             categoryRepo = categoryRepository;
             petRepo = petRepository;
             orderRepo = orderRepository;
+            ordDetailRepo = orderDetailRepository;
         }
 
         private User GetUserObject()
@@ -57,7 +59,7 @@ namespace PetWorld
 
         private void btnBackClick(object sender, RoutedEventArgs e)
         {
-            var previous = new MainWindow(userRepo, productRepo, categoryRepo, petRepo, orderRepo);
+            var previous = new MainWindow(userRepo, productRepo, categoryRepo, petRepo, orderRepo, ordDetailRepo);
             previous.Show();
             this.Close();
         }
@@ -77,7 +79,7 @@ namespace PetWorld
                     {
                         User user = GetUserObject();
                         userRepo.AddUser(user);
-                        var signin = new WindowLogin(userRepo, productRepo, categoryRepo, petRepo, orderRepo);
+                        var signin = new WindowLogin(userRepo, productRepo, categoryRepo, petRepo, orderRepo, ordDetailRepo);
                         signin.Show();
                         this.Close();
                     }
