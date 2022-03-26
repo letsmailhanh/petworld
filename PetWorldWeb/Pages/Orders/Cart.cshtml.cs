@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using PetWorldWeb.Helpers;
 using PetWorldWeb.Models;
 using System;
@@ -94,7 +95,9 @@ namespace PetWorldWeb.Pages.Orders
                 CartItems.Add(
                     new CartItem
                     {
-                        Product = _context.Products.Where(p => p.ProductId == prodId).FirstOrDefault(),
+                        Product = _context.Products
+                        .Include(p => p.Category)
+                        .Where(p => p.ProductId == prodId).FirstOrDefault(),
                         Quantity = quantity
                     }
                 );
