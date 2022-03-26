@@ -19,7 +19,6 @@ namespace PetWorldWeb.Pages
 
         public void OnGet()
         {
-            Response.Cookies.Append("CartItemCount", "2");
         }
     }
 }

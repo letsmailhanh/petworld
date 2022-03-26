@@ -9,7 +9,7 @@ using DataAccess.Model;
 
 namespace PetWorldWeb.Pages.Orders
 {
-    public class DeleteModel : PageModel
+    public class DeleteModel : BaseViewModel
     {
         private readonly DataAccess.Model.prn221_petworldContext _context;
 
