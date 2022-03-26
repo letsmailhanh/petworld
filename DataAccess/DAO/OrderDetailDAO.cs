@@ -62,5 +62,32 @@ namespace DataAccess.DAO
             }
             return orderDetails;
         }
+
+        //Get list product theo order detail
+        public IEnumerable<Product> GetProductListByOrder(Order o)
+        {
+            List<Product> result = new List<Product>();
+            try
+            {
+                var db = new prn221_petworldContext();
+                List<OrderDetail> orderDetails = db.OrderDetails.Where(od => od.OrderId == o.OrderId).ToList();
+                List<Product> products = db.Products.ToList();
+                foreach (OrderDetail od in orderDetails)
+                {
+                    foreach (Product p in products)
+                    {
+                        if(od.ProductId == p.ProductId)
+                        {
+                            result.Add(p);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return result;
+        }
     }
 }
