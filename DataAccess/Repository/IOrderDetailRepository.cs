@@ -11,5 +11,6 @@ namespace DataAccess.Repository
     {
         IEnumerable<OrderDetail> GetOrderDetailList();
         IEnumerable<OrderDetail> GetOrderDetailListByOrder(Order o);
+        IEnumerable<Product> GetProductListByOrder(Order o);
     }
 }

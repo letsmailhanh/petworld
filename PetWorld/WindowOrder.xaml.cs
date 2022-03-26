@@ -2,6 +2,7 @@
 using DataAccess.Repository;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -150,36 +151,50 @@ namespace PetWorld
             {
                 case 0: 
                     tbStatus.Text = "Uncomfirmed"; 
-                    tbStatus.Background = new SolidColorBrush(Colors.Red); 
+                    tbStatus.Background = new SolidColorBrush(Colors.Red);
+                    btnConfirm.Visibility = Visibility.Visible;
                     break;
                 case 1:
                     tbStatus.Text = "Confirmed";
                     tbStatus.Background = new SolidColorBrush(Colors.Orange);
+                    btnConfirm.Visibility = Visibility.Collapsed;
                     break;
                 case 2: 
                     tbStatus.Text = "Shipping"; 
-                    tbStatus.Background = new SolidColorBrush(Colors.Yellow); 
+                    tbStatus.Background = new SolidColorBrush(Colors.Yellow);
+                    btnConfirm.Visibility = Visibility.Collapsed;
                     break;
                 case 3: 
                     tbStatus.Text = "Shipped"; 
                     tbStatus.Background = new SolidColorBrush(Colors.Green);
-                    
+                    btnConfirm.Visibility = Visibility.Collapsed;
                     break;
             }
 
-            //Load order date
+            //Load list product name
+            List<Product> products = ordDetailRepo.GetProductListByOrder(selected).ToList();
+            lvProductName.ItemsSource = products;
 
+            //Load order date
+            tbOrderDate.Text = selected.OrderDate.ToString("MM/dd/yyyy");
+
+            CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
             //Load shipping fee
-            tbFreight.Text = selected.Freight.ToString("#.##");
+            tbFreight.Text = selected.Freight.ToString("#,###", cul.NumberFormat);
 
             //Load total
-            tbTotal.Text = orderRepo.CalculateOrderRevenue(selected).ToString("#.##");
+            tbTotal.Text = orderRepo.CalculateOrderRevenue(selected).ToString("#,###", cul.NumberFormat);
 
         }
 
         private void btnConfirmClick(object sender, RoutedEventArgs e)
         {
             //Change order status
+            Order selected = (Order)lvOrder.SelectedItem;
+            selected.Status = 2;
+            btnConfirm.Visibility = Visibility.Hidden;
+            tbStatus.Text = "Confirmed";
+            LoadOrderList();
         }
     }
 }
