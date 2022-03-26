@@ -2,6 +2,7 @@
 using DataAccess.Repository;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,33 +37,21 @@ namespace PetWorld
 
         private void LoadOrderList()
         {
-            lvOrder.ItemsSource = orderRepo.GetOrderList();
-            //for (int i = 0; i < lvOrder.Items.Count; i++)
-            //{
-            //    Order o = (Order)lvOrder.Items[i];
-                
-            //    string status;
-            //    if(o.Status == 0)
-            //    {
-            //        status = "Unconfirmed";
-            //    }else if(o.Status == 1)
-            //    {
-            //        status = "Confirmed";
-            //    }
-            //    else if (o.Status == 2)
-            //    {
-            //        status = "Shipping";
-            //    }
-            //    else if (o.Status == 3)
-            //    {
-            //        status = "Shipped";
-            //    }
-            //    else
-            //    {
-            //        status = "Undefined";
-            //    }
-            //    MessageBox.Show(status);
-            //}
+            List<Order> orders = orderRepo.GetOrderList().ToList();
+            lvOrder.ItemsSource = orders;
+
+            List<statusItem> statusList = new List<statusItem>();
+            foreach (Order o in orders)
+            {
+                switch (o.Status)
+                {
+                    case 0: statusList.Add(new statusItem("Unconfirmed", "#f5dada", "Red")); break;
+                    case 1: statusList.Add(new statusItem("Confirmed", "#fce0c2", "Orange")); break;
+                    case 2: statusList.Add(new statusItem("Shipping", "#fcfac0", "Yellow")); break;
+                    case 3: statusList.Add(new statusItem("Shipped", "#daf5db", "Green")); break;
+                }
+            }
+            lvStatus.ItemsSource = statusList;
         }
 
         private void cbOrderByChange(object sender, SelectionChangedEventArgs e)
@@ -150,36 +139,65 @@ namespace PetWorld
             {
                 case 0: 
                     tbStatus.Text = "Uncomfirmed"; 
-                    tbStatus.Background = new SolidColorBrush(Colors.Red); 
+                    tbStatus.Foreground = new SolidColorBrush(Colors.Red);
+                    btnConfirm.Visibility = Visibility.Visible;
                     break;
                 case 1:
                     tbStatus.Text = "Confirmed";
-                    tbStatus.Background = new SolidColorBrush(Colors.Orange);
+                    tbStatus.Foreground = new SolidColorBrush(Colors.Orange);
+                    btnConfirm.Visibility = Visibility.Collapsed;
                     break;
                 case 2: 
                     tbStatus.Text = "Shipping"; 
-                    tbStatus.Background = new SolidColorBrush(Colors.Yellow); 
+                    tbStatus.Foreground = new SolidColorBrush(Colors.Yellow);
+                    btnConfirm.Visibility = Visibility.Collapsed;
                     break;
                 case 3: 
                     tbStatus.Text = "Shipped"; 
-                    tbStatus.Background = new SolidColorBrush(Colors.Green);
-                    
+                    tbStatus.Foreground = new SolidColorBrush(Colors.Green);
+                    btnConfirm.Visibility = Visibility.Collapsed;
                     break;
             }
 
-            //Load order date
+            //Load list product name
+            List<Product> products = ordDetailRepo.GetProductListByOrder(selected).ToList();
+            lvProductName.ItemsSource = products;
 
+            //Load order date
+            tbOrderDate.Text = selected.OrderDate.ToString("MM/dd/yyyy");
+
+            CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
             //Load shipping fee
-            tbFreight.Text = selected.Freight.ToString("#.##");
+            tbFreight.Text = selected.Freight.ToString("#,###", cul.NumberFormat);
 
             //Load total
-            tbTotal.Text = orderRepo.CalculateOrderRevenue(selected).ToString("#.##");
+            tbTotal.Text = orderRepo.CalculateOrderRevenue(selected).ToString("#,###", cul.NumberFormat);
 
         }
 
         private void btnConfirmClick(object sender, RoutedEventArgs e)
         {
             //Change order status
+            Order selected = (Order)lvOrder.SelectedItem;
+            selected.Status = 2;
+            btnConfirm.Visibility = Visibility.Hidden;
+            tbStatus.Text = "Confirmed";
+            LoadOrderList();
+        }
+    }
+
+    public class statusItem
+    {
+        public string name { get; set; }
+        public string background { get; set; }
+
+        public string foreground { get; set; }
+
+        public statusItem(string name, string background, string foreground)
+        {
+            this.name = name;
+            this.background = background;
+            this.foreground = foreground;
         }
     }
 }

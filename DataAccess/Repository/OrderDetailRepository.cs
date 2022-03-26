@@ -13,5 +13,7 @@ namespace DataAccess.Repository
         public IEnumerable<OrderDetail> GetOrderDetailList() => OrderDetailDAO.Instance.GetOrderDetailList();
 
         public IEnumerable<OrderDetail> GetOrderDetailListByOrder(Order o) => OrderDetailDAO.Instance.GetOrderDetailByOrder(o);
+
+        public IEnumerable<Product> GetProductListByOrder(Order o) => OrderDetailDAO.Instance.GetProductListByOrder(o);
     }
 }

@@ -34,7 +34,7 @@ namespace PetWorldWeb.Pages.Users
             CurrentUser = userRepository.GetUserByUsernameAndPassword(Username, Password);
             if (CurrentUser != null){
                 Response.Cookies.Append("Username", CurrentUser.UserName);
-                return RedirectToPage("Index");
+                return RedirectToPage("/Index");
             }
             else
             {
@@ -45,7 +45,7 @@ namespace PetWorldWeb.Pages.Users
         public IActionResult OnGetLogout()
         {
             Response.Cookies.Delete("Username");
-            return RedirectToPage("Index");
+            return RedirectToPage("/Index");
         }
     }
 }

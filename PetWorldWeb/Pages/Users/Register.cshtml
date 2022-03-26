@@ -1,0 +1,181 @@
+﻿@page "/register"
+@model PetWorldWeb.Pages.Users.RegisterModel
+@{
+}
+
+@*<h3>Registration Form</h3>
+	@if (@Model.Msg != null){
+	<div class="alert alert-danger" role="alert">
+	@Model.Msg
+	</div>
+	}
+
+	<div class="row">
+	<div class="col-md-12 col-lg-12">
+	<form method="post">
+	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+	<div class="form-group">
+	<label asp-for="Customer.UserName" class="control-label">Your Username: </label>
+	<input style="width:500px" asp-for="Customer.UserName" class="form-control" placeholder="Enter Username" required />
+	<span asp-validation-for="Customer.UserName" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+	<label asp-for="Customer.Phone" class="control-label">Your Phone Number:</label>
+	<input type="number" asp-for="Customer.Phone" class="form-control" placeholder="0123456789" required />
+	<span asp-validation-for="Customer.Phone" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+	<label asp-for="Customer.Email" class="control-label">Your Email: </label>
+	<input type="email" asp-for="Customer.Email" class="form-control" placeholder="abc@gmail.com" required />
+	<span asp-validation-for="Customer.Email" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+	<label asp-for="Customer.Address" class="control-label">Your Address: </label>
+	<input asp-for="Customer.Address" class="form-control" required/>
+	<span asp-validation-for="Customer.Address" class="text-danger"></span>
+	</div>
+	<div class="form-group" >
+	<label asp-for="Customer.Password" class="control-label"></label>
+	<input type="password" asp-for="Customer.Password" placeholder="Enter Password" class="form-control" required/>
+	<span asp-validation-for="Customer.Password" class="text-danger"></span>
+	</div>
+	<div class="form-group" style="display: none;">
+	<label asp-for="Customer.Role" class="control-label"></label>
+	<input value="customer" asp-for="Customer.Role" class="form-control"/>
+	<span asp-validation-for="Customer.Role" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+	<input type="submit" value="Create" class="btn btn-primary" />
+	</div>
+	</form>
+	</div>
+	</div>*@
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+	<title>Bootstrap Elegant Sign Up Form</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<style>
+		body {
+			color: #999;
+			background: wheat;
+			font-family: 'Roboto', sans-serif;
+
+		}
+
+		.form-control {
+			min-height: 41px;
+			box-shadow: none;
+			border-color: #e6e6e6;
+		}
+
+			.form-control:focus {
+				border-color: #00c1c0;
+			}
+
+		.form-control, .btn {
+			border-radius: 3px;
+		}
+
+		.signup-form {
+			width: 425px;
+			margin: 0 auto;
+			padding: 30px 0;
+			margin-bottom:30px;
+
+		}
+
+			.signup-form h2 {
+				color: #333;
+				font-weight: bold;
+				margin: 0 0 25px;
+			}
+
+			.signup-form form {
+				margin-bottom: 15px;
+				background: #fff;
+				border: 1px solid #f4f4f4;
+				box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+				padding: 40px 50px;
+			}
+
+			.signup-form .form-group {
+				margin-bottom: 20px;
+			}
+
+			.signup-form label {
+				font-weight: normal;
+				font-size: 13px;
+			}
+
+			.signup-form input[type="checkbox"] {
+				margin-top: 2px;
+			}
+
+			.signup-form .btn {
+				font-size: 16px;
+				font-weight: bold;
+				background: #00c1c0;
+				border: none;
+				min-width: 140px;
+				outline: none !important;
+			}
+
+				.signup-form .btn:hover, .signup-form .btn:focus {
+					background: #00b3b3;
+				}
+
+			.signup-form a {
+				color: #00c1c0;
+				text-decoration: none;
+			}
+
+				.signup-form a:hover {
+					text-decoration: underline;
+				}
+	</style>
+</head>
+<body>
+	<div class="signup-form">
+		<form method="post">
+			<h2>Sign Up</h2>
+			@if (@Model.Msg != null)
+			{
+				@*<div class="alert alert-danger" role="alert">*@
+				<p class="alert-warning"></p> @Model.Msg
+				@*</div>*@
+			}
+			<div class="form-group">
+				<input asp-for="Customer.UserName" type="text" class="form-control" placeholder="Username" required="required">
+			</div>
+			<div class="form-group">
+				<input asp-for="Customer.Phone" type="number" class="form-control" placeholder="Phone" required="required">
+			</div>
+			<div class="form-group">
+				<input asp-for="Customer.Email" type="email" class="form-control" placeholder="Email Address" required="required">
+			</div>
+			<div class="form-group">
+				<input asp-for="Customer.Address" class="form-control" placeholder="Address" required="required">
+			</div>
+			<div class="form-group">
+				<input asp-for="Customer.Password" type="password" class="form-control" placeholder="Password" required="required">
+			</div>
+			<div class="form-group">
+				<input type="password" class="form-control" name="ConfirmPassword" placeholder="Confirm Password" required="required">
+			</div>
+			<div class="form-group" style="display: none;">
+				<input value="customer" asp-for="Customer.Role" class="form-control" />
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+			</div>
+		</form>
+		<div class="text-center">Already have an account?<a asp-page="/Users/Login" >
+                            Login here
+                        </a></div>
+	</div>
+</body>

@@ -151,7 +151,10 @@
 						<h5>@((int)product.Price) ₫</h5>
 					</div>
 				</a>
-				<a asp-page="/Orders/Cart" asp-page-handler="AddToCart" asp-route-id="@product.ProductId">Buy Now</a>
+				<br/>
+				<div style="text-align:center">
+				<a  class="btn btn-info" asp-page="/Cart" asp-page-handler="AddToCart" asp-route-id="@product.ProductId">Add To Cart</a>
+				</div>
 			</div>
 		}
 	}
