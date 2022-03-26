@@ -95,7 +95,7 @@
                            FontStyle="Italic"></TextBlock>
                 <!--Order list-->
                 <ScrollViewer>
-                    <ListView Name="lvOrder">
+                    <ListView Name="lvOrder" SelectionChanged="lvOrderSelectionChange">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=OrderId}"></GridViewColumn>
@@ -109,6 +109,43 @@
                     </ListView>
                 </ScrollViewer>
             </Grid>
+
+            <!--Order detail-->
+            <StackPanel Grid.Column="1" Margin="20">
+                <TextBlock TextAlignment="Center">Order detail</TextBlock>
+                <WrapPanel>
+                    <Label>Order date: </Label>
+                    <TextBlock Name="tbOrderDate"></TextBlock>
+                </WrapPanel>
+                <WrapPanel HorizontalAlignment="Right">
+                    <Button Name="btnConfirm" Click="btnConfirmClick">Confirm</Button>
+                    <Border>
+                        <TextBlock Name="tbStatus">Status</TextBlock>
+                    </Border>
+                </WrapPanel>
+                <ListView Name="lvOrderDetail">
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </Style>
+                    </ListView.Resources>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Product name" DisplayMemberBinding="{Binding Path=ProductId}"></GridViewColumn>
+                            <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Path=Quantity}"></GridViewColumn>
+                            <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Path=Price}"></GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <WrapPanel HorizontalAlignment="Right">
+                    <Label Width="50">Freight:</Label>
+                    <TextBlock Name="tbFreight" Width="100"></TextBlock>
+                </WrapPanel>
+                <WrapPanel HorizontalAlignment="Right">
+                    <Label Width="50">Total:</Label>
+                    <TextBlock Name="tbTotal" Width="100"></TextBlock>
+                </WrapPanel>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

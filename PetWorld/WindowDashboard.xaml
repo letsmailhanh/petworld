@@ -28,7 +28,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Border CornerRadius="25" Background="#f5ccd0" Margin="10" Padding="15">
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <Calendar x:Name="cldSelectDate" SelectedDatesChanged="cldSelectDateChange"></Calendar>
                         <StackPanel>
                             <!--<Label>New Customer</Label>
@@ -42,9 +42,24 @@
                 </Border>
 
                 <StackPanel Grid.Column="1">
-                    <Border CornerRadius="10" Background="#dcd5ee" Margin="10" Height="50"></Border>
-                    <Border CornerRadius="10" Background="#f4e9dd" Margin="10" Height="50"></Border>
-                    <Border CornerRadius="10" Background="#e8ecf2" Margin="10" Height="50"></Border>
+                    <Border CornerRadius="10" Background="#dcd5ee" Margin="10" Height="50">
+                        <StackPanel>
+                            <Label>Best seller</Label>
+                            <TextBlock></TextBlock>
+                        </StackPanel>
+                    </Border>
+                    <Border CornerRadius="10" Background="#f4e9dd" Margin="10" Height="50">
+                        <StackPanel>
+                            <Label>This month</Label>
+                            <TextBlock></TextBlock>
+                        </StackPanel>
+                    </Border>
+                    <Border CornerRadius="10" Background="#e8ecf2" Margin="10" Height="50">
+                        <StackPanel>
+                            <Label>This year</Label>
+                            <TextBlock></TextBlock>
+                        </StackPanel>
+                    </Border>
                 </StackPanel>
             </Grid>
 

@@ -34,6 +34,7 @@ namespace PetWorld
             services.AddSingleton(typeof(ICategoryRepository), typeof(CategoryRepository));
             services.AddSingleton(typeof(IPetDetailRepository), typeof(PetDetailRepository));
             services.AddSingleton(typeof(IOrderRepository), typeof(OrderRepository));
+            services.AddSingleton(typeof(IOrderDetailRepository), typeof(OrderDetailRepository));
             services.AddSingleton<MainWindow>();
         }
 

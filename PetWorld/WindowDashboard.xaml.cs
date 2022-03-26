@@ -31,6 +31,7 @@ namespace PetWorld
         ICategoryRepository categoryRepo;
         IPetDetailRepository petRepo;
         IOrderRepository orderRepo;
+        IOrderDetailRepository ordDetailRepo;
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -44,7 +45,7 @@ namespace PetWorld
         public string[] Labels { get; set; }
         public Func<int, string> Formatter { get; set; }
 
-        public WindowDashboard(User u, IUserRepository userRepository, IProductRepository productRepository, ICategoryRepository categoryRepository, IPetDetailRepository petRepository, IOrderRepository orderRepository)
+        public WindowDashboard(User u, IUserRepository userRepository, IProductRepository productRepository, ICategoryRepository categoryRepository, IPetDetailRepository petRepository, IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository)
         {
             InitializeComponent();
             user = u;
@@ -53,6 +54,7 @@ namespace PetWorld
             categoryRepo = categoryRepository;
             petRepo = petRepository;
             orderRepo = orderRepository;
+            ordDetailRepo = orderDetailRepository;
 
             LoadChart();
             LoadSelectedDateReport(DateTime.Today);
@@ -105,7 +107,7 @@ namespace PetWorld
 
         private void btnOrderClick(object sender, RoutedEventArgs e)
         {
-            var orderWindow = new WindowOrder(orderRepo);
+            var orderWindow = new WindowOrder(orderRepo, ordDetailRepo);
             orderWindow.Show();
             this.Close();
         }

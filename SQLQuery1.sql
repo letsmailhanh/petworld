@@ -27,7 +27,7 @@ INSERT INTO [Category] VALUES (N'Thuốc', 0)
 INSERT INTO [Category] VALUES (N'Khác', 0)
 
 --Insert product
---select * from [Product] where [IsPet] = 1
+--select * from [Product] where [IsPet] = 0
 --Insert pet
 INSERT INTO [Product] VALUES (N'Husky', 1, 1, '12000000', 1, N'/Image/husky1.jpg')
 INSERT INTO [Product] VALUES (N'Husky', 1, 1, '9999000', 1,  N'/Image/husky2.jpg')
@@ -109,19 +109,20 @@ INSERT INTO [PetDetail] VALUES(23, N'Tếu', 0.14, 0, 1, 1, 0, 0)
 
 --Insert order
 --select * from [Order]
- 
+--drop table [Order]
+
 --Status: 0: unconfirmed, 1: confirm, 2: shipping, 3: shipped
 INSERT INTO [Order] VALUES (4, '2022/02/21', '2022/03/01', '30000', 3)
 INSERT INTO [Order] VALUES (5, '2022/02/25', '2022/03/05', '25000',3)
 INSERT INTO [Order] VALUES (6, '2022/01/31', '2022/02/10', '0', 3)
 INSERT INTO [Order] VALUES (4, '2022/03/06', '2022/03/11', '25000', 3)
-INSERT INTO [Order] VALUES (4, '2022/03/07', '2022/03/09', '320000', 3)
-INSERT INTO [Order] VALUES (5, '2022/03/03', '2022/03/10', '15000', 3)
+INSERT INTO [Order] VALUES (4, '2022/03/07', '2022/03/25', '320000', 3)
+INSERT INTO [Order] VALUES (5, '2022/03/03', '2022/03/22', '15000', 3)
 
 INSERT INTO [Order] VALUES (5, '2022/03/21', '2022/03/24', '15000', 3)
-INSERT INTO [Order] VALUES (6, '2022/03/21', '2022/03/27', '10000', 3)
-INSERT INTO [Order] VALUES (6, '2022/03/21', '2022/03/26', '25000', 3)
-INSERT INTO [Order] VALUES (5, '2022/03/22', '2022/03/26', '15000', 3)
+INSERT INTO [Order] VALUES (6, '2022/03/21', '2022/03/25', '10000', 3)
+INSERT INTO [Order] VALUES (6, '2022/03/21', '2022/03/23', '25000', 3)
+INSERT INTO [Order] VALUES (5, '2022/03/22', '2022/03/23', '15000', 3)
 INSERT INTO [Order] VALUES (6, '2022/03/22', '2022/03/27', '10000', 3)
 INSERT INTO [Order] VALUES (6, '2022/03/23', '2022/03/28', '25000', 3)
 INSERT INTO [Order] VALUES (4, '2022/03/24', '2022/04/01', '30000', 3)
@@ -151,3 +152,17 @@ INSERT INTO [OrderDetail] VALUES(5, 26, '450000', 8)
 INSERT INTO [OrderDetail] VALUES(6, 5, '53000000', 1)
 INSERT INTO [OrderDetail] VALUES(6, 4, '68000000', 1)
 INSERT INTO [OrderDetail] VALUES(6, 32, '1650000', 7)
+
+INSERT INTO [OrderDetail] VALUES(7, 4, '68000000', 1)
+INSERT INTO [OrderDetail] VALUES(8, 32, '1650000', 3)
+INSERT INTO [OrderDetail] VALUES(9, 26, '450000', 4)
+INSERT INTO [OrderDetail] VALUES(10, 28, '60000', 4)
+INSERT INTO [OrderDetail] VALUES(11, 26, '45000', 2)
+INSERT INTO [OrderDetail] VALUES(12, 30, '45000', 1)
+INSERT INTO [OrderDetail] VALUES(13, 26, '45000', 2)
+INSERT INTO [OrderDetail] VALUES(13, 27, '35000', 2)
+INSERT INTO [OrderDetail] VALUES(14, 25, '119000', 2)
+INSERT INTO [OrderDetail] VALUES(15, 26, '45000', 2)
+INSERT INTO [OrderDetail] VALUES(16, 35, '260000', 2)
+INSERT INTO [OrderDetail] VALUES(16, 26, '45000', 2)
+INSERT INTO [OrderDetail] VALUES(16, 33, '172000', 2)
