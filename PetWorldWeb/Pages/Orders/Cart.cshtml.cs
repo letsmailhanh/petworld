@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PetWorldWeb.Pages
+namespace PetWorldWeb.Pages.Orders
 {
     public class CartModel : BaseViewModel
     {

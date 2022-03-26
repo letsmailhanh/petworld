@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 
-namespace PetWorldWeb.Pages
+namespace PetWorldWeb.Pages.Users
 {
     public class LoginModel : BaseViewModel
     {

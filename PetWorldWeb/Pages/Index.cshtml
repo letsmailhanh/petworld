@@ -20,7 +20,7 @@
 <div style="background-color:blanchedalmond ;width: 100vw; height: 30vh; border-end-start-radius: 30px; border-end-end-radius: 30px;" class="container">
     <div class="row align-content-center h-100">
         <div class="col d-flex justify-content-center">
-            <a asp-page="/Index" class="btn h-100">
+            <a asp-area="" asp-page="/Products/Index" asp-route-type="pet" asp-route-categoryid="1" class="btn h-100">
                 <div class="row h-75">
                     <img src="~/Image/DogButton.png" style="height: 150px; width: 150px;" class="raise"/>
                 </div>
@@ -30,7 +30,7 @@
             </a>
         </div>
         <div class="col d-flex justify-content-center">
-            <a asp-page="/Index" class="btn h-100">
+            <a asp-area="" asp-page="/Products/Index" asp-route-type="pet" asp-route-categoryid="2" class="btn h-100">
                 <div class="row h-75">
                     <img src="~/Image/CatButton.png" style="height: 150px; width: 150px;" class="raise"/>
                 </div>
@@ -40,7 +40,7 @@
             </a>
         </div>
         <div class="col d-flex justify-content-center">
-            <a asp-page="/Index" class="btn h-100">
+            <a asp-area="" asp-page="/Products/Index" asp-route-type="pet" asp-route-categoryid="3" class="btn h-100">
                 <div class="row h-75">
                     <img src="~/Image/HamsterButton.png" style="height: 150px; width: 150px;" class="raise"/>
                 </div>
@@ -55,7 +55,7 @@
     <div class="row">
         <div class="col-4">
             <div class="row" style="height: 49%; margin: 10px;">
-                <a asp-page="" class="btn border-1 h-100" style="background-color:cornsilk; width: 100%; border-radius: 30px;">Pet Accessory</a>
+                <a asp-area="" asp-page="/Products/Index" asp-route-type="acc" asp-route-categoryid="0" class="btn border-1 h-100" style="background-color:cornsilk; width: 100%; border-radius: 30px;">Pet Accessory</a>
             </div>
             <div class="row" style="height: 49%; margin: 10px;">
                 <a asp-page="" class="btn border-1 h-100" style="background-color: cornsilk; width: 100%; border-radius: 30px;">Pet News</a>
