@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 
-namespace PetWorldWeb.Pages
+namespace PetWorldWeb.Pages.Users
 {
     public class LoginModel : BaseViewModel
     {
@@ -34,7 +34,7 @@ namespace PetWorldWeb.Pages
             CurrentUser = userRepository.GetUserByUsernameAndPassword(Username, Password);
             if (CurrentUser != null){
                 Response.Cookies.Append("Username", CurrentUser.UserName);
-                return RedirectToPage("Index");
+                return RedirectToPage("/Index");
             }
             else
             {
@@ -45,7 +45,7 @@ namespace PetWorldWeb.Pages
         public IActionResult OnGetLogout()
         {
             Response.Cookies.Delete("Username");
-            return RedirectToPage("Index");
+            return RedirectToPage("/Index");
         }
     }
 }

@@ -112,7 +112,7 @@ namespace DataAccess.DAO
             {
                 var db = new prn221_petworldContext();
                 var query = from p in db.Products
-                            where p.ProductName.Contains(key)
+                            where p.ProductName.ToLower().Contains(key.ToLower())
                             select p;
                 products = query.ToList();
             }

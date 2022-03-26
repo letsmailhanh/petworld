@@ -26,6 +26,7 @@ namespace PetWorldWeb.Pages.Products
         public int CategoryId { get; set; } = 0;
         [BindProperty(SupportsGet = true)]
         public string Type { get; set; } = "all";
+        public string SearchTerm { get; set; } = "";
         public int Count { get; set; }
         public int PageSize { get; set; } = 6;
 
@@ -85,6 +86,11 @@ namespace PetWorldWeb.Pages.Products
         public List<Product> GetPaginatedResult(IList<Product> products, int currentPage = 1, int pageSize = 10)
         {
             return products.OrderBy(d => d.ProductId).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+        }
+
+        public void OnGetSearch([FromServices] IProductRepository prodRepo)
+        {
+            Product = prodRepo.GetProductsByName(SearchTerm).ToList();
         }
     }
 }
