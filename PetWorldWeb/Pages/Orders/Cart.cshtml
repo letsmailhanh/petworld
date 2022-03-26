@@ -58,8 +58,7 @@ else
         alert("Cart empty");
     </script>
 }
-<a href="javascript:;" onclick = "history.back()">Continue Shopping</a>
-<a asp-page="/Products/Index">Continue Shopping</a>*@
+<a href="javascript:;" onclick = "history.back()">Continue Shopping</a>*@
 <style>
     body {
   background: #eecda3;
@@ -113,11 +112,11 @@ else
                     <td class="align-middle"><strong>@((int)item.Product.Price)</strong></td>
                     @if (!item.Product.IsPet)
                     {
-                    <td class="align-middle"><strong>
+                    <td class="align-middle">
                         <form method="post" asp-page="cart" asp-page-handler="update" asp-route-id="@item.Product.ProductId">
-                            <input type="number" name="quantity" value="@item.Quantity" min="1" style="width: 50px;" />
+                            <input type="number" name="quantity" value="@item.Quantity" min="1" max="@item.Product.UnitsInStock" style="width: 50px;" oninput="checkInputInRange(this);" onblur="submit(this);" />
                         </form>
-                    </strong></td>
+                    </td>
                     }
                     else
                     {

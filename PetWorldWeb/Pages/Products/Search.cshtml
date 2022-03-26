@@ -2,7 +2,6 @@
 @model PetWorldWeb.Pages.Products.SearchModel
 @{
 }
-
 <h2>@ViewData["CategoryName"]</h2>
 <style>
     .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
@@ -150,7 +149,10 @@
                         <h5>@((int)product.Price) ₫</h5>
                     </div>
                 </a>
-                <a asp-page="/Orders/Cart" asp-page-handler="AddToCart" asp-route-id="@product.ProductId">Buy Now</a>
+                <br />
+                <div style="text-align:center">
+                    <a class="btn btn-info" asp-page="/Orders/Cart" asp-page-handler="AddToCart" asp-route-id="@product.ProductId">Add To Cart</a>
+                </div>
             </div>
         }
     }
