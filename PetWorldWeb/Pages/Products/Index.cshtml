@@ -1,4 +1,4 @@
-﻿@page "/product/{type}/{categoryid}/{currentpage:int?}"
+﻿@page "/product/{type=all}/{categoryid=0}/{currentpage:int?}"
 @model PetWorldWeb.Pages.Products.IndexModel
 @{
 	ViewData["Title"] = "Index";
@@ -151,7 +151,7 @@
 						<h5>@((int)product.Price) ₫</h5>
 					</div>
 				</a>
-				<a asp-page="/Cart" asp-page-handler="AddToCart" asp-route-id="@product.ProductId">Buy Now</a>
+				<a asp-page="/Orders/Cart" asp-page-handler="AddToCart" asp-route-id="@product.ProductId">Buy Now</a>
 			</div>
 		}
 	}

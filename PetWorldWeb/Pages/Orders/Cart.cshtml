@@ -33,7 +33,7 @@
                 {
                     <td>
                         <form method="post" asp-page="cart" asp-page-handler="update" asp-route-id="@item.Product.ProductId">
-                            <input type="number" name="quantity" value="@item.Quantity" min="1" style="width: 50px;" />
+                            <input type="number" name="quantity" value="@item.Quantity" min="1" max="@item.Product.UnitsInStock" style="width: 50px;" oninput="checkInputInRange(this);" onblur="submit(this);"/>
                         </form>
                     </td>
                 }
@@ -59,10 +59,10 @@ else
         alert("Cart empty");
     </script>
 }
-<a asp-page="/Products/Index">Continue Shopping</a>
-
+<a href="javascript:;" onclick = "history.back()">Continue Shopping</a>
 <script>
-    $('form input').on('input', function () {
-        $(this).closest('form').submit();
-    });
+    function checkInputInRange(ele) {
+        if (parseInt(ele.value) < parseInt(ele.min)) ele.value = ele.min;
+        else if (parseInt(ele.value) > parseInt(ele.max)) ele.value = ele.max;
+    }
 </script>

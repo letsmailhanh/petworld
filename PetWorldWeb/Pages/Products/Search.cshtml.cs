@@ -30,7 +30,7 @@ namespace PetWorldWeb.Pages.Products
             return products.OrderBy(d => d.ProductId).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
         }
 
-        public void OnPostSearch([FromServices] IProductRepository prodRepo, string searchterm = "")
+        public void OnGetSearch([FromServices] IProductRepository prodRepo, string searchterm = "")
         {
             ViewData["CategoryName"] = "Product";
             ViewData["SearchTerm"] = searchterm;

@@ -66,7 +66,16 @@ namespace PetWorldWeb.Pages.Orders
             if (cartPos > -1)
             {
                 string[] item = Cart[cartPos].Split("=");
-                Cart[cartPos] = id.ToString() + "=" + (int.Parse(item[1]) + 1).ToString();
+                CartItem cartItem = CartItems.Find(c => c.Product.ProductId == id);
+                if (cartItem != null)
+                {
+                    if (int.Parse(item[1]) + 1 <= cartItem.Product.UnitsInStock)
+                        Cart[cartPos] = id.ToString() + "=" + (int.Parse(item[1]) + 1).ToString();
+                    else
+                    {
+                        Cart[cartPos] = id.ToString() + "=" + (cartItem.Product.UnitsInStock).ToString();
+                    }
+                }
             }
             else
             {

@@ -150,7 +150,7 @@
                         <h5>@((int)product.Price) ₫</h5>
                     </div>
                 </a>
-                <a asp-page="/Cart" asp-page-handler="AddToCart" asp-route-id="@product.ProductId">Buy Now</a>
+                <a asp-page="/Orders/Cart" asp-page-handler="AddToCart" asp-route-id="@product.ProductId">Buy Now</a>
             </div>
         }
     }
@@ -161,7 +161,7 @@
         @for (var i = 1; i <= Model.TotalPages; i++)
         {
             <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
-                <a asp-page="./Index" asp-route-currentpage="@i" class="page-link">@i</a>
+                <a asp-page="./Search" asp-route-handler="Search" asp-route-searchterm="@ViewData["SearchTerm"]" asp-route-currentpage="@i" class="page-link">@i</a>
             </li>
         }
     </ul>

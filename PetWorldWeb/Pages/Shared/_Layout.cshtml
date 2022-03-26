@@ -37,9 +37,10 @@
                     </a>
                 </div>
                 <div class="col-8 d-flex justify-content-center">
-                    <form class="row border border-4 w-75 rounded-pill" style="background-color: azure" method="post" asp-page="/Products/Search" asp-page-handler="Search">
-                        <input class="col-11 form-control shadow-none w-75 rounded-pill border-0" name="searchterm" type="text" placeholder="Find Pets ..." value="@ViewData["SearchTerm"]" style="background-color: rgba(0,0,0,0);" onkeydown="if (event.key == 'Enter') submitSearch(this);" />
-                        <a class="col-1 align-self-center btn w-25 rounded-pill" onclick="submitSearch(this)">
+                    <form class="row border border-4 w-75 rounded-pill" style="background-color: azure" method="get" asp-page="/Products/Search">
+                        <input type="hidden" name="handler" value="search" />
+                        <input class="col-11 form-control shadow-none w-75 rounded-pill border-0" name="searchterm" type="text" placeholder="Find Pets ..." value="@ViewData["SearchTerm"]" style="background-color: rgba(0,0,0,0);" onkeydown="if (event.key == 'Enter') submit(this);" />
+                        <a class="col-1 align-self-center btn w-25 rounded-pill" onclick="submit(this)">
                             <i class="fa fa-search"></i>
                         </a>
                     </form>
@@ -190,7 +191,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script>
-        function submitSearch(ele) {
+        function submit(ele) {
             $(ele).closest('form').submit();
         };
     </script>
