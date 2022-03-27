@@ -25,6 +25,7 @@ namespace PetWorldWeb.Pages.Orders
         [BindProperty(SupportsGet =true)]
         public User _User { get; set; } = new User();
         public double Total { get; set; }
+        public double Freight { get; set; } = 30000;
         [BindProperty]
         public Order Order { get; set; }
 
@@ -106,7 +107,7 @@ namespace PetWorldWeb.Pages.Orders
                 _User = userRepo.GetUserByUsername(username); 
             }
             Order.UserId = _User.UserId;
-            Order.Freight = 100000;
+            Order.Freight = (decimal)Freight;
             Order.Status = 0;
             Order = ordRepo.AddOrder(Order);
             foreach(CartItem item in CartItems)
@@ -170,6 +171,7 @@ namespace PetWorldWeb.Pages.Orders
             ViewData["CartItems"] = CartItems;
             ViewData["Total"] = (int)Total;
             ViewData["CartItemCount"] = CartItems.Sum(i => i.Quantity).ToString();
+            ViewData["Freight"] = Freight;
         }
         private string RandStr()
         {

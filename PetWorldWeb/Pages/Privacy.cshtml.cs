@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PetWorldWeb.Pages
 {
-    public class PrivacyModel : PageModel
+    public class PrivacyModel : BaseViewModel
     {
         private readonly ILogger<PrivacyModel> _logger;
 
