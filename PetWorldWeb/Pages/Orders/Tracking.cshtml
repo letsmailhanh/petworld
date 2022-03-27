@@ -1,5 +1,6 @@
 ﻿@page
 @model PetWorldWeb.Pages.Orders.TrackingModel
+@using PetWorldWeb.Models
 @{
 }
 
@@ -46,7 +47,7 @@
                 @Html.DisplayNameFor(model => model.Order.Status)
             </dt>
             <dd class="col-8">
-                @Html.DisplayFor(model => model.Order.Status)
+                @Constants.OrderStatus[Model.Order.Status]
             </dd>
         </dl>
     </div>

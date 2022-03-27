@@ -50,7 +50,7 @@ namespace PetWorldWeb.Pages.Products
             SearchHandler = "Search";
         }
 
-        public void OnGetOrderByName([FromServices] IProductRepository prodRepo)
+        public void OnGetOrderByNameAscending([FromServices] IProductRepository prodRepo)
         {
             ViewData["CategoryName"] = "Product";
             ViewData["SearchTerm"] = SearchTerm;
@@ -64,10 +64,10 @@ namespace PetWorldWeb.Pages.Products
             }
             Count = AllProducts.Count;
             Product = GetPaginatedResult(AllProducts, CurrentPage, 6); 
-            SearchHandler = "OrderByName";
+            SearchHandler = "OrderByNameAscending";
         }
 
-        public void OnGetOrderByPrice([FromServices] IProductRepository prodRepo)
+        public void OnGetOrderByPriceAscending([FromServices] IProductRepository prodRepo)
         {
             ViewData["CategoryName"] = "Product";
             ViewData["SearchTerm"] = SearchTerm;
@@ -81,7 +81,40 @@ namespace PetWorldWeb.Pages.Products
             }
             Count = AllProducts.Count;
             Product = GetPaginatedResult(AllProducts, CurrentPage, 6);
-            SearchHandler = "OrderByPrice";
+            SearchHandler = "OrderByPriceAscending";
+        }
+        public void OnGetOrderByName([FromServices] IProductRepository prodRepo)
+        {
+            ViewData["CategoryName"] = "Product";
+            ViewData["SearchTerm"] = SearchTerm;
+            if (SearchTerm == "" || SearchTerm == null)
+            {
+                AllProducts = prodRepo.GetProducts().OrderByDescending(p => p.ProductName).ToList();
+            }
+            else
+            {
+                AllProducts = prodRepo.GetProductsByName(SearchTerm).OrderByDescending(p => p.ProductName).ToList();
+            }
+            Count = AllProducts.Count;
+            Product = GetPaginatedResult(AllProducts, CurrentPage, 6);
+            SearchHandler = "OrderByNameDescending";
+        }
+
+        public void OnGetOrderByPrice([FromServices] IProductRepository prodRepo)
+        {
+            ViewData["CategoryName"] = "Product";
+            ViewData["SearchTerm"] = SearchTerm;
+            if (SearchTerm == "" || SearchTerm == null)
+            {
+                AllProducts = prodRepo.GetProducts().OrderByDescending(p => p.Price).ToList();
+            }
+            else
+            {
+                AllProducts = prodRepo.GetProductsByName(SearchTerm).OrderByDescending(p => p.Price).ToList();
+            }
+            Count = AllProducts.Count;
+            Product = GetPaginatedResult(AllProducts, CurrentPage, 6);
+            SearchHandler = "OrderByPriceDescending";
         }
     }
 }

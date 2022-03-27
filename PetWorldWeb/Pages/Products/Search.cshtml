@@ -15,14 +15,24 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <form>
-                            <input type="hidden" name="handler" value="OrderByName" />
+                            <input type="hidden" name="handler" value="OrderByNameAscending" />
                             <input type="hidden" name="searchterm" value="@Model.SearchTerm" />
-                            <a class="dropdown-item" onclick="submit(this)">Name</a>
+                            <a class="dropdown-item" onclick="submit(this)">Ascending Name</a>
                         </form>
                         <form>
-                            <input type="hidden" name="handler" value="OrderByPrice" />
+                            <input type="hidden" name="handler" value="OrderByNameDescending" />
                             <input type="hidden" name="searchterm" value="@Model.SearchTerm" />
-                            <a class="dropdown-item" onclick="submit(this)">Price</a>
+                            <a class="dropdown-item" onclick="submit(this)">Descending Name</a>
+                        </form>
+                        <form>
+                            <input type="hidden" name="handler" value="OrderByPriceAscending" />
+                            <input type="hidden" name="searchterm" value="@Model.SearchTerm" />
+                            <a class="dropdown-item" onclick="submit(this)">Ascending Price</a>
+                        </form>
+                        <form>
+                            <input type="hidden" name="handler" value="OrderByPriceDescending" />
+                            <input type="hidden" name="searchterm" value="@Model.SearchTerm" />
+                            <a class="dropdown-item" onclick="submit(this)">Descending Price</a>
                         </form>
                     </div>
                 </div>
