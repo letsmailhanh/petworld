@@ -27,6 +27,8 @@ namespace DataAccess.Repository
 
         public IEnumerable<Order> GetOrderListInPeriod(DateTime from, DateTime to) => OrderDAO.Instance.GetOrderListInPeriod(from, to);
 
+        public IEnumerable<Order> GetOrderListOfUser(User user) => OrderDAO.Instance.GetOrderListOfUser(user);
+
         public int GetTotalOrder(DateTime date) => OrderDAO.Instance.GetTotalOrderADate(date);
 
         public decimal GetTotalRevenue(DateTime date) => OrderDAO.Instance.GetTotalRevenueOrderADate(date);

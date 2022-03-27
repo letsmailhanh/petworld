@@ -115,6 +115,12 @@
                                 </li>
                             </ul>
                         </li>
+                        @if (Model.IsLoggedIn())
+                        {
+                            <li class="nav-item border-left border-1 d-flex justify-content-center" style="width: 120px;">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Orders/List">My Orders</a>
+                            </li>
+                        }
                         <li class="nav-item border-left border-1 d-flex justify-content-center" style="width: 120px;">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">About Us</a>
                         </li>
@@ -128,7 +134,7 @@
     </header>
     <div class="container-fluid" style="margin-top: 150px">
         <div class="row justify-content-center px-5">
-            <main role="main" class="">
+            <main role="main" class="w-100">
                 @RenderBody()
             </main>
         </div>

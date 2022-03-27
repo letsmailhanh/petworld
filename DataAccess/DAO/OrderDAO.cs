@@ -91,6 +91,21 @@ namespace DataAccess.DAO
             return orders;
         }
 
+        public IEnumerable<Order> GetOrderListOfUser(User user)
+        {
+            List<Order> orders = null;
+            try
+            {
+                var db = new prn221_petworldContext();
+                orders = db.Orders.Where(o => o.UserId == user.UserId).OrderBy(o => o.OrderDate).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return orders;
+        }
+
         public int GetTotalOrderADate(DateTime date)
         {
             int total = 0;
@@ -199,6 +214,7 @@ namespace DataAccess.DAO
             var db = new prn221_petworldContext();
             return db.Orders.Include(o => o.User).Where(o => o.OrderId == id).FirstOrDefault();
         }
+
     }
 }
 

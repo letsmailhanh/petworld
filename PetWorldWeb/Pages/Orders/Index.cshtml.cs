@@ -18,12 +18,10 @@ namespace PetWorldWeb.Pages.Orders
             _context = context;
         }
 
-        public IList<Order> Order { get;set; }
+        public IList<Order> Order { get; set; } = new List<Order>();
 
         public async Task OnGetAsync()
         {
-            Order = await _context.Orders
-                .Include(o => o.User).ToListAsync();
         }
     }
 }

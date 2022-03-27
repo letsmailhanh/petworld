@@ -1,6 +1,6 @@
 ﻿@page
 @model PetWorldWeb.Pages.Orders.DetailsModel
-
+@using PetWorldWeb.Models;
 @{
     ViewData["Title"] = "Details";
 }
@@ -41,7 +41,7 @@
                     @Html.DisplayNameFor(model => model.Order.Status)
                 </dt>
                 <dd class="col-8">
-                    @Html.DisplayFor(model => model.Order.Status)
+                    @Constants.OrderStatus[Model.Order.Status]
                 </dd>
             </dl>
         </div>

@@ -80,13 +80,13 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Products/Index" asp-route-type="pet" asp-route-categoryid="0" data-bs-toggle="dropdown" aria-expanded="false" id="dog-dropdown">Pet</a>
                             <ul class="dropdown-menu" aria-labelledby="dog-dropdown">
                                 <li>
-                                    <a class="dropdown-item" asp-area="" asp-page="/Products/Index" asp-route-type="pet" asp-route-categoryid="1" >Dog</a>
+                                    <a class="dropdown-item" asp-area="" asp-page="/Products/Index" asp-route-type="pet" asp-route-categoryid="1">Dog</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" asp-area="" asp-page="/Products/Index" asp-route-type="pet" asp-route-categoryid="2" >Cat</a>
+                                    <a class="dropdown-item" asp-area="" asp-page="/Products/Index" asp-route-type="pet" asp-route-categoryid="2">Cat</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" asp-area="" asp-page="/Products/Index" asp-route-type="pet" asp-route-categoryid="3" >Other</a>
+                                    <a class="dropdown-item" asp-area="" asp-page="/Products/Index" asp-route-type="pet" asp-route-categoryid="3">Other</a>
                                 </li>
                             </ul>
                         </li>
@@ -127,6 +127,12 @@
                                 </li>
                             </ul>
                         </li>
+                        @if (Model.IsLoggedIn())
+                        {
+                            <li class="nav-item border-left border-1 d-flex justify-content-center" style="width: 120px;">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Orders/List">My Orders</a>
+                            </li>
+                        }
                         <li class="nav-item border-left border-1 d-flex justify-content-center" style="width: 120px;">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">About Us</a>
                         </li>
