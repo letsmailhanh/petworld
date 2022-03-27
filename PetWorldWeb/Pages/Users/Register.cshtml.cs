@@ -44,6 +44,7 @@ namespace PetWorldWeb.Pages.Users
             _context.Users.Add(Customer);
             _context.SaveChanges();
             Response.Cookies.Append("Username", Customer.UserName);
+            Response.Cookies.Append("UserId", Customer.UserId.ToString());
             return RedirectToPage("/Index");
         }
     }

@@ -36,7 +36,7 @@
                         <img src="/Image/Logo.png" class="h-100" />
                     </a>
                 </div>
-                <div class="col-8 d-flex justify-content-center">
+                <div class="col-7 d-flex justify-content-center">
                     <form class="row border border-4 w-75 rounded-pill" style="background-color: azure" method="get" asp-page="/Products/Search">
                         <input type="hidden" name="handler" value="search" />
                         <input class="col-11 form-control shadow-none w-75 rounded-pill border-0" name="searchterm" type="text" placeholder="Find Pets ..." value="@ViewData["SearchTerm"]" style="background-color: rgba(0,0,0,0);" onkeydown="if (event.key == 'Enter') submit(this);" />
@@ -45,6 +45,14 @@
                         </a>
                     </form>
                 </div>
+                @if (Model.IsLoggedIn())
+                {
+                    <div class="col-1 d-flex justify-content-start">
+                        <a asp-page="Users/Edit" asp-route-id=@(Int32.Parse(Model.CurUserId)) class="btn h-100">
+                            <i class="fa-solid fa fa-user fa-2x"></i>
+                        </a>
+                    </div>
+                }
                 <div class="col-1 d-flex justify-content-start">
                     <a asp-page="/Orders/Cart" asp-area="" class="btn h-100">
                         <i class="fa-solid fa-cart-shopping fa-2x"></i>
