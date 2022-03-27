@@ -6,34 +6,45 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.Model;
+using Microsoft.AspNetCore.Mvc.Filters;
+using DataAccess.Repository;
 
 namespace PetWorldWeb.Pages.Orders
 {
     public class DetailsModel : BaseViewModel
     {
         private readonly DataAccess.Model.prn221_petworldContext _context;
+        private readonly IOrderDetailRepository ordDetRepo;
 
-        public DetailsModel(DataAccess.Model.prn221_petworldContext context)
-        {
-            _context = context;
-        }
-
+        public List<OrderDetail> CartItems { get; set; } = new List<OrderDetail>();
+        public double Total { get; set; } = 0;
+        [BindProperty(SupportsGet = true)]
+        public int OrderId { get; set; } = 0;
         public Order Order { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public DetailsModel(DataAccess.Model.prn221_petworldContext context, [FromServices] IOrderDetailRepository ordDetRepo)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            _context = context;
+            this.ordDetRepo = ordDetRepo;
+        }
 
-            Order = await _context.Orders
-                .Include(o => o.User).FirstOrDefaultAsync(m => m.OrderId == id);
-
-            if (Order == null)
+        public override void OnPageHandlerExecuting(PageHandlerExecutingContext context)
+        {
+            Order =  _context.Orders.Include(o => o.User).FirstOrDefault(m => m.OrderId == OrderId);
+            if (Order != null)
             {
-                return NotFound();
+                CartItems = ordDetRepo.GetOrderDetailListByOrder(Order).ToList();
+                Total = (double)CartItems.Sum(item => item.Product.Price * item.Quantity);
             }
+            else
+            {
+                Order = new Order();
+            }
+            base.OnPageHandlerExecuting(context);
+        }
+
+        public IActionResult OnGet()
+        {
             return Page();
         }
     }

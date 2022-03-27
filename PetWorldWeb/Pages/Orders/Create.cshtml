@@ -1,6 +1,6 @@
 ﻿@page
 @model PetWorldWeb.Pages.Orders.CreateModel
-
+@using PetWorldWeb.Models;
 @{
     ViewData["Title"] = "Create";
 }
@@ -9,7 +9,7 @@
 
 <h4>Order</h4>
 <hr />
-<p>@ViewData["message"]</p>
+<p style="white-space: pre-line">@ViewData["message"]</p>
 <form method="post" class="row">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="col-3">
@@ -18,7 +18,7 @@
                 <label asp-for="_User.Address" class="control-label"></label>
                 @if (Model._User.Address != "" && Model._User.Address != null)
                 {
-                    <input asp-for="_User.Address" value="@Model._User.Address" class="form-control" required disabled/>
+                    <input asp-for="_User.Address" value="@Model._User.Address" class="form-control" required disabled />
                 }
                 else
                 {
@@ -79,7 +79,7 @@
                 </thead>
 
                 <tbody>
-                    @foreach (var item in Model.CartItems)
+                    @foreach (var item in (List<CartItem>)ViewData["CartItems"])
                     {
 
                         <tr>
@@ -101,7 +101,7 @@
             <ul class="list-unstyled mb-4">
                 <li class="d-flex justify-content-between py-3 border-bottom">
                     <strong class="text-muted">Total</strong>
-                    <h5 class="font-weight-bold">@((int)Model.Total) ₫</h5>
+                    <h5 class="font-weight-bold">@((int)ViewData["Total"]) ₫</h5>
                 </li>
             </ul>
         </div>

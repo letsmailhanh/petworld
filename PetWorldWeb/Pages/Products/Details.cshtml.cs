@@ -22,7 +22,6 @@ namespace PetWorldWeb.Pages.Products
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            ViewData["CartItemCount"] = Request.Cookies["CartItemCount"];
             if (id == null)
             {
                 return NotFound();

@@ -1,4 +1,5 @@
 ﻿using DataAccess.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,7 +55,7 @@ namespace DataAccess.DAO
             try
             {
                 var db = new prn221_petworldContext();
-                orderDetails = db.OrderDetails.Where(od => od.OrderId == o.OrderId).ToList();
+                orderDetails = db.OrderDetails.Where(od => od.OrderId == o.OrderId).Include(od => od.Product).Include(od => od.Product.Category).ToList();
             }
             catch (Exception ex)
             {

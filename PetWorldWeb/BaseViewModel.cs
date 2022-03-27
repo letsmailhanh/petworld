@@ -17,6 +17,7 @@ namespace PetWorldWeb
         {
             CurUser = Request.Cookies["Username"] != null ? Request.Cookies["Username"] : null;
             CartItemCount = Request.Cookies["CartItemCount"] != null ? Request.Cookies["CartItemCount"] : "0";
+            ViewData["CartItemCount"] = CartItemCount;
             base.OnPageHandlerSelected(context);
         }
         public bool IsLoggedIn()

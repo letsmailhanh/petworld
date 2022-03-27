@@ -44,19 +44,19 @@ namespace PetWorldWeb.Pages.Products
                 if (Type.Equals("all"))
                 {
                     ViewData["CategoryName"] = "Product";
-                    AllProducts = await _context.Products.ToListAsync();
+                    AllProducts = await _context.Products.Where(p => p.UnitsInStock > 0).ToListAsync();
                     Count = AllProducts.Count;
                 }
                 else if (Type.Equals("pet"))
                 {
                     ViewData["CategoryName"] = "Pet";
-                    AllProducts = await _context.Products.Where(p => p.IsPet == true).ToListAsync();
+                    AllProducts = await _context.Products.Where(p => p.IsPet == true && p.UnitsInStock > 0).ToListAsync();
                     Count = AllProducts.Count;
                 }
                 else
                 {
                     ViewData["CategoryName"] = "Accessory";
-                    AllProducts = await _context.Products.Where(p => p.IsPet == false).ToListAsync();
+                    AllProducts = await _context.Products.Where(p => p.IsPet == false && p.UnitsInStock > 0).ToListAsync();
                     Count = AllProducts.Count;
                 }
             }
@@ -65,19 +65,19 @@ namespace PetWorldWeb.Pages.Products
                 if (Type.Equals("all"))
                 {
                     ViewData["CategoryName"] = category.Title;
-                    AllProducts = await _context.Products.ToListAsync();
+                    AllProducts = await _context.Products.Where(p => p.UnitsInStock > 0).ToListAsync();
                     Count = AllProducts.Count;
                 }
                 else if (Type.Equals("pet"))
                 {
                     ViewData["CategoryName"] = category.Title;
-                    AllProducts = await _context.Products.Where(p => p.IsPet == true && p.CategoryId == CategoryId).ToListAsync();
+                    AllProducts = await _context.Products.Where(p => p.IsPet == true && p.CategoryId == CategoryId && p.UnitsInStock > 0).ToListAsync();
                     Count = AllProducts.Count;
                 }
                 else
                 {
                     ViewData["CategoryName"] = category.Title;
-                    AllProducts = await _context.Products.Where(p => p.IsPet == false && p.CategoryId == CategoryId).ToListAsync();
+                    AllProducts = await _context.Products.Where(p => p.IsPet == false && p.CategoryId == CategoryId && p.UnitsInStock > 0).ToListAsync();
                     Count = AllProducts.Count;
                 }
             }

@@ -62,7 +62,6 @@ namespace PetWorldWeb.Pages.Orders
             {
                 return NotFound("Item does not exist.");
             }
-
             int cartPos = ExistsInCart(Cart, id);
             if (cartPos > -1)
             {
@@ -71,23 +70,23 @@ namespace PetWorldWeb.Pages.Orders
                 if (cartItem != null)
                 {
                     if (int.Parse(item[1]) + 1 <= cartItem.Product.UnitsInStock)
-                        Cart[cartPos] = id.ToString() + "=" + (int.Parse(item[1]) + 1).ToString();
+                        Cart[cartPos] = "Item:" + id.ToString() + "=" + (int.Parse(item[1]) + 1).ToString();
                     else
                     {
-                        Cart[cartPos] = id.ToString() + "=" + (cartItem.Product.UnitsInStock).ToString();
+                        Cart[cartPos] = "Item:" + id.ToString() + "=" + (cartItem.Product.UnitsInStock).ToString();
                     }
                 }
             }
             else
             {
-                Cart.Add(id.ToString() + "=1");
+                Cart.Add("Item:" + id.ToString() + "=1");
             }
-
-            return Redirect(Request.Headers["Referer"].ToString());
+            var referer = Request.Headers["Referer"].ToString() != null ? Request.Headers["Referer"].ToString() : "/Index";
+            return Redirect(referer);
         }
         private int ExistsInCart(List<string> cart, int id)
         {
-            return cart.FindIndex(i => i.Contains(id.ToString() + "="));
+            return cart.FindIndex(i => i.Contains("Item:" + id.ToString() + "="));
         }
         private void RemoveFromCart(int id)
         {
@@ -99,7 +98,7 @@ namespace PetWorldWeb.Pages.Orders
             foreach (string item in Cart)
             {
                 if (item == "") continue;
-                int prodId = int.Parse(item.Split("=")[0]);
+                int prodId = int.Parse(item.Split("=")[0].Split(":")[1]);
                 int quantity = int.Parse(item.Split("=")[1]);
                 CartItems.Add(
                     new CartItem
@@ -134,7 +133,7 @@ namespace PetWorldWeb.Pages.Orders
                 }
                 else
                 {
-                    Cart[cartPos] = id.ToString() + "=" + quantity.ToString();
+                    Cart[cartPos] = "Item:" + id.ToString() + "=" + quantity.ToString();
                 }
             }
             return RedirectToPage("Cart");

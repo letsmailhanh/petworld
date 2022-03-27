@@ -27,6 +27,8 @@ namespace DataAccess.Model
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.EnableSensitiveDataLogging();
+
             if (!optionsBuilder.IsConfigured)
             {
                 var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();

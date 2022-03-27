@@ -10,6 +10,7 @@ using PetWorldWeb.Models;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.Repository;
+using Microsoft.AspNetCore.Http;
 
 namespace PetWorldWeb.Pages.Orders
 {
@@ -17,7 +18,9 @@ namespace PetWorldWeb.Pages.Orders
     {
         private readonly DataAccess.Model.prn221_petworldContext _context;
         private IUserRepository userRepo;
+        [BindProperty(SupportsGet = true)]
         public List<string> Cart { get; set; } = new List<string>();
+        [BindProperty(SupportsGet = true)]
         public List<CartItem> CartItems { get; set; } = new List<CartItem>();
         [BindProperty(SupportsGet =true)]
         public User _User { get; set; } = new User();
@@ -29,14 +32,6 @@ namespace PetWorldWeb.Pages.Orders
         {
             _context = context;
             this.userRepo = userRepo;
-        }
-        public override void OnPageHandlerSelected(PageHandlerSelectedContext context)
-        {
-            string cartCookies = Request.Cookies["Cart"] != null ? Request.Cookies["Cart"].Replace(" ", "") : "";
-            Cart = cartCookies.Split(";").ToList();
-            UpdateCart();
-
-            base.OnPageHandlerSelected(context);
         }
         public override void OnPageHandlerExecuting(PageHandlerExecutingContext context)
         {
@@ -50,12 +45,42 @@ namespace PetWorldWeb.Pages.Orders
 
         public IActionResult OnGet()
         {
+            LoadInfo();
+            UpdateCart();
             return Page();
         }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public IActionResult OnPost([FromServices] IOrderRepository ordRepo, [FromServices] IOrderDetailRepository ordDetRepo)
+        public IActionResult OnPost([FromServices] IOrderRepository ordRepo, [FromServices] IOrderDetailRepository ordDetRepo, [FromServices] IProductRepository prodRepo)
         {
+            LoadInfo();
+            UpdateCart();
+            String message = "";
+            bool invalid = false;
+            foreach (CartItem item in CartItems)
+            {
+                Product product = prodRepo.GetProductByID(item.Product.ProductId);
+                if (product.UnitsInStock <= 0)
+                {
+                    message += "Product " + item.Product.ProductName + " Is No Longer Available, And Has Been Removed From Your Cart.\n";
+                    RemoveFromCart(item.Product.ProductId);
+                    invalid = true;
+                    continue;
+                }
+                if (product.UnitsInStock - item.Quantity < 0)
+                {
+                    message += "Product " + item.Product.ProductName + " Don't have enough Stock, And Has Been Update From Your Cart.\n";
+                    Cart[ExistsInCart(Cart, product.ProductId)] = "Item:" + item.Product.ProductId.ToString() + "=" + (product.UnitsInStock).ToString();
+                    invalid = true;
+                }
+            }
+            if (invalid)
+            {
+                ViewData["message"] = message;
+                UpdateCart();
+                UpdateCookies();
+                return Page();
+            }
             if (!ModelState.IsValid)
             {
                 ViewData["message"] = "Invalid Info";
@@ -86,16 +111,42 @@ namespace PetWorldWeb.Pages.Orders
             Order = ordRepo.AddOrder(Order);
             foreach(CartItem item in CartItems)
             {
+                Product product = prodRepo.GetProductByID(item.Product.ProductId);
                 OrderDetail ordDetail = new OrderDetail();
                 ordDetail.OrderId = Order.OrderId;
                 ordDetail.ProductId = item.Product.ProductId;
                 ordDetail.Quantity = item.Quantity;
                 ordDetail.Price = item.Product.Price;
                 ordDetRepo.AddOrderDetail(ordDetail);
+                product.UnitsInStock = product.UnitsInStock - ordDetail.Quantity;
+                prodRepo.UpdateProduct(product);
             }
             Response.Cookies.Delete("Cart");
             Response.Cookies.Delete("CartItemCount");
-            return RedirectToPage("./Index");
+            return Redirect("/Orders/Details?orderid=" + Order.OrderId);
+        }
+        private int ExistsInCart(List<string> cart, int id)
+        {
+            return cart.FindIndex(i => i.Contains("Item:" + id.ToString() + "="));
+        }
+        private void RemoveFromCart(int id)
+        {
+            Cart.RemoveAt(ExistsInCart(Cart, id));
+        }
+        private void LoadInfo()
+        {
+            string cartCookies = Request.Cookies["Cart"] != null ? Request.Cookies["Cart"].Replace(" ", "") : "";
+            Cart = cartCookies.Split(";").ToList();
+            UpdateCart();
+        }
+        private void UpdateCookies()
+        {
+            CookieOptions cookieOptions = new CookieOptions();
+            cookieOptions.Expires = new DateTimeOffset(DateTime.Now.AddDays(7));
+            Response.Cookies.Delete("Cart");
+            Response.Cookies.Append("Cart", string.Join(";", Cart), cookieOptions);
+            Response.Cookies.Delete("CartItemCount");
+            Response.Cookies.Append("CartItemCount", CartItems.Sum(i => i.Quantity).ToString(), cookieOptions);
         }
         private void UpdateCart()
         {
@@ -103,7 +154,7 @@ namespace PetWorldWeb.Pages.Orders
             foreach (string item in Cart)
             {
                 if (item == "") continue;
-                int prodId = int.Parse(item.Split("=")[0]);
+                int prodId = int.Parse(item.Split("=")[0].Split(":")[1]);
                 int quantity = int.Parse(item.Split("=")[1]);
                 CartItems.Add(
                     new CartItem
@@ -116,8 +167,10 @@ namespace PetWorldWeb.Pages.Orders
                 );
             }
             Total = (double)CartItems.Sum(item => item.Product.Price * item.Quantity);
+            ViewData["CartItems"] = CartItems;
+            ViewData["Total"] = (int)Total;
+            ViewData["CartItemCount"] = CartItems.Sum(i => i.Quantity).ToString();
         }
-
         private string RandStr()
         {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

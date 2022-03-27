@@ -8,42 +8,94 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Order</h4>
+    <h4>Please Record Order ID To Tracking Your Order!</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Order.OrderDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Order.OrderDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Order.ShippedDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Order.ShippedDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Order.Freight)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Order.Freight)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Order.Status)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Order.Status)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Order.User)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Order.User.Password)
-        </dd>
-    </dl>
+    <div class="row">
+        <div class="col-4">
+            <dl class="row">
+                <dt class="col-4">
+                    @Html.DisplayNameFor(model => model.Order.OrderId)
+                </dt>
+                <dd class="col-8">
+                    @Html.DisplayFor(model => model.Order.OrderId)
+                </dd>
+                <dt class="col-4">
+                    @Html.DisplayNameFor(model => model.Order.OrderDate)
+                </dt>
+                <dd class="col-8">
+                    @Html.DisplayFor(model => model.Order.OrderDate)
+                </dd>
+                <dt class="col-4">
+                    @Html.DisplayNameFor(model => model.Order.ShippedDate)
+                </dt>
+                <dd class="col-8">
+                    @Html.DisplayFor(model => model.Order.ShippedDate)
+                </dd>
+                <dt class="col-4">
+                    @Html.DisplayNameFor(model => model.Order.Freight)
+                </dt>
+                <dd class="col-8">
+                    @Html.DisplayFor(model => model.Order.Freight)
+                </dd>
+                <dt class="col-4">
+                    @Html.DisplayNameFor(model => model.Order.Status)
+                </dt>
+                <dd class="col-8">
+                    @Html.DisplayFor(model => model.Order.Status)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-8">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="border-0 bg-light">
+                                <div class="p-2 px-3 text-uppercase">Product</div>
+                            </th>
+                            <th scope="col" class="border-0 bg-light">
+                                <div class="py-2 text-uppercase">Price</div>
+                            </th>
+                            <th scope="col" class="border-0 bg-light">
+                                <div class="py-2 text-uppercase">Quantity</div>
+                            </th>
+                            <th scope="col" class="border-0 bg-light">
+                                <div class="py-2 text-uppercase">Sub Total</div>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model.CartItems)
+                        {
+
+                            <tr>
+                                <th scope="row">
+                                    <div class="p-2">
+                                        <img src="@item.Product.Image" alt="" width="80" class="img-fluid rounded shadow-sm">
+
+                                        <div class="ml-3 d-inline-block align-middle">
+                                            <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block">@item.Product.ProductName</a></h5><span class="text-muted font-weight-normal font-italic">Category: @item.Product.Category.Title</span>
+                                        </div>
+                                    </div>
+                                <td class="align-middle"><strong>@((int)item.Product.Price)</strong></td>
+                                <td class="align-middle"><strong>@item.Quantity</strong></td>
+                                <td class="align-middle"><strong>@((int)(item.Product.Price * item.Quantity)) ₫</strong></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <ul class="list-unstyled mb-4">
+                    <li class="d-flex justify-content-between py-3 border-bottom">
+                        <strong class="text-muted">Total</strong>
+                        <h5 class="font-weight-bold">@((int)Model.Total) ₫</h5>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Order.OrderId">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="/Products/Index">Back to List</a>
 </div>
