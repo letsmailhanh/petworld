@@ -56,7 +56,7 @@
                         <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block">@item.Product.ProductName</a></h5><span class="text-muted font-weight-normal font-italic">Category: @item.Product.Category.Title</span>
                       </div>
                     </div>
-                    <td class="align-middle"><strong>@((int)item.Product.Price)</strong></td>
+                    <td class="align-middle"><strong>@String.Format("{0:n0}", item.Product.Price)</strong></td>
                     @if (!item.Product.IsPet)
                     {
                     <td class="align-middle">
@@ -69,7 +69,7 @@
                     {
                     <td class="align-middle"><strong>@item.Quantity</strong></td>
                     }
-                    <td class="align-middle"><strong>@((int)(item.Product.Price * item.Quantity)) ₫</strong></td>
+                    <td class="align-middle"><strong>@String.Format("{0:n0}", item.Product.Price * item.Quantity) ₫</strong></td>
 
                     <td class="align-middle">
                         <a asp-page="cart" asp-page-handler="delete" asp-route-id="@item.Product.ProductId" class="text-dark"><i class="fa fa-trash"></i></a>
@@ -80,10 +80,10 @@
             </table>
             <ul class="list-unstyled mb-4">
               <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                <h5 class="font-weight-bold">@((int)Model.Total) ₫</h5>
+                                                                            <h5 class="font-weight-bold">@String.Format("{0:n0}", Model.Total) ₫</h5>
               </li>
             </ul>
-              <a href="javascript:;" onclick = "history.back()" class="btn btn-success rounded-pill py-2"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Continue Shopping</a>
+              <a asp-page="/Products/Index" class="btn btn-success rounded-pill py-2"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Continue Shopping</a>
             <a asp-page="/Orders/Create" class="btn btn-dark pull-right rounded-pill py-2">Buy Now<span class="glyphicon glyphicon-chevron-right"></span></a>
           </div>
           <!-- End -->

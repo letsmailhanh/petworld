@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.Model;
+using DataAccess.Repository;
 
 namespace PetWorldWeb.Pages.Products
 {
@@ -20,15 +21,14 @@ namespace PetWorldWeb.Pages.Products
 
         public Product Product { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int? id, [FromServices] IProductRepository prodRepo)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Product = await _context.Products
-                .Include(p => p.Category).FirstOrDefaultAsync(m => m.ProductId == id);
+            Product = prodRepo.GetProductByID((int)id);
 
             if (Product == null)
             {

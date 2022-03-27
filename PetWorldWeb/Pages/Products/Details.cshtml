@@ -1,54 +1,72 @@
 ﻿@page
 @model PetWorldWeb.Pages.Products.DetailsModel
-
+@using PetWorldWeb.Models
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
 
 <div>
-    <h4>Product</h4>
+    <div class="row justify-content-center">
+        <h1>Details</h1>
+    </div>
+    <div class="row justify-content-center">
+        <h4>@Model.Product.ProductName</h4>
+    </div>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.ProductName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.ProductName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.IsPet)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.IsPet)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Price)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Price)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.UnitsInStock)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.UnitsInStock)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Image)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Image)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Category)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Category.Title)
-        </dd>
-    </dl>
+    <div class="row justify-content-center" style="margin: 50px;">
+        <div class="col-6">
+            <div class="row justify-content-center">
+                <img src="@Model.Product.Image" width="400"/>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <div class="col-2"><h6>Category</h6></div>
+                <div class="col-10">@Model.Product.Category.Title</div>
+            </div>
+            <div class="row">
+                <div class="col-2"><h6>Price</h6></div>
+                <div class="col-10">@String.Format("{0:n0}", Model.Product.Price)</div>
+            </div>
+            <div class="row">
+                <div class="col-2"><h6>Unit In Stock</h6></div>
+                <div class="col-10">@Model.Product.UnitsInStock</div>
+            </div>
+            @if (Model.Product.IsPet)
+            {
+                <div class="row">
+                    <div class="col-2"><h6>Pet Name</h6></div>
+                    <div class="col-10">@Model.Product.PetDetail.PetName</div>
+                </div>
+                <div class="row">
+                    <div class="col-2"><h6>Weight</h6></div>
+                    <div class="col-10">@String.Format("{0:0,0.0}", Model.Product.PetDetail.Weight)</div>
+                </div>
+                <div class="row">
+                    <div class="col-2"><h6>Vaccinated</h6></div>
+                    <div class="col-10">@Constants.Vaccinated[Model.Product.PetDetail.Vaccinated]</div>
+                </div>
+                <div class="row">
+                    <div class="col-2"><h6>Vaccinated</h6></div>
+                    <div class="col-10">@Constants.Gender[Model.Product.PetDetail.Gender]</div>
+                </div>
+                <div class="row">
+                    <div class="col-2"><h6>Age</h6></div>
+                    <div class="col-10">@String.Format("{0:0.0}", Model.Product.PetDetail.Age)</div>
+                </div>
+                <div class="row">
+                    <div class="col-2"><h6>Sterilize</h6></div>
+                    <div class="col-10">@Constants.Sterilized[Model.Product.PetDetail.Sterilized]</div>
+                </div>
+                <div class="row">
+                    <div class="col-2"><h6>Is Rescued</h6></div>
+                    <div class="col-10">@Constants.Rescued[Model.Product.PetDetail.IsRescued]</div>
+                </div>
+            }
+        </div>
+    </div>
 </div>
-<div>
+<div class="row justify-content-center">
     <a asp-page="/Products/Index">Back to List</a>
 </div>

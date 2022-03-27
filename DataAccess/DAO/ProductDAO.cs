@@ -129,7 +129,9 @@ namespace DataAccess.DAO
             try
             {
                 var db = new prn221_petworldContext();
-                p = db.Products.SingleOrDefault(p => p.ProductId == id);
+                p = db.Products.Include(p => p.PetDetail)
+                    .Include(p => p.Category)
+                    .SingleOrDefault(p => p.ProductId == id);
             }
             catch (Exception ex)
             {

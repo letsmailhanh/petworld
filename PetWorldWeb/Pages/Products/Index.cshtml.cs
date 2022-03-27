@@ -26,7 +26,7 @@ namespace PetWorldWeb.Pages.Products
         public int CategoryId { get; set; } = 0;
         [BindProperty(SupportsGet = true)]
         public string Type { get; set; } = "all";
-        public string SearchTerm { get; set; } = "";
+        public string SearchHandler { get; set; }
         public int Count { get; set; }
         public int PageSize { get; set; } = 6;
 
@@ -44,19 +44,19 @@ namespace PetWorldWeb.Pages.Products
                 if (Type.Equals("all"))
                 {
                     ViewData["CategoryName"] = "Product";
-                    AllProducts = await _context.Products.Where(p => p.UnitsInStock > 0).ToListAsync();
+                    AllProducts = await _context.Products.Where(p => p.UnitsInStock > 0).OrderBy(p => p.ProductId).ToListAsync();
                     Count = AllProducts.Count;
                 }
                 else if (Type.Equals("pet"))
                 {
                     ViewData["CategoryName"] = "Pet";
-                    AllProducts = await _context.Products.Where(p => p.IsPet == true && p.UnitsInStock > 0).ToListAsync();
+                    AllProducts = await _context.Products.Where(p => p.IsPet == true && p.UnitsInStock > 0).OrderBy(p => p.ProductId).ToListAsync();
                     Count = AllProducts.Count;
                 }
                 else
                 {
                     ViewData["CategoryName"] = "Accessory";
-                    AllProducts = await _context.Products.Where(p => p.IsPet == false && p.UnitsInStock > 0).ToListAsync();
+                    AllProducts = await _context.Products.Where(p => p.IsPet == false && p.UnitsInStock > 0).OrderBy(p => p.ProductId).ToListAsync();
                     Count = AllProducts.Count;
                 }
             }
@@ -65,32 +65,124 @@ namespace PetWorldWeb.Pages.Products
                 if (Type.Equals("all"))
                 {
                     ViewData["CategoryName"] = category.Title;
-                    AllProducts = await _context.Products.Where(p => p.UnitsInStock > 0).ToListAsync();
+                    AllProducts = await _context.Products.Where(p => p.UnitsInStock > 0).OrderBy(p => p.ProductId).ToListAsync();
                     Count = AllProducts.Count;
                 }
                 else if (Type.Equals("pet"))
                 {
                     ViewData["CategoryName"] = category.Title;
-                    AllProducts = await _context.Products.Where(p => p.IsPet == true && p.CategoryId == CategoryId && p.UnitsInStock > 0).ToListAsync();
+                    AllProducts = await _context.Products.Where(p => p.IsPet == true && p.CategoryId == CategoryId && p.UnitsInStock > 0).OrderBy(p => p.ProductId).ToListAsync();
                     Count = AllProducts.Count;
                 }
                 else
                 {
                     ViewData["CategoryName"] = category.Title;
-                    AllProducts = await _context.Products.Where(p => p.IsPet == false && p.CategoryId == CategoryId && p.UnitsInStock > 0).ToListAsync();
+                    AllProducts = await _context.Products.Where(p => p.IsPet == false && p.CategoryId == CategoryId && p.UnitsInStock > 0).OrderBy(p => p.ProductId).ToListAsync();
+                    Count = AllProducts.Count;
+                }
+            }
+            Product = GetPaginatedResult(AllProducts, CurrentPage, PageSize); 
+            SearchHandler = "";
+        }
+        public async Task OnGetOrderByPriceAsync()
+        {
+            Category category = _context.Categories.Where(c => c.CategoryId == CategoryId).FirstOrDefault();
+            if (category == null || CategoryId == 0)
+            {
+                if (Type.Equals("all"))
+                {
+                    ViewData["CategoryName"] = "Product";
+                    AllProducts = await _context.Products.Where(p => p.UnitsInStock > 0).OrderBy(p => p.Price).ToListAsync();
+                    Count = AllProducts.Count;
+                }
+                else if (Type.Equals("pet"))
+                {
+                    ViewData["CategoryName"] = "Pet";
+                    AllProducts = await _context.Products.Where(p => p.IsPet == true && p.UnitsInStock > 0).OrderBy(p => p.Price).ToListAsync();
+                    Count = AllProducts.Count;
+                }
+                else
+                {
+                    ViewData["CategoryName"] = "Accessory";
+                    AllProducts = await _context.Products.Where(p => p.IsPet == false && p.UnitsInStock > 0).OrderBy(p => p.Price).ToListAsync();
+                    Count = AllProducts.Count;
+                }
+            }
+            else
+            {
+                if (Type.Equals("all"))
+                {
+                    ViewData["CategoryName"] = category.Title;
+                    AllProducts = await _context.Products.Where(p => p.UnitsInStock > 0).OrderBy(p => p.Price).ToListAsync();
+                    Count = AllProducts.Count;
+                }
+                else if (Type.Equals("pet"))
+                {
+                    ViewData["CategoryName"] = category.Title;
+                    AllProducts = await _context.Products.Where(p => p.IsPet == true && p.CategoryId == CategoryId && p.UnitsInStock > 0).OrderBy(p => p.Price).ToListAsync();
+                    Count = AllProducts.Count;
+                }
+                else
+                {
+                    ViewData["CategoryName"] = category.Title;
+                    AllProducts = await _context.Products.Where(p => p.IsPet == false && p.CategoryId == CategoryId && p.UnitsInStock > 0).OrderBy(p => p.Price).ToListAsync();
                     Count = AllProducts.Count;
                 }
             }
             Product = GetPaginatedResult(AllProducts, CurrentPage, PageSize);
+            SearchHandler = "OrderByPrice";
+        }
+        public async Task OnGetOrderByNameAsync()
+        {
+            Category category = _context.Categories.Where(c => c.CategoryId == CategoryId).FirstOrDefault();
+            if (category == null || CategoryId == 0)
+            {
+                if (Type.Equals("all"))
+                {
+                    ViewData["CategoryName"] = "Product";
+                    AllProducts = await _context.Products.Where(p => p.UnitsInStock > 0).OrderBy(p => p.ProductName).ToListAsync();
+                    Count = AllProducts.Count;
+                }
+                else if (Type.Equals("pet"))
+                {
+                    ViewData["CategoryName"] = "Pet";
+                    AllProducts = await _context.Products.Where(p => p.IsPet == true && p.UnitsInStock > 0).OrderBy(p => p.ProductName).ToListAsync();
+                    Count = AllProducts.Count;
+                }
+                else
+                {
+                    ViewData["CategoryName"] = "Accessory";
+                    AllProducts = await _context.Products.Where(p => p.IsPet == false && p.UnitsInStock > 0).OrderBy(p => p.ProductName).ToListAsync();
+                    Count = AllProducts.Count;
+                }
+            }
+            else
+            {
+                if (Type.Equals("all"))
+                {
+                    ViewData["CategoryName"] = category.Title;
+                    AllProducts = await _context.Products.Where(p => p.UnitsInStock > 0).OrderBy(p => p.ProductName).ToListAsync();
+                    Count = AllProducts.Count;
+                }
+                else if (Type.Equals("pet"))
+                {
+                    ViewData["CategoryName"] = category.Title;
+                    AllProducts = await _context.Products.Where(p => p.IsPet == true && p.CategoryId == CategoryId && p.UnitsInStock > 0).OrderBy(p => p.ProductName).ToListAsync();
+                    Count = AllProducts.Count;
+                }
+                else
+                {
+                    ViewData["CategoryName"] = category.Title;
+                    AllProducts = await _context.Products.Where(p => p.IsPet == false && p.CategoryId == CategoryId && p.UnitsInStock > 0).OrderBy(p => p.ProductName).ToListAsync();
+                    Count = AllProducts.Count;
+                }
+            }
+            Product = GetPaginatedResult(AllProducts, CurrentPage, PageSize);
+            SearchHandler = "OrderByName";
         }
         public List<Product> GetPaginatedResult(IList<Product> products, int currentPage = 1, int pageSize = 10)
         {
-            return products.OrderBy(d => d.ProductId).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
-        }
-
-        public void OnGetSearch([FromServices] IProductRepository prodRepo)
-        {
-            Product = prodRepo.GetProductsByName(SearchTerm).ToList();
+            return products.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
         }
     }
 }

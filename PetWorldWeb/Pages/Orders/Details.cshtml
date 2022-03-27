@@ -78,9 +78,9 @@
                                             <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block">@item.Product.ProductName</a></h5><span class="text-muted font-weight-normal font-italic">Category: @item.Product.Category.Title</span>
                                         </div>
                                     </div>
-                                <td class="align-middle"><strong>@((int)item.Product.Price)</strong></td>
+                                <td class="align-middle"><strong>@String.Format("{0:n0}", item.Product.Price) @((int)item.Product.Price)</strong></td>
                                 <td class="align-middle"><strong>@item.Quantity</strong></td>
-                                <td class="align-middle"><strong>@((int)(item.Product.Price * item.Quantity)) ₫</strong></td>
+                                <td class="align-middle"><strong>@String.Format("{0:n0}", item.Product.Price * item.Quantity) ₫</strong></td>
                             </tr>
                         }
                     </tbody>
