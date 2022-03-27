@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -130,6 +132,45 @@ namespace DataAccess.DAO
                 throw new Exception(ex.Message);
             }
             return user;
+        }
+        //Get user by email
+        public User GetUserByEmail(string email)
+        {
+            User user = null;
+            try
+            {
+                var db = new prn221_petworldContext();
+                user = db.Users.SingleOrDefault(user => user.Email == email);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return user;
+        }
+        // Send email
+        public void SendEmail(string userEmail, string subject, string message)
+        {
+            string fromAddress = "mail.rac.alo.alo@gmail.com";
+            string password = "ASD123@@@";
+            using System.Net.Mail.SmtpClient email = new SmtpClient
+            {
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                EnableSsl = true,
+                Host = "smtp.gmail.com",
+                Port = 587,
+                Credentials = new NetworkCredential(fromAddress, password)
+            };
+            try
+            {
+                Console.WriteLine("Sending email...");
+                email.Send(fromAddress, userEmail, subject, message);
+            }
+            catch (SmtpException e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
         //Add user
         public void AddUser(User u)

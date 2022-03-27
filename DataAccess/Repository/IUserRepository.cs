@@ -17,5 +17,7 @@ namespace DataAccess.Repository
         void UpdateUser(User u);
         void DeleteUser(User u);
         User GetUserByUsernameAndPassword(string username, string password);
+        User GetUserByEmail(string email);
+        void SendMail(string userEmail, string subject, string message);
     }
 }

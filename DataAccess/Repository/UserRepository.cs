@@ -25,5 +25,9 @@ namespace DataAccess.Repository
 
         public void UpdateUser(User u) => UserDAO.Instance.UpdateUser(u);
         public User GetUserByUsernameAndPassword(string username, string password) => UserDAO.Instance.GetUserByUsernameAndPassword(username, password);
+
+        public User GetUserByEmail(string email) => UserDAO.Instance.GetUserByEmail(email);
+
+        public void SendMail(string userEmail, string subject, string message) => UserDAO.Instance.SendEmail(userEmail, subject, message);
     }
 }
