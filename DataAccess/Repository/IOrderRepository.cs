@@ -19,5 +19,6 @@ namespace DataAccess.Repository
         int[] GetCurrentWeekNumberOrder();
         decimal[] GetCurrentWeekRevenue();
         Order AddOrder(Order order);
+        Order GetOrderById(int id);
     }
 }

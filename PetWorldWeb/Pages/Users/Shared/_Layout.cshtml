@@ -37,9 +37,10 @@
                     </a>
                 </div>
                 <div class="col-8 d-flex justify-content-center">
-                    <form class="row border border-4 w-75 rounded-pill" style="background-color: azure" method="post" asp-page="/Products/Search" asp-page-handler="Search">
-                        <input class="col-11 form-control shadow-none w-75 rounded-pill border-0" name="searchterm" type="text" placeholder="Find Pets ..." value="@ViewData[" SearchTerm"]" style="background-color: rgba(0,0,0,0);" onkeydown="if (event.key == 'Enter') submitSearch(this);" />
-                        <a class="col-1 align-self-center btn w-25 rounded-pill" onclick="submitSearch(this)">
+                    <form class="row border border-4 w-75 rounded-pill" style="background-color: azure" method="get" asp-page="/Products/Search">
+                        <input type="hidden" name="handler" value="search" />
+                        <input class="col-11 form-control shadow-none w-75 rounded-pill border-0" name="searchterm" type="text" placeholder="Find Pets ..." value="@ViewData["SearchTerm"]" style="background-color: rgba(0,0,0,0);" onkeydown="if (event.key == 'Enter') submit(this);" />
+                        <a class="col-1 align-self-center btn w-25 rounded-pill" onclick="submit(this)">
                             <i class="fa fa-search"></i>
                         </a>
                     </form>
@@ -48,7 +49,7 @@
                     <a asp-page="/Orders/Cart" asp-area="" class="btn h-100">
                         <i class="fa-solid fa-cart-shopping fa-2x"></i>
                     </a>
-                    <div id="cartItemCount" class="align-items-center rounded-circle d-flex justify-content-center" style="height: 20px; background-color:deepskyblue; margin-left: -25px; font-size: 12px; padding: 5px;">@Model.CartItemCount</div>
+                    <div id="cartItemCount" class="align-items-center rounded-circle d-flex justify-content-center" style="height: 20px; background-color:deepskyblue; margin-left: -25px; font-size: 12px; padding: 5px;">@ViewData["CartItemCount"]</div>
                 </div>
                 <div class="col-1 d-flex justify-content-start">
                 </div>
@@ -64,44 +65,16 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item border-left border-1 d-flex justify-content-center dropdown" style="width: 120px;">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Products/Index" asp-route-type="pet" asp-route-categoryid="1" data-bs-toggle="dropdown" aria-expanded="false" id="dog-dropdown">Dog</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Products/Index" asp-route-type="pet" asp-route-categoryid="0" data-bs-toggle="dropdown" aria-expanded="false" id="dog-dropdown">Pet</a>
                             <ul class="dropdown-menu" aria-labelledby="dog-dropdown">
                                 <li>
-                                    <a class="dropdown-item">Action</a>
+                                    <a class="dropdown-item" asp-area="" asp-page="/Products/Index" asp-route-type="pet" asp-route-categoryid="1">Dog</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" asp-area="" asp-page="/Products/Index" asp-route-type="pet" asp-route-categoryid="2">Cat</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item border-left border-1 d-flex justify-content-center dropdown" style="width: 120px;">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Products/Index" asp-route-type="pet" asp-route-categoryid="2" data-bs-toggle="dropdown" aria-expanded="false" id="cat-dropdown">Cat</a>
-                            <ul class="dropdown-menu" aria-labelledby="cat-dropdown">
-                                <li>
-                                    <a class="dropdown-item" href="#">Action</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item border-left border-1 d-flex justify-content-center dropdown" style="width: 120px;">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Products/Index" asp-route-type="pet" asp-route-categoryid="3" data-bs-toggle="dropdown" aria-expanded="false" id="oth-dropdown">Other</a>
-                            <ul class="dropdown-menu" aria-labelledby="oth-dropdown">
-                                <li>
-                                    <a class="dropdown-item" href="#">Action</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <a class="dropdown-item" asp-area="" asp-page="/Products/Index" asp-route-type="pet" asp-route-categoryid="3">Other</a>
                                 </li>
                             </ul>
                         </li>
@@ -109,13 +82,25 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Products/Index" asp-route-type="acc" asp-route-categoryid="0" data-bs-toggle="dropdown" aria-expanded="false" id="acc-dropdown">Accessory</a>
                             <ul class="dropdown-menu" aria-labelledby="acc-dropdown">
                                 <li>
-                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" asp-area="" asp-page="/Products/Index" asp-route-type="acc" asp-route-categoryid="4">Food</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" asp-area="" asp-page="/Products/Index" asp-route-type="acc" asp-route-categoryid="5">Cleaner</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <a class="dropdown-item" asp-area="" asp-page="/Products/Index" asp-route-type="acc" asp-route-categoryid="6">Cage</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-page="/Products/Index" asp-route-type="acc" asp-route-categoryid="7">Clothes</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-page="/Products/Index" asp-route-type="acc" asp-route-categoryid="8">Toy</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-page="/Products/Index" asp-route-type="acc" asp-route-categoryid="9">Medicine</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-page="/Products/Index" asp-route-type="acc" asp-route-categoryid="10">Other</a>
                                 </li>
                             </ul>
                         </li>
@@ -123,13 +108,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index" data-bs-toggle="dropdown" aria-expanded="false" id="news-dropdown">News</a>
                             <ul class="dropdown-menu" aria-labelledby="news-dropdown">
                                 <li>
-                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" asp-page="/Orders/Tracking">Tracking Order</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <a class="dropdown-item" asp-page="/Index">News</a>
                                 </li>
                             </ul>
                         </li>
@@ -178,7 +160,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script>
-        function submitSearch(ele) {
+        function submit(ele) {
             $(ele).closest('form').submit();
         };
     </script>

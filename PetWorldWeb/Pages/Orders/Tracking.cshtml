@@ -1,0 +1,101 @@
+﻿@page
+@model PetWorldWeb.Pages.Orders.TrackingModel
+@{
+}
+
+<div class="row align-items-center justify-content-center" style="margin-bottom: 20px;">
+    <div class="col-12 w-100 d-flex justify-content-center">
+        <form class="row border border-4 w-75 rounded-pill" style="background-color: azure" method="get" asp-page="/Orders/Tracking">
+            <input type="hidden" name="handler" value="search" />
+            <input class="col-11 form-control shadow-none w-75 rounded-pill border-0" name="orderid" type="text" placeholder="Enter Order Id" value="@ViewData["SearchTerm"]" style="background-color: rgba(0,0,0,0);" onkeydown="if (event.key == 'Enter') submit(this);" />
+            <a class="col-1 align-self-center btn w-25 rounded-pill" onclick="submit(this)">
+                <i class="fa fa-search"></i>
+            </a>
+        </form>
+    </div>
+    <p>@ViewData["message"]</p>
+</div>
+<div class="row">
+    <div class="col-4">
+        <dl class="row">
+            <dt class="col-4">
+                @Html.DisplayNameFor(model => model.Order.OrderId)
+            </dt>
+            <dd class="col-8">
+                @Html.DisplayFor(model => model.Order.OrderId)
+            </dd>
+            <dt class="col-4">
+                @Html.DisplayNameFor(model => model.Order.OrderDate)
+            </dt>
+            <dd class="col-8">
+                @Html.DisplayFor(model => model.Order.OrderDate)
+            </dd>
+            <dt class="col-4">
+                @Html.DisplayNameFor(model => model.Order.ShippedDate)
+            </dt>
+            <dd class="col-8">
+                @Html.DisplayFor(model => model.Order.ShippedDate)
+            </dd>
+            <dt class="col-4">
+                @Html.DisplayNameFor(model => model.Order.Freight)
+            </dt>
+            <dd class="col-8">
+                @Html.DisplayFor(model => model.Order.Freight)
+            </dd>
+            <dt class="col-4">
+                @Html.DisplayNameFor(model => model.Order.Status)
+            </dt>
+            <dd class="col-8">
+                @Html.DisplayFor(model => model.Order.Status)
+            </dd>
+        </dl>
+    </div>
+    <div class="col-8">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="border-0 bg-light">
+                            <div class="p-2 px-3 text-uppercase">Product</div>
+                        </th>
+                        <th scope="col" class="border-0 bg-light">
+                            <div class="py-2 text-uppercase">Price</div>
+                        </th>
+                        <th scope="col" class="border-0 bg-light">
+                            <div class="py-2 text-uppercase">Quantity</div>
+                        </th>
+                        <th scope="col" class="border-0 bg-light">
+                            <div class="py-2 text-uppercase">Sub Total</div>
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model.CartItems)
+                    {
+
+                        <tr>
+                            <th scope="row">
+                                <div class="p-2">
+                                    <img src="@item.Product.Image" alt="" width="80" class="img-fluid rounded shadow-sm">
+
+                                    <div class="ml-3 d-inline-block align-middle">
+                                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block">@item.Product.ProductName</a></h5><span class="text-muted font-weight-normal font-italic">Category: @item.Product.Category.Title</span>
+                                    </div>
+                                </div>
+                            <td class="align-middle"><strong>@((int)item.Product.Price)</strong></td>
+                            <td class="align-middle"><strong>@item.Quantity</strong></td>
+                            <td class="align-middle"><strong>@((int)(item.Product.Price * item.Quantity)) ₫</strong></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <ul class="list-unstyled mb-4">
+                <li class="d-flex justify-content-between py-3 border-bottom">
+                    <strong class="text-muted">Total</strong>
+                    <h5 class="font-weight-bold">@((int)Model.Total) ₫</h5>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

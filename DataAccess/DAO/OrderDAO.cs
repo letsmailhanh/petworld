@@ -1,4 +1,5 @@
 ﻿using DataAccess.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -191,6 +192,12 @@ namespace DataAccess.DAO
             db.Orders.Add(order);
             db.SaveChanges();
             return order;
+        }
+
+        public Order GetOrderById(int id)
+        {
+            var db = new prn221_petworldContext();
+            return db.Orders.Include(o => o.User).Where(o => o.OrderId == id).FirstOrDefault();
         }
     }
 }
