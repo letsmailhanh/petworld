@@ -43,19 +43,19 @@
                         </a>
                         <form class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <div class="dropdown-item">
-                                <input class="dropdown-item" type="checkbox" name="checkedList" value="Male" id="Male" checked="@Model.CheckedList.Contains("Male")" /> <label for="Male">Male</label>
+                                <input type="checkbox" name="checkedList" value="Male" id="Male" checked="@Model.CheckedList.Contains("Male")" /> <label for="Male">Male</label>
                             </div>
                             <div class="dropdown-item">
-                                <input class="dropdown-item" type="checkbox" name="checkedList" value="Female" id="Female" checked="@Model.CheckedList.Contains("Female")" /> <label for="Female">Female</label>
+                                <input type="checkbox" name="checkedList" value="Female" id="Female" checked="@Model.CheckedList.Contains("Female")" /> <label for="Female">Female</label>
                             </div>
                             <div class="dropdown-item">
-                                <input class="dropdown-item" type="checkbox" name="checkedList" value="Vaccinated" id="Vaccinated" checked="@Model.CheckedList.Contains("Vaccinated")" /> <label for="Vaccinated">Vaccinated</label>
+                                <input type="checkbox" name="checkedList" value="Vaccinated" id="Vaccinated" checked="@Model.CheckedList.Contains("Vaccinated")" /> <label for="Vaccinated">Vaccinated</label>
                             </div>
                             <div class="dropdown-item">
-                                <input class="dropdown-item" type="checkbox" name="checkedList" value="Sterilized" id="Sterilized" checked="@Model.CheckedList.Contains("Sterilized")" /> <label for="Sterilized">Sterilied</label>
+                                <input type="checkbox" name="checkedList" value="Sterilized" id="Sterilized" checked="@Model.CheckedList.Contains("Sterilized")" /> <label for="Sterilized">Sterilied</label>
                             </div>
                             <div class="dropdown-item">
-                                <input class="dropdown-item" type="checkbox" name="checkedList" value="Rescued" id="Rescued" checked="@Model.CheckedList.Contains("Rescued")" /> <label for="Rescued">Rescued</label>
+                                <input type="checkbox" name="checkedList" value="Rescued" id="Rescued" checked="@Model.CheckedList.Contains("Rescued")" /> <label for="Rescued">Rescued</label>
                             </div>
                             <input class="dropdown-item" type="hidden" name="handler" value="Checkbox" />
                             <a class="dropdown-item" onclick="submit(this)">Confirm</a>
