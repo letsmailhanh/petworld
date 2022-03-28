@@ -84,7 +84,10 @@
               </li>
             </ul>
               <a asp-page="/Products/Index" class="btn btn-success rounded-pill py-2"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Continue Shopping</a>
+              @if (Model.Cart.Count > 0){
+
             <a asp-page="/Orders/Create" class="btn btn-dark pull-right rounded-pill py-2">Buy Now<span class="glyphicon glyphicon-chevron-right"></span></a>
+              }
           </div>
           <!-- End -->
         </div>
