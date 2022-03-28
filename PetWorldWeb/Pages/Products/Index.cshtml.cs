@@ -26,6 +26,7 @@ namespace PetWorldWeb.Pages.Products
         public int CategoryId { get; set; } = 0;
         [BindProperty(SupportsGet = true)]
         public string Type { get; set; } = "all";
+        public List<string> CheckedList { get; set; } = new List<string>();
         public string SearchHandler { get; set; }
         public int Count { get; set; }
         public int PageSize { get; set; } = 6;
@@ -33,7 +34,7 @@ namespace PetWorldWeb.Pages.Products
         public int TotalPages => (int)Math.Ceiling(decimal.Divide(Count, PageSize));
 
 
-        public IList<Product> AllProducts { get;set; }
+        public IList<Product> AllProducts { get; set; } = new List<Product>();
         public List<Product> Product { get; set; }
 
         public async Task OnGetAsync()
@@ -275,6 +276,74 @@ namespace PetWorldWeb.Pages.Products
             }
             Product = GetPaginatedResult(AllProducts, CurrentPage, PageSize);
             SearchHandler = "OrderByNameDescending";
+        }
+        public async Task OnGetCheckboxAsync(List<string> checkedList)
+        {
+            Category category = _context.Categories.Where(c => c.CategoryId == CategoryId).FirstOrDefault();
+            if (category == null || CategoryId == 0)
+            {
+                List<Product> allProducts = await _context.Products.Include(p => p.PetDetail).Where(p => p.IsPet == true && p.UnitsInStock > 0).OrderBy(p => p.ProductId).ToListAsync();
+                if (Type.Equals("pet"))
+                {
+                    ViewData["CategoryName"] = "Pet";
+                    if (!checkedList.Contains("Male"))
+                    {
+                        allProducts.RemoveAll(p => p.PetDetail.Gender == true);
+                        checkedList.Add("Female");
+                    }
+                    if (!checkedList.Contains("Female"))
+                    {
+                        allProducts.RemoveAll(p => p.PetDetail.Gender == false);
+                    }
+                    if (!checkedList.Contains("Vaccinated"))
+                    {
+                        allProducts.RemoveAll(p => p.PetDetail.Vaccinated == true);
+                    }
+                    if (!checkedList.Contains("Sterilized"))
+                    {
+                        allProducts.RemoveAll(p => p.PetDetail.Sterilized == true);
+                    }
+                    if (!checkedList.Contains("Rescued"))
+                    {
+                        allProducts.RemoveAll(p => p.PetDetail.IsRescued == true);
+                    }
+                    Count = allProducts.Count;
+                    Product = GetPaginatedResult(allProducts, CurrentPage, PageSize);
+                }
+            }
+            else
+            {
+                if (Type.Equals("pet"))
+                {
+                    ViewData["CategoryName"] = category.Title;
+                    List<Product> allProducts = await _context.Products.Include(p => p.PetDetail).Where(p => p.IsPet == true && p.CategoryId == CategoryId && p.UnitsInStock > 0).OrderBy(p => p.ProductId).ToListAsync();
+                    ViewData["CategoryName"] = "Pet";
+                    if (!checkedList.Contains("Male"))
+                    {
+                        allProducts.RemoveAll(p => p.PetDetail.Gender == true);
+                    }
+                    if (!checkedList.Contains("Female"))
+                    {
+                        allProducts.RemoveAll(p => p.PetDetail.Gender == false);
+                    }
+                    if (!checkedList.Contains("Vaccinated"))
+                    {
+                        allProducts.RemoveAll(p => p.PetDetail.Vaccinated == true);
+                    }
+                    if (!checkedList.Contains("Sterilized"))
+                    {
+                        allProducts.RemoveAll(p => p.PetDetail.Sterilized == true);
+                    }
+                    if (!checkedList.Contains("Rescued"))
+                    {
+                        allProducts.RemoveAll(p => p.PetDetail.IsRescued == true);
+                    }
+                    Count = allProducts.Count;
+                    Product = GetPaginatedResult(allProducts, CurrentPage, PageSize);
+                }
+            }
+            CheckedList = checkedList;
+            SearchHandler = "Checkbox";
         }
         public List<Product> GetPaginatedResult(IList<Product> products, int currentPage = 1, int pageSize = 10)
         {
