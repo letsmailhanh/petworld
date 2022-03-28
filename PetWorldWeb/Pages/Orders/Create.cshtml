@@ -16,7 +16,7 @@
         <div class="row">
             <div class="form-group">
                 <label asp-for="_User.Address" class="control-label"></label>
-                @if (Model._User.Address != "" && Model._User.Address != null)
+                @if (Model._User.Address != "" && Model._User.Address != null && Model.CurUser != null && Model.CurUser != "")
                 {
                     <input asp-for="_User.Address" value="@Model._User.Address" class="form-control" required disabled />
                 }
@@ -29,7 +29,7 @@
         <div class="row">
             <div class="form-group">
                 <label asp-for="_User.Email" class="control-label"></label>
-                @if (Model._User.Address != "" && Model._User.Address != null)
+                @if (Model._User.Email != "" && Model._User.Email != null && Model.CurUser != null && Model.CurUser != "")
                 {
                     <input asp-for="_User.Email" value="@Model._User.Email" class="form-control" required disabled />
                 }
@@ -42,7 +42,7 @@
         <div class="row">
             <div class="form-group">
                 <label asp-for="_User.Phone" class="control-label"></label>
-                @if (Model._User.Address != "" && Model._User.Address != null)
+                @if (Model._User.Phone != "" && Model._User.Phone != null && Model.CurUser != null && Model.CurUser != "")
                 {
                     <input asp-for="_User.Phone" value="@Model._User.Phone" class="form-control" required disabled />
                 }
